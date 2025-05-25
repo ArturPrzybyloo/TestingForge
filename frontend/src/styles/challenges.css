@@ -1,0 +1,156 @@
+body {
+  background: #181f2a;
+  color: #e5e7eb;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+.qa-challenge-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px;
+}
+.qa-challenge {
+  background: #232b39;
+  border: 1.5px solid #334155;
+  border-radius: 14px;
+  margin-bottom: 32px;
+  padding: 28px 24px 20px 24px;
+  box-shadow: 0 2px 12px #0002;
+  position: relative;
+}
+.qa-challenge.completed {
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 2px #22d3ee44;
+  opacity: 0.85;
+}
+.qa-challenge h2 {
+  margin-top: 0;
+  color: #22d3ee;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.qa-challenge p {
+  color: #cbd5e1;
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+}
+.flag-input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+input[type="text"] {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #e5e7eb;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  flex: 1;
+  outline: none;
+  transition: border 0.2s;
+}
+input[type="text"]:focus {
+  border-color: #38bdf8;
+}
+button {
+  background: #22d3ee;
+  color: #181f2a;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button:active {
+  background: #0ea5e9;
+}
+.feedback {
+  font-size: 1rem;
+  margin-bottom: 0;
+  margin-top: 2px;
+  min-height: 22px;
+}
+.feedback.success {
+  color: #22d3ee;
+  font-weight: 600;
+}
+.feedback.error {
+  color: #f87171;
+  font-weight: 500;
+}
+.drag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.drag-item {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: grab;
+  font-size: 1rem;
+  user-select: none;
+  transition: background 0.15s, border 0.15s;
+}
+.drag-item.dragging {
+  opacity: 0.5;
+  background: #334155;
+}
+.drag-item.over {
+  border: 2px dashed #22d3ee;
+}
+.ui-buggy {
+  background: #1e293b;
+  color: #e5e7eb;
+  border: 1px solid #f87171;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  left: 40px; /* misaligned on purpose */
+  cursor: pointer;
+}
+.json-box {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 14px;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  color: #a5f3fc;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  white-space: pre;
+  overflow-x: auto;
+}
+.flag-reveal {
+  background: #0ea5e9;
+  color: #fff;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 1rem;
+  margin-left: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  display: inline-block;
+}
+.qa-challenge .flag-reveal {
+  margin-left: 0;
+  margin-top: 8px;
+  display: block;
+  width: fit-content;
+}
+@media (max-width: 600px) {
+  .qa-challenge-container { padding: 8px; }
+  .qa-challenge { padding: 16px 6px 12px 6px; }
+  .ui-buggy { width: 100%; left: 0; }
+} 

@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: qa_platform_backend
+    ports:
+      - "${PORT:-5001}:${PORT:-5001}" # Exposes backend port, defaults to 5001
+    environment:
+      NODE_ENV: development # or production
+      PORT: ${PORT:-5001}
+      MONGODB_URI: ${MONGODB_URI:-mongodb://mongo:27017/qa_learning_platform_dev} # Connects to mongo service
+      JWT_SECRET: ${JWT_SECRET:-yourSuperSecretKeyForDevelopment}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-1d}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      # CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000} # Frontend URL for CORS
+    volumes:
+      - ./backend/src:/usr/src/app/src # Mount src for development, remove for production image
+      - ./backend/node_modules:/usr/src/app/node_modules # Named volume for node_modules
+    depends_on:
+      - mongo
+    networks:
+      - qa_platform_network
+    # command: npm run dev # For development with nodemon
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: qa_platform_frontend
+    ports:
+      - "${FRONTEND_PORT:-3000}:80" # Nginx serves on 80, maps to host 3000
+    volumes:
+      - ./frontend/src:/usr/src/app/src # Mount src for development HMR with CRA
+      - ./frontend/public:/usr/src/app/public
+      # For production, you wouldn't typically mount src/public after building
+    depends_on:
+      - backend # Optional: if frontend needs backend to be up for proxying or initial data
+    networks:
+      - qa_platform_network
+    # environment:
+      # WDS_SOCKET_PORT: ${FRONTEND_PORT:-3000} # For react-scripts hot reloading behind a proxy (if needed)
+      # CHOKIDAR_USEPOLLING: "true" # May be needed in some Docker environments for HMR
+
+  mongo:
+    image: mongo:latest # Or a specific version e.g., mongo:6.0
+    container_name: qa_platform_mongo
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - qa_platform_mongodb_data:/data/db # Persist MongoDB data
+    networks:
+      - qa_platform_network
+
+networks:
+  qa_platform_network:
+    driver: bridge
+
+volumes:
+  qa_platform_mongodb_data: # Named volume for MongoDB data persistence
+  # backend_node_modules: # Example if you want to name the node_modules volume explicitly 
