@@ -1,0 +1,11 @@
+<svg width="100%" height="100%" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1920" height="1080" fill="#0a0f1a"/>
+  <g opacity="0.12" stroke="#00eaff" stroke-width="2">
+    <path d="M100 100 L400 100 L400 400" />
+    <path d="M600 200 L900 200 L900 600" />
+    <path d="M1200 300 L1500 300 L1500 900" />
+    <circle cx="400" cy="100" r="10" fill="#00eaff"/>
+    <circle cx="900" cy="200" r="10" fill="#00eaff"/>
+    <circle cx="1500" cy="300" r="10" fill="#00eaff"/>
+  </g>
+</svg> 
