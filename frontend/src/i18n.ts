@@ -19,15 +19,13 @@ const resources = {
       'Beginner': 'Beginner',
       'Medium': 'Medium',
       'Start Learning →': 'Start Learning →',
-      'Master Software Testing with AI': 'Master Software Testing with AI',
-      'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.': 'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.',
-      'Browse Challenges': 'Browse Challenges',
-      'Get Started': 'Get Started',
-      'Why Choose AI Test Forge?': 'Why Choose AI Test Forge?',
-      'Real-World Challenges': 'Real-World Challenges',
-      'Practice with scenarios that mirror actual testing situations.': 'Practice with scenarios that mirror actual testing situations.',
-      'AI-Powered Learning': 'AI-Powered Learning',
-      'Get personalized feedback and guidance from our AI assistant.': 'Get personalized feedback and guidance from our AI assistant.',
+      'Master Software Testing with AI': 'Develop your testing skills',
+      'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.': 'Interactive challenges, mini-courses, and a community for testers at every level.',
+      'Why Choose AI Test Forge?': 'Why Choose Testing Forge?',
+      'Real-World Challenges': 'Practical Testing Challenges',
+      'Practice with scenarios that mirror actual testing situations.': 'Practice with scenarios that mirror real testing situations.',
+      'AI-Powered Learning': 'Modern Tools (including AI)',
+      'Get personalized feedback and guidance from our AI assistant.': 'Learn modern tools like Selenium, Playwright, Postman, and AI. Get feedback and guidance from the community and smart assistants.',
       'Active Community': 'Active Community',
       'Connect with other testers and share your experiences.': 'Connect with other testers and share your experiences.',
       'Stay Current': 'Stay Current',
@@ -45,7 +43,7 @@ const resources = {
       'Mid-Level Testers': 'Mid-Level Testers',
       'Enhance your skills with advanced scenarios and automation challenges.': 'Enhance your skills with advanced scenarios and automation challenges.',
       'Senior Testers': 'Senior Testers',
-      'Master AI testing and lead complex testing initiatives.': 'Master AI testing and lead complex testing initiatives.',
+      'Master AI testing and lead complex testing initiatives.': 'Master advanced testing and lead complex initiatives.',
       'Technologies Covered': 'Technologies Covered',
       'Selenium': 'Selenium',
       'Playwright': 'Playwright',
@@ -313,10 +311,6 @@ Next up: Network Monitoring — see how data flows between frontend and backend.
       'playground.module.form.title': 'Form Validation',
       'playground.module.form.description': 'Practice automating form interactions with real-time validation. Learn how to handle input validation and form submission.',
       'playground.module.form.tips': 'Validate all fields before submitting. Handle error messages and edge cases. Test both valid and invalid inputs.',
-      'playground.module.iframe.label': 'iFrames & Modals',
-      'playground.module.iframe.title': 'iFrames & Modals',
-      'playground.module.iframe.description': 'Master automation of elements inside iframes and modals. Learn how to switch contexts and interact with nested elements.',
-      'playground.module.iframe.tips': 'Switch to the iframe context before interacting. Handle modal dialogs and overlays. Test closing and reopening modals.',
       'playground.module.table.label': 'Tables & Lists',
       'playground.module.table.title': 'Tables & Lists',
       'playground.module.table.description': 'Practice automating table interactions including sorting and data selection. Learn how to work with dynamic table data.',
@@ -325,6 +319,9 @@ Next up: Network Monitoring — see how data flows between frontend and backend.
       'playground.module.select.title': 'Select Dropdown',
       'playground.module.select.description': 'Practice automating selection from dropdown menus. Learn how to interact with <select> elements and verify selected values.',
       'playground.module.select.tips': 'Use selectByValue or selectByVisibleText in your automation tool. Verify the selected value after interaction. Handle dynamic dropdowns and disabled options.',
+      'playground.module.select.simulation': 'This module simulates a dropdown menu with various options. Practice selecting different values and verifying the selection.',
+      'playground.module.select.choose': 'Choose an option:',
+      'playground.module.select.select': 'Select a value',
       'playground.module.choices.label': 'Checkboxes & Radios',
       'playground.module.choices.title': 'Checkboxes & Radio Buttons',
       'playground.module.choices.description': 'Practice automating selection of checkboxes and radio buttons. Learn how to check, uncheck, and verify options.',
@@ -368,6 +365,86 @@ Next up: Network Monitoring — see how data flows between frontend and backend.
       'learn.minicourse.devtools.duration': '1 hour',
       'learn.minicourse.devtools.cta': 'Start now',
       'learn.comingSoon': 'Coming soon',
+      'playground.module.table.simulation': 'This module simulates a product table with sorting and filtering capabilities. Practice automating table interactions and data verification.',
+      'playground.module.table.product1': 'Premium Plan',
+      'playground.module.table.product2': 'Basic Plan',
+      'playground.module.table.product3': 'Standard Plan',
+      'playground.module.table.product4': 'Enterprise Plan',
+      'playground.module.ajax.simulation': 'This module simulates asynchronous data loading with a loading spinner. Practice handling dynamic content and loading states.',
+      'playground.module.ajax.loading': 'Loading data...',
+      'playground.module.ajax.data': 'Data loaded successfully!',
+      'playground.module.form.simulation': 'This module provides a form with real-time validation. Practice form automation with various input types and validation rules.',
+      'playground.module.form.name': 'Name',
+      'playground.module.form.email': 'Email',
+      'playground.module.form.password': 'Password',
+      'playground.module.form.submit': 'Submit',
+      'playground.module.iframe.simulation': 'This module demonstrates iframe and modal interactions. Practice switching contexts and handling nested elements.',
+      'playground.module.iframe.open': 'Open Modal',
+      'playground.module.iframe.close': 'Close',
+      'playground.module.choices.simulation': 'This module provides checkboxes and radio buttons for practice. Learn to handle multiple selections and verify states.',
+      'playground.module.choices.checkbox1': 'Option 1',
+      'playground.module.choices.checkbox2': 'Option 2',
+      'playground.module.choices.radio1': 'Choice A',
+      'playground.module.choices.radio2': 'Choice B',
+      'playground.module.form.phone': 'Phone Number',
+      'playground.module.ajax.loadData': 'Load Data',
+      'playground.module.choices.subscribe': 'Subscribe',
+      'playground.module.choices.newsletter': 'Newsletter',
+      'playground.module.choices.updates': 'Product Updates',
+      'playground.module.choices.choosePlan': 'Choose Your Plan',
+      'playground.module.choices.basic': 'Basic',
+      'playground.module.choices.pro': 'Professional',
+      'playground.module.table.header.name': 'Product Name',
+      'playground.module.table.header.price': 'Price',
+      'playground.module.table.header.rating': 'Rating',
+      'playground.module.table.header.actions': 'Actions',
+      'playground.module.table.sort': 'Sort by',
+      'playground.module.table.filter': 'Filter by price',
+      'playground.module.table.view': 'View Details',
+      'playground.module.table.edit': 'Edit',
+      'playground.module.table.delete': 'Delete',
+      'playground.module.table.rating.good': 'Good',
+      'playground.module.table.rating.excellent': 'Excellent',
+      'playground.module.table.rating.average': 'Average',
+      'playground.module.select.placeholder': 'Select an option',
+      'playground.module.select.option1': 'Option 1',
+      'playground.module.select.option2': 'Option 2',
+      'playground.module.select.option3': 'Option 3',
+      'playground.module.select.option4': 'Option 4',
+      'playground.module.select.option5': 'Option 5',
+      'playground.module.select.selected': 'Selected:',
+      'playground.module.select.change': 'Change Selection',
+      'playground.module.iframe.title': 'Embedded Content',
+      'playground.module.iframe.content': 'This is the content inside the iframe',
+      'playground.module.iframe.switch': 'Switch to iframe',
+      'playground.module.iframe.switchBack': 'Switch back to main content',
+      'playground.module.iframe.interact': 'Interact with iframe content',
+      'playground.module.iframe.button': 'Click me inside iframe',
+      'playground.module.iframe.success': 'Successfully interacted with iframe!',
+      'playground.module.button.click': 'Click Me',
+      'playground.module.button.doubleClick': 'Double Click Me',
+      'playground.module.button.rightClick': 'Right Click Me',
+      'playground.module.button.hover': 'Hover Over Me',
+      'playground.module.button.drag': 'Drag Me',
+      'playground.module.button.drop': 'Drop Here',
+      'playground.module.button.success': 'Button clicked successfully!',
+      'playground.module.button.doubleSuccess': 'Double click successful!',
+      'playground.module.button.rightSuccess': 'Right click successful!',
+      'playground.module.button.hoverSuccess': 'Hover detected!',
+      'playground.module.button.dragSuccess': 'Drag and drop successful!',
+      'playground.module.form.errorName': 'Name is required',
+      'playground.module.form.errorEmail': 'Invalid email format',
+      'playground.module.form.errorPhone': 'Phone must be at least 9 digits',
+      'playground.module.form.success': 'Form submitted successfully!',
+      'playground.module.iframe.openModal': 'Open Modal',
+      'playground.module.iframe.modalTitle': 'Modal Content',
+      'playground.module.iframe.openIframe': 'Open iFrame',
+      'playground.module.table.product': 'Product',
+      'playground.module.select.apple': 'Apple',
+      'playground.module.select.banana': 'Banana',
+      'playground.module.select.cherry': 'Cherry',
+      'playground.module.select.grape': 'Grape',
+      'playground.module.iframe.label': 'iFrames & Modals',
     }
   },
   pl: {
@@ -387,15 +464,13 @@ Next up: Network Monitoring — see how data flows between frontend and backend.
       'Beginner': 'Początkujący',
       'Medium': 'Średni',
       'Start Learning →': 'Rozpocznij naukę →',
-      'Master Software Testing with AI': 'Opanuj testowanie oprogramowania z AI',
-      'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.': 'Podnieś swoje umiejętności testerskie dzięki interaktywnym zadaniom, scenariuszom z życia wziętym i nauce wspieranej przez AI.',
-      'Browse Challenges': 'Przeglądaj zadania',
-      'Get Started': 'Rozpocznij',
-      'Why Choose AI Test Forge?': 'Dlaczego AI Test Forge?',
-      'Real-World Challenges': 'Zadania z prawdziwego świata',
+      'Master Software Testing with AI': 'Rozwijaj swoje umiejętności testerskie',
+      'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.': 'Interaktywne wyzwania, mini kursy i społeczność dla testerów na każdym poziomie.',
+      'Why Choose AI Test Forge?': 'Dlaczego Testing Forge?',
+      'Real-World Challenges': 'Praktyczne wyzwania testerskie',
       'Practice with scenarios that mirror actual testing situations.': 'Ćwicz na scenariuszach odzwierciedlających rzeczywiste sytuacje testerskie.',
-      'AI-Powered Learning': 'Nauka wspierana przez AI',
-      'Get personalized feedback and guidance from our AI assistant.': 'Otrzymuj spersonalizowane wskazówki i feedback od asystenta AI.',
+      'AI-Powered Learning': 'Nowoczesne narzędzia (w tym AI)',
+      'Get personalized feedback and guidance from our AI assistant.': 'Poznaj nowoczesne narzędzia jak Selenium, Playwright, Postman i AI. Otrzymuj feedback i wsparcie od społeczności oraz inteligentnych asystentów.',
       'Active Community': 'Aktywna społeczność',
       'Connect with other testers and share your experiences.': 'Łącz się z innymi testerami i dziel się doświadczeniami.',
       'Stay Current': 'Bądź na bieżąco',
@@ -413,7 +488,7 @@ Next up: Network Monitoring — see how data flows between frontend and backend.
       'Mid-Level Testers': 'Testerzy średniozaawansowani',
       'Enhance your skills with advanced scenarios and automation challenges.': 'Rozwijaj umiejętności dzięki zaawansowanym scenariuszom i zadaniom automatyzacyjnym.',
       'Senior Testers': 'Testerzy zaawansowani',
-      'Master AI testing and lead complex testing initiatives.': 'Opanuj testowanie AI i prowadź złożone inicjatywy testerskie.',
+      'Master AI testing and lead complex testing initiatives.': 'Opanuj zaawansowane testowanie i prowadź złożone inicjatywy.',
       'Technologies Covered': 'Technologie na platformie',
       'Selenium': 'Selenium',
       'Playwright': 'Playwright',
@@ -491,44 +566,44 @@ Inspekcja HTML i CSS to podstawowa umiejętność dla testerów. Pozwala na szyb
 
 Inspekcja elementów na stronie:
 Aby zbadać element:
-1. Kliknij prawym przyciskiem myszy na dowolny element strony.
-2. Wybierz Zbadaj lub Zbadaj element.
-3. To otworzy zakładkę Elements w DevTools i podświetli węzeł DOM.
-Lewy panel pokazuje strukturę HTML (DOM), podczas gdy prawy panel wyświetla style CSS, obliczone wartości i metryki układu.
-Pro Tip: Najedź kursorem na elementy w drzewie HTML, aby podświetlić je wizualnie na stronie.
+1. Right-click on any element on a webpage.
+2. Choose Inspect or Inspect Element.
+3. This opens the Elements tab in DevTools and highlights the DOM node.
+The left pane shows the HTML structure (DOM), while the right pane displays CSS styles, computed values, and layout metrics.
+Pro Tip: Hover over elements in the HTML tree to highlight them visually on the page.
 
-Edycja HTML i CSS na żywo:
-Możesz edytować zarówno HTML jak i CSS bezpośrednio w zakładce Elements. Jest to przydatne do weryfikacji poprawek interfejsu, reprodukowania błędów lub prototypowania zmian.
-Edycja HTML:
-- Kliknij dwukrotnie dowolny tag lub atrybut, aby go edytować.
-- Kliknij prawym przyciskiem myszy, aby dodać lub usunąć elementy.
-Edycja CSS:
-- Modyfikuj istniejące reguły lub dodawaj nowe w panelu Styles.
-- Włączaj/wyłączaj pojedyncze właściwości.
-- Przeglądaj obliczone style i model pudełkowy, aby zrozumieć zachowanie układu.
-Zadanie praktyczne:
-- Zmień kolor tekstu paragrafu.
-- Dodaj obramowanie: 2px solid red; do diva.
-- Ukryj element za pomocą display: none;
+Live Editing HTML & CSS:
+You can edit both HTML and CSS directly within the Elements tab. This is useful for verifying UI fixes, reproducing bugs, or prototyping changes.
+Editing HTML:
+- Double-click any tag or attribute to edit it.
+- Right-click to add or remove elements.
+Editing CSS:
+- Modify existing rules or add new ones in the Styles pane.
+- Toggle individual properties on/off.
+- View computed styles and box model to understand layout behavior.
+Practice Task:
+- Change a paragraph's text color.
+- Add a border: 2px solid red; to a div.
+- Hide an element with display: none;
 
-Znajdowanie selektorów dla automatyzacji:
-Narzędzia automatyzacyjne jak Selenium czy Playwright polegają na unikalnych selektorach do znajdowania elementów.
-Strategie znajdowania dobrych selektorów:
-- Najpierw szukaj atrybutów data-testid, id lub name.
-- Używaj nazw klas tylko jeśli są stabilne.
-- Unikaj używania zawartości tekstowej jako jedynego selektora.
-Jak kopiować selektory:
-- Kliknij prawym przyciskiem myszy na element w zakładce Elements.
-- Wybierz Kopiuj > Kopiuj selektor lub Kopiuj > Kopiuj XPath
-Wskazówka: Użyj skopiowanego selektora do testowania w Konsoli:
-document.querySelector('twój-selektor')
+Finding Selectors for Automation:
+Automation tools like Selenium or Playwright rely on unique selectors to find elements.
+Strategies to Find Good Selectors:
+- Look for data-testid, id, or name attributes first.
+- Use class names only if they are stable.
+- Avoid using text content as the only selector.
+How to Copy Selectors:
+- Right-click on an element in the Elements tab.
+- Select Copy > Copy selector or Copy > Copy XPath
+Tip: Use the copied selector to test in the Console:
+document.querySelector('your-selector')
 
-Podsumowanie:
-Panel Elements to Twoje okno do DOM. Dzięki niemu możesz:
-- Badać problemy z układem i renderowaniem
-- Weryfikować lub prototypować zmiany frontendowe
-- Odkrywać i weryfikować selektory dla automatyzacji
-Następnie: Używanie konsoli — naucz się interakcji z przeglądarką przez kod.`,
+Summary:
+The Elements panel is your window into the DOM. With it, you can:
+- Investigate layout and rendering issues
+- Validate or prototype frontend changes
+- Discover and verify selectors for automation
+Next up: Console Usage — learn how to interact with the browser through code.`,
       'learn.course.console.title': 'Używanie konsoli',
       'learn.course.console.description': 'Zrozum, jak używać konsoli do debugowania i logowania.',
       'learn.course.console.content': `💾 Używanie konsoli
@@ -541,28 +616,28 @@ Konsola JavaScript to nie tylko narzędzie dla programistów. Dla testerów jest
 - Symulowania akcji użytkownika lub odpowiedzi backendu
 Zbadajmy, jak używać jej efektywnie.
 
-Otwieranie konsoli:
-Możesz uzyskać dostęp do panelu konsoli przez:
-- Skrót: Ctrl + Shift + J (Windows/Linux) lub Cmd + Option + J (macOS)
-- Z zakładek DevTools: kliknij na zakładkę Console
-Konsola pokaże logi, ostrzeżenia i błędy generowane przez JavaScript strony.
+Opening the Console:
+You can access the Console panel via:
+- Shortcut: Ctrl + Shift + J (Windows/Linux) or Cmd + Option + J (macOS)
+- From DevTools tabs: click on the Console tab
+The console will show logs, warnings, and errors generated by the page's JavaScript.
 
-Podstawy konsoli:
-Wyprowadzanie logów:
-Użyj następujących komend do wyprowadzania informacji:
+Console Basics:
+Logging Output:
+Use the following commands to output information:
 console.log('This is a log');
 console.warn('This is a warning');
 console.error('This is an error');
 
-Testowanie zmiennych:
-Możesz uzyskać dostęp do globalnych zmiennych JavaScript lub inspekcjonować obiekty:
+Variable Testing:
+You can access global JavaScript variables or inspect objects:
 document.title
 window.location.href
 document.querySelector('h1')
 Spróbuj wpisać document.body, aby zobaczyć pełne drzewo DOM.
 
-Interakcja ze stroną:
-Konsola pozwala symulować zmiany bez dotykania interfejsu:
+Interacting with the Page:
+The console allows you to simulate changes without touching the UI:
 Zmiana tekstu:
 document.querySelector('button').innerText = 'Kliknięto!';
 Zmiana stylów:
@@ -571,7 +646,7 @@ Wywołanie kliknięć:
 document.querySelector('#submit').click();
 Jest to szczególnie przydatne do testowania scenariuszy jak stan przycisku, dynamiczny interfejs lub zdarzenia JS.
 
-Debugowanie z konsolą:
+Debugging with Console:
 Czytanie błędów:
 Błędy pokazane na czerwono pomagają zlokalizować linię i plik, w którym wystąpił wyjątek.
 - Kliknij na nazwę pliku, aby przejść do kodu źródłowego
@@ -581,7 +656,7 @@ Jeśli podejrzewasz, że zmienna jest niezdefiniowana, spróbuj zdefiniować ją
 let testFlag = 'FLAG-TEST-123';
 console.log(testFlag);
 
-Podsumowanie:
+Summary:
 Konsola pozwala Ci:
 - Interrogować DOM i środowisko wykonawcze JS
 - Symulować zdarzenia i zmiany stanu
@@ -670,8 +745,8 @@ Następnie: Monitorowanie sieci — zobacz, jak dane przepływają między front
       'playground.module.dynamicUI.title': 'Dynamiczne Elementy UI',
       'playground.module.dynamicUI.description': 'Ćwicz automatyzację interakcji z elementami pojawiającymi się i znikającymi dynamicznie. Idealne do nauki strategii czekania i wykrywania elementów.',
       'playground.module.dynamicUI.tips': 'Używaj jawnych waitów do obsługi widoczności elementu. Rozważ strategie pollingowe dla większej niezawodności. Obsłuż potencjalny StaleElementReferenceException.',
-      'playground.module.dynamicUI.simulation': 'Ten moduł symuluje przycisk, który pojawia się i znika co 5 sekund. Ćwicz czekanie i interakcję z dynamicznymi elementami.',
-      'playground.module.dynamicUI.button': 'Kliknij Mnie!',
+      'playground.module.dynamicUI.simulation': 'This module simulates a button that appears and disappears every 5 seconds. Practice waiting for and interacting with dynamic elements.',
+      'playground.module.dynamicUI.button': 'Click Me!',
       'playground.tips': 'Wskazówki',
       'playground.module.ajax.label': 'Żądania AJAX',
       'playground.module.ajax.title': 'Żądania AJAX',
@@ -681,10 +756,6 @@ Następnie: Monitorowanie sieci — zobacz, jak dane przepływają między front
       'playground.module.form.title': 'Walidacja Formularza',
       'playground.module.form.description': 'Ćwicz automatyzację interakcji z formularzami z walidacją w czasie rzeczywistym. Naucz się obsługi walidacji i wysyłania formularzy.',
       'playground.module.form.tips': 'Waliduj wszystkie pola przed wysłaniem. Obsłuż komunikaty o błędach i przypadki brzegowe. Testuj poprawne i niepoprawne dane.',
-      'playground.module.iframe.label': 'iFrame i Modale',
-      'playground.module.iframe.title': 'iFrame i Modale',
-      'playground.module.iframe.description': 'Opanuj automatyzację elementów wewnątrz iframe i modali. Naucz się przełączać konteksty i obsługiwać zagnieżdżone elementy.',
-      'playground.module.iframe.tips': 'Przełącz kontekst na iframe przed interakcją. Obsłuż modale i nakładki. Testuj zamykanie i ponowne otwieranie modali.',
       'playground.module.table.label': 'Tabele i Listy',
       'playground.module.table.title': 'Tabele i Listy',
       'playground.module.table.description': 'Ćwicz automatyzację interakcji z tabelami, sortowanie i wybieranie danych. Naucz się obsługi dynamicznych danych w tabelach.',
@@ -693,6 +764,9 @@ Następnie: Monitorowanie sieci — zobacz, jak dane przepływają między front
       'playground.module.select.title': 'Lista rozwijana',
       'playground.module.select.description': 'Ćwicz automatyzację wyboru z list rozwijanych. Naucz się obsługiwać elementy <select> i weryfikować wybrane wartości.',
       'playground.module.select.tips': 'Użyj selectByValue lub selectByVisibleText w narzędziu automatyzującym. Weryfikuj wybraną wartość po interakcji. Obsłuż dynamiczne i zablokowane opcje.',
+      'playground.module.select.simulation': 'This module simulates a dropdown menu with various options. Practice selecting different values and verifying the selection.',
+      'playground.module.select.choose': 'Wybierz opcję:',
+      'playground.module.select.select': 'Wybierz wartość',
       'playground.module.choices.label': 'Checkboxy i Radio',
       'playground.module.choices.title': 'Checkboxy i Przyciski Radio',
       'playground.module.choices.description': 'Ćwicz automatyzację zaznaczania checkboxów i przycisków radio. Naucz się zaznaczać, odznaczać i weryfikować opcje.',
@@ -736,6 +810,86 @@ Następnie: Monitorowanie sieci — zobacz, jak dane przepływają między front
       'learn.minicourse.devtools.duration': '1 godzina',
       'learn.minicourse.devtools.cta': 'Zacznij teraz',
       'learn.comingSoon': 'Wkrótce dostępny',
+      'playground.module.table.simulation': 'This module simulates a product table with sorting and filtering capabilities. Practice automating table interactions and data verification.',
+      'playground.module.table.product1': 'Plan Premium',
+      'playground.module.table.product2': 'Plan Podstawowy',
+      'playground.module.table.product3': 'Plan Standardowy',
+      'playground.module.table.product4': 'Plan Enterprise',
+      'playground.module.ajax.simulation': 'This module simulates asynchronous data loading with a loading spinner. Practice handling dynamic content and loading states.',
+      'playground.module.ajax.loading': 'Ładowanie danych...',
+      'playground.module.ajax.data': 'Dane załadowane pomyślnie!',
+      'playground.module.form.simulation': 'This module provides a form with real-time validation. Practice form automation with various input types and validation rules.',
+      'playground.module.form.name': 'Imię',
+      'playground.module.form.email': 'Email',
+      'playground.module.form.password': 'Hasło',
+      'playground.module.form.submit': 'Wyślij',
+      'playground.module.iframe.simulation': 'This module demonstrates iframe and modal interactions. Practice switching contexts and handling nested elements.',
+      'playground.module.iframe.open': 'Open Modal',
+      'playground.module.iframe.close': 'Close',
+      'playground.module.choices.simulation': 'This module provides checkboxes and radio buttons for practice. Learn to handle multiple selections and verify states.',
+      'playground.module.choices.checkbox1': 'Opcja 1',
+      'playground.module.choices.checkbox2': 'Opcja 2',
+      'playground.module.choices.radio1': 'Wybór A',
+      'playground.module.choices.radio2': 'Wybór B',
+      'playground.module.form.phone': 'Numer telefonu',
+      'playground.module.ajax.loadData': 'Załaduj dane',
+      'playground.module.choices.subscribe': 'Subskrybuj',
+      'playground.module.choices.newsletter': 'Newsletter',
+      'playground.module.choices.updates': 'Aktualizacje produktu',
+      'playground.module.choices.choosePlan': 'Wybierz swój plan',
+      'playground.module.choices.basic': 'Podstawowy',
+      'playground.module.choices.pro': 'Profesjonalny',
+      'playground.module.table.header.name': 'Nazwa produktu',
+      'playground.module.table.header.price': 'Cena',
+      'playground.module.table.header.rating': 'Ocena',
+      'playground.module.table.header.actions': 'Akcje',
+      'playground.module.table.sort': 'Sortuj według',
+      'playground.module.table.filter': 'Filtruj według ceny',
+      'playground.module.table.view': 'Zobacz szczegóły',
+      'playground.module.table.edit': 'Edytuj',
+      'playground.module.table.delete': 'Usuń',
+      'playground.module.table.rating.good': 'Dobra',
+      'playground.module.table.rating.excellent': 'Doskonała',
+      'playground.module.table.rating.average': 'Średnia',
+      'playground.module.select.placeholder': 'Wybierz opcję',
+      'playground.module.select.option1': 'Opcja 1',
+      'playground.module.select.option2': 'Opcja 2',
+      'playground.module.select.option3': 'Opcja 3',
+      'playground.module.select.option4': 'Opcja 4',
+      'playground.module.select.option5': 'Opcja 5',
+      'playground.module.select.selected': 'Wybrano:',
+      'playground.module.select.change': 'Zmień wybór',
+      'playground.module.iframe.title': 'Embedded Content',
+      'playground.module.iframe.content': 'This is the content inside the iframe',
+      'playground.module.iframe.switch': 'Switch to iframe',
+      'playground.module.iframe.switchBack': 'Switch back to main content',
+      'playground.module.iframe.interact': 'Interact with iframe content',
+      'playground.module.iframe.button': 'Click me inside iframe',
+      'playground.module.iframe.success': 'Successfully interacted with iframe!',
+      'playground.module.button.click': 'Kliknij mnie',
+      'playground.module.button.doubleClick': 'Kliknij dwukrotnie',
+      'playground.module.button.rightClick': 'Kliknij prawym przyciskiem',
+      'playground.module.button.hover': 'Najedź na mnie',
+      'playground.module.button.drag': 'Przeciągnij mnie',
+      'playground.module.button.drop': 'Upuść tutaj',
+      'playground.module.button.success': 'Przycisk kliknięty pomyślnie!',
+      'playground.module.button.doubleSuccess': 'Podwójne kliknięcie udane!',
+      'playground.module.button.rightSuccess': 'Kliknięcie prawym przyciskiem udane!',
+      'playground.module.button.hoverSuccess': 'Wykryto najechanie!',
+      'playground.module.button.dragSuccess': 'Przeciągnięcie i upuszczenie udane!',
+      'playground.module.form.errorName': 'Imię jest wymagane',
+      'playground.module.form.errorEmail': 'Nieprawidłowy format email',
+      'playground.module.form.errorPhone': 'Telefon musi mieć co najmniej 9 cyfr',
+      'playground.module.form.success': 'Formularz wysłany pomyślnie!',
+      'playground.module.iframe.openModal': 'Open Modal',
+      'playground.module.iframe.modalTitle': 'Modal Content',
+      'playground.module.iframe.openIframe': 'Open iFrame',
+      'playground.module.table.product': 'Produkt',
+      'playground.module.select.apple': 'Jabłko',
+      'playground.module.select.banana': 'Banan',
+      'playground.module.select.cherry': 'Wiśnia',
+      'playground.module.select.grape': 'Winogrono',
+      'playground.module.iframe.label': 'iFrame i Modale',
     }
   }
 };

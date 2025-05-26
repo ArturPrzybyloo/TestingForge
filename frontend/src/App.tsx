@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import Challenges from './pages/Challenges';
@@ -8,6 +8,8 @@ import Community from './pages/Community';
 import { Learn, CourseDetail } from './pages/Learn';
 import AutomationPlayground from './pages/AutomationPlayground';
 import ChallengeDetail from './pages/ChallengeDetail';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import './i18n';
 
 const App: React.FC = () => {
@@ -25,6 +27,8 @@ const App: React.FC = () => {
           <Route path="automation-playground" element={<AutomationPlayground />} />
           <Route path="playground" element={<AutomationPlayground />} />
         </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );
