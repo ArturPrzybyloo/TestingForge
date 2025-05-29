@@ -4,258 +4,161 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      // Add English translations here
+      // Navigation
+      'Home': 'Home',
+      'Challenges': 'Challenges',
+      'Playground': 'Playground',
+      'Learn': 'Learn',
+      'Community': 'Community',
+      'Dashboard': 'Dashboard',
+      'Logout': 'Logout',
+      'Login': 'Login',
+      'Sign Up': 'Sign Up',
+      
+      // Main page
       'Testing Community': 'Testing Community',
-      'Discussion Forums': 'Discussion Forums',
-      'Upcoming Events': 'Upcoming Events',
-      'Active Members': 'Active Members',
-      'Completed Challenges': 'Completed Challenges',
-      'Forum Posts': 'Forum Posts',
-      'QA Interactive Challenges': 'QA Interactive Challenges',
-      'Improve your testing skills with interactive challenges on Testing Forge!': 'Improve your testing skills with interactive challenges on Testing Forge!',
-      'Back': 'Back',
-      'Filter by Difficulty:': 'Filter by Difficulty:',
-      'All': 'All',
-      'Beginner': 'Beginner',
-      'Medium': 'Medium',
-      'Start Learning →': 'Start Learning →',
-      'Master Software Testing with AI': 'Develop your testing skills',
-      'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.': 'Interactive challenges, mini-courses, and a community for testers at every level.',
-      'Why Choose AI Test Forge?': 'Why Choose Testing Forge?',
-      'Real-World Challenges': 'Practical Testing Challenges',
-      'Practice with scenarios that mirror actual testing situations.': 'Practice with scenarios that mirror real testing situations.',
-      'AI-Powered Learning': 'Modern Tools (including AI)',
-      'Get personalized feedback and guidance from our AI assistant.': 'Learn modern tools like Selenium, Playwright, Postman, and AI. Get feedback and guidance from the community and smart assistants.',
+      'Master Software Testing with AI': 'Master Software Testing with AI',
+      'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.': 'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.',
+      'Why Choose AI Test Forge?': 'Why Choose AI Test Forge?',
+      'Real-World Challenges': 'Real-World Challenges',
+      'Practice with scenarios that mirror actual testing situations.': 'Practice with scenarios that mirror actual testing situations.',
+      'AI-Powered Learning': 'AI-Powered Learning',
+      'Get personalized feedback and guidance from our AI assistant.': 'Get personalized feedback and guidance from our AI assistant.',
       'Active Community': 'Active Community',
       'Connect with other testers and share your experiences.': 'Connect with other testers and share your experiences.',
       'Stay Current': 'Stay Current',
       'Learn the latest testing techniques and tools.': 'Learn the latest testing techniques and tools.',
-      'Try a Sample Challenge': 'Try a Sample Challenge',
-      'API Testing Challenge': 'API Testing Challenge',
-      'Test a REST API endpoint that manages user profiles. Your task is to:': 'Test a REST API endpoint that manages user profiles. Your task is to:',
-      'Verify the GET /users endpoint returns correct user data': 'Verify the GET /users endpoint returns correct user data',
-      'Test POST /users with invalid data handling': 'Test POST /users with invalid data handling',
-      'Implement proper error handling': 'Implement proper error handling',
-      'Try This Challenge': 'Try This Challenge',
-      'Who is this for?': 'Who is this for?',
-      'Beginner Testers': 'Beginner Testers',
-      'Start your testing journey with fundamental concepts and basic challenges.': 'Start your testing journey with fundamental concepts and basic challenges.',
-      'Mid-Level Testers': 'Mid-Level Testers',
-      'Enhance your skills with advanced scenarios and automation challenges.': 'Enhance your skills with advanced scenarios and automation challenges.',
-      'Senior Testers': 'Senior Testers',
-      'Master AI testing and lead complex testing initiatives.': 'Master advanced testing and lead complex initiatives.',
-      'Technologies Covered': 'Technologies Covered',
-      'Selenium': 'Selenium',
-      'Playwright': 'Playwright',
-      'Postman': 'Postman',
-      'AI Testing': 'AI Testing',
-      'What Our Users Say': 'What Our Users Say',
-      'The AI-powered challenges helped me improve my testing skills significantly. Highly recommended!': 'The AI-powered challenges helped me improve my testing skills significantly. Highly recommended!',
-      'Best platform for learning modern testing techniques. The community is incredibly supportive.': 'Best platform for learning modern testing techniques. The community is incredibly supportive.',
-      'The real-world scenarios are exactly what I needed to prepare for my testing career.': 'The real-world scenarios are exactly what I needed to prepare for my testing career.',
-      'Welcome to your dashboard, Tester!': 'Welcome to your dashboard, Tester!',
-      'Here is a summary of your progress on Testing Forge': 'Here is a summary of your progress on Testing Forge',
-      'Completed challenges': 'Completed challenges',
-      'Completed courses': 'Completed courses',
-      'Progress': 'Progress',
-      'Recently completed challenges': 'Recently completed challenges',
-      'No completed challenges yet.': 'No completed challenges yet.',
-      'Challenge': 'Challenge',
-      'Browse challenges': 'Browse challenges',
-      'Browse courses': 'Browse courses',
-      'learn.hero.title': 'DevTools Mini Course',
-      'learn.hero.description': 'Master the use of browser DevTools for web development and debugging',
-      'learn.startLearning': 'Start Learning →',
-      'learn.backToCourses': '← Back to courses',
-      'learn.moduleNotFound': 'Module not found.',
-      'learn.features.title': 'Why Learn DevTools?',
-      'learn.features.expert.title': 'Expert-Led Content',
-      'learn.features.expert.description': 'Learn from industry experts with years of testing experience.',
-      'learn.features.community.title': 'Community Support',
-      'learn.features.community.description': 'Join a community of learners and get help when you need it.',
-      'learn.features.practice.title': 'Hands-on Practice',
-      'learn.features.practice.description': 'Apply what you learn with real-world projects and challenges.',
-      'learn.course.introduction.title': 'Introduction to DevTools',
-      'learn.course.introduction.description': 'Learn the basics of browser DevTools and how to access them.',
-      'learn.course.introduction.content': `📗 Introduction to DevTools
-
-Why DevTools Matter for Testers:
-Browser DevTools are essential for modern web testers. They allow you to inspect the structure of a web page, debug styles and JavaScript, monitor network traffic, simulate devices, and much more. Understanding DevTools helps testers become more independent, effective, and technically capable.
-
-Opening DevTools:
-You can open DevTools in most browsers using one of the following methods:
-- Keyboard Shortcuts:
-  - Chrome/Edge: Ctrl + Shift + I or F12
-  - macOS: Cmd + Option + I
-- Right-click an element on the page and select "Inspect"
-- Use the browser menu: More tools > Developer tools
-Tip: You can dock DevTools to the bottom, left, right, or open it in a separate window.
-
-DevTools Interface Overview:
-Once DevTools is open, you'll see several tabs. Here are the most useful ones for testers:
-1. Elements: Inspect the HTML DOM and CSS of the page. Modify styles live to test layout issues.
-2. Console: Run JavaScript commands. View warnings, errors, and logs. Debug broken scripts or simulate inputs.
-3. Network: Monitor HTTP requests/responses. Check for 404/500 errors or long response times.
-4. Application: View cookies, localStorage, sessionStorage. Inspect service workers, cache, and web storage.
-5. Sources (advanced): Debug JavaScript files with breakpoints. View loaded scripts and execution stack.
-
-Hands-On Exercise: Modify the UI
-- Right-click any element on your platform and select Inspect.
-- Find the line of HTML with the text you want to change.
-- Double-click the text and modify it. Try changing a button label!
-- In the Styles panel on the right, change the background color of the button by editing the background-color rule.
-This is only a visual change, it won't persist on refresh — but it's powerful for quick testing!
-
-Summary:
-By learning to use DevTools, testers can:
-- Validate UI implementation
-- Test and debug styles and JavaScript without asking developers
-- Analyze page performance and inspect backend interactions
-Coming up next: Elements Inspection — let's dive deeper into DOM structure and CSS debugging!`,
-      'learn.course.elements.title': 'Elements Inspection',
-      'learn.course.elements.description': 'Explore how to inspect and modify HTML and CSS using the Elements panel.',
-      'learn.course.elements.content': `📚 Elements Inspection
-
-What You'll Learn:
-Inspecting HTML and CSS is a fundamental skill for testers. It allows you to quickly identify layout issues, verify the presence of elements, and prepare selectors for automation tools.
-
-Inspecting Elements on the Page:
-To inspect an element:
-1. Right-click on any element on a webpage.
-2. Choose Inspect or Inspect Element.
-3. This opens the Elements tab in DevTools and highlights the DOM node.
-The left pane shows the HTML structure (DOM), while the right pane displays CSS styles, computed values, and layout metrics.
-Pro Tip: Hover over elements in the HTML tree to highlight them visually on the page.
-
-Live Editing HTML & CSS:
-You can edit both HTML and CSS directly within the Elements tab. This is useful for verifying UI fixes, reproducing bugs, or prototyping changes.
-Editing HTML:
-- Double-click any tag or attribute to edit it.
-- Right-click to add or remove elements.
-Editing CSS:
-- Modify existing rules or add new ones in the Styles pane.
-- Toggle individual properties on/off.
-- View computed styles and box model to understand layout behavior.
-Practice Task:
-- Change a paragraph's text color.
-- Add a border: 2px solid red; to a div.
-- Hide an element with display: none;
-
-Finding Selectors for Automation:
-Automation tools like Selenium or Playwright rely on unique selectors to find elements.
-Strategies to Find Good Selectors:
-- Look for data-testid, id, or name attributes first.
-- Use class names only if they are stable.
-- Avoid using text content as the only selector.
-How to Copy Selectors:
-- Right-click on an element in the Elements tab.
-- Select Copy > Copy selector or Copy > Copy XPath
-Tip: Use the copied selector to test in the Console:
-document.querySelector('your-selector')
-
-Summary:
-The Elements panel is your window into the DOM. With it, you can:
-- Investigate layout and rendering issues
-- Validate or prototype frontend changes
-- Discover and verify selectors for automation
-Next up: Console Usage — learn how to interact with the browser through code.`,
-      'learn.course.console.title': 'Console Usage',
-      'learn.course.console.description': 'Understand how to use the Console for debugging and logging.',
-      'learn.course.console.content': `💾 Console Usage
-
-Why the Console Matters for Testers:
-The JavaScript console isn't just for developers. For testers, it's an incredibly powerful tool to:
-- Run commands directly in the browser
-- Debug application behavior
-- Check for runtime errors
-- Simulate user actions or backend responses
-Let's explore how to use it effectively.
-
-Opening the Console:
-You can access the Console panel via:
-- Shortcut: Ctrl + Shift + J (Windows/Linux) or Cmd + Option + J (macOS)
-- From DevTools tabs: click on the Console tab
-The console will show logs, warnings, and errors generated by the page's JavaScript.
-
-Console Basics:
-Logging Output:
-Use the following commands to output information:
-console.log('This is a log');
-console.warn('This is a warning');
-console.error('This is an error');
-
-Variable Testing:
-You can access global JavaScript variables or inspect objects:
-document.title
-window.location.href
-document.querySelector('h1')
-Try typing document.body to see the full DOM tree.
-
-Interacting with the Page:
-The console allows you to simulate changes without touching the UI:
-Change text:
-document.querySelector('button').innerText = 'Clicked!';
-Change styles:
-document.querySelector('div').style.backgroundColor = 'yellow';
-Trigger clicks:
-document.querySelector('#submit').click();
-This is particularly useful for testing scenarios like button state, dynamic UI, or JS events.
-
-Debugging with Console:
-Reading Errors:
-Errors shown in red help pinpoint the line and file where an exception occurred.
-- Click on the filename to jump to the source code
-- Use the stack trace to trace the origin of the issue
-Testing Fixes Live:
-If you suspect a variable is undefined, try defining it temporarily:
-let testFlag = 'FLAG-TEST-123';
-console.log(testFlag);
-
-Summary:
-The console lets you:
-- Interrogate the DOM and JS runtime
-- Simulate events and state changes
-- Debug and experiment quickly
-Next up: Network Monitoring — see how data flows between frontend and backend.`,
-      'learn.course.network.title': 'Network Monitoring',
-      'learn.course.network.description': 'Learn to monitor network requests and responses using the Network panel.',
-      'learn.course.network.content': `The **Network panel** allows you to monitor all network activity (XHR, fetch, images, scripts, etc.).
-
-**How to use:**
-- Reload the page with the Network panel open to capture all requests.
-- Click on any request to see headers, payload, and response.
-- Filter requests by type (XHR, JS, CSS, etc.).
-- Analyze timing (waterfall) to find slow resources.
-
-**Use Cases:**
-- Debug API calls and check request/response data
-- Identify failed or slow requests
-- Inspect cookies and authentication headers
-
-**Tips:**
-- Right-click a request to copy as cURL or fetch.
-- Use "Preserve log" to keep requests after navigation.`,
-      'learn.course.performance.title': 'Performance Analysis',
-      'learn.course.performance.description': 'Discover how to analyze and improve performance using the Performance panel.',
-      'learn.course.performance.content': `The **Performance panel** helps you analyze and optimize your web app's speed.
-
-**How to use:**
-- Click "Record" and interact with your page.
-- Stop recording to see a breakdown of scripting, rendering, and painting.
-- Identify long tasks, layout shifts, and bottlenecks.
-
-**Key Metrics:**
-- FPS (frames per second)
-- CPU usage
-- Network and resource loading
-
-**Optimization Tips:**
-- Minimize JavaScript execution time
-- Optimize images and assets
-- Reduce layout thrashing
-
-**Pro Tip:**
-- Use the "Lighthouse" panel for automated performance audits and improvement suggestions.`,
+      'Start Learning →': 'Start Learning →',
+      
+      // Playground
+      'playground.title': 'Automation Playground',
+      'playground.description': 'Welcome to the Automation Playground! This is your dedicated space for practicing web automation. Each module provides a controlled environment to practice different automation scenarios using tools like Selenium, Playwright, or Cypress. No flags or challenges - just pure automation practice!',
+      'playground.tips': 'Tips',
+      
+      // Playground modules
+      'playground.module.dynamicUI.label': 'Dynamic UI',
+      'playground.module.dynamicUI.title': 'Dynamic UI Elements',
+      'playground.module.dynamicUI.description': 'Practice automating interactions with elements that appear and disappear dynamically. Perfect for learning wait strategies and element detection.',
+      'playground.module.dynamicUI.tips': 'Use explicit waits to handle the element\'s visibility. Consider using polling strategies for better reliability. Handle potential StaleElementReferenceException.',
+      'playground.module.dynamicUI.simulation': 'This module simulates a button that appears and disappears every 5 seconds. Practice waiting for and interacting with dynamic elements.',
+      'playground.module.dynamicUI.button': 'Click Me!',
+      
+      'playground.module.ajax.label': 'AJAX Requests',
+      'playground.module.ajax.title': 'AJAX Requests',
+      'playground.module.ajax.description': 'Train your automation skills with asynchronous data loading. Learn how to handle loading states and wait for dynamic content.',
+      'playground.module.ajax.tips': 'Wait for loading spinner to disappear. Use explicit waits for the data to appear. Consider using custom wait conditions.',
+      'playground.module.ajax.simulation': 'This module simulates asynchronous data loading with a loading spinner. Practice handling dynamic content and loading states.',
+      'playground.module.ajax.loading': 'Loading data...',
+      'playground.module.ajax.loadData': 'Load Data',
+      
+      'playground.module.form.label': 'Form Validation',
+      'playground.module.form.title': 'Form Validation',
+      'playground.module.form.description': 'Practice automating form interactions with real-time validation. Learn how to handle input validation and form submission.',
+      'playground.module.form.tips': 'Validate all fields before submitting. Handle error messages and edge cases. Test both valid and invalid inputs.',
+      'playground.module.form.simulation': 'This module provides a form with real-time validation. Practice form automation with various input types and validation rules.',
+      'playground.module.form.name': 'Name',
+      'playground.module.form.email': 'Email',
+      'playground.module.form.phone': 'Phone Number',
+      'playground.module.form.submit': 'Submit',
+      'playground.module.form.errorName': 'Name is required',
+      'playground.module.form.errorEmail': 'Invalid email format',
+      'playground.module.form.errorPhone': 'Phone must be at least 9 digits',
+      'playground.module.form.success': 'Form submitted successfully!',
+      
+      'playground.module.iframe.label': 'iFrame & Modals',
+      'playground.module.iframe.title': 'iFrame & Modals',
+      'playground.module.iframe.description': 'Practice automating iframe and modal interactions. Learn context switching and nested element handling.',
+      'playground.module.iframe.tips': 'Switch to iframe context before interacting with elements. Use proper waiting strategies for modal appearance. Test both iframe and modal closing.',
+      'playground.module.iframe.simulation': 'This module demonstrates iframe and modal interactions. Practice switching contexts and handling nested elements.',
+      'playground.module.iframe.openModal': 'Open Modal',
+      'playground.module.iframe.modalTitle': 'Modal Content',
+      'playground.module.iframe.button': 'Hidden Button',
+      'playground.module.iframe.openIframe': 'Open iFrame',
+      
+      'playground.module.table.label': 'Tables & Lists',
+      'playground.module.table.title': 'Tables & Lists',
+      'playground.module.table.description': 'Practice automating table interactions including sorting and data selection. Learn how to work with dynamic table data.',
+      'playground.module.table.tips': 'Sort tables before selecting data. Verify table contents after actions. Handle dynamic row and column changes.',
+      'playground.module.table.simulation': 'This module simulates a product table with sorting and filtering capabilities. Practice automating table interactions and data verification.',
+      'playground.module.table.product': 'Product',
+      'playground.module.table.price': 'Price',
+      'playground.module.table.product1': 'Premium Plan',
+      'playground.module.table.product2': 'Basic Plan',
+      'playground.module.table.product3': 'Standard Plan',
+      'playground.module.table.product4': 'Enterprise Plan',
+      
+      'playground.module.select.label': 'Select Dropdown',
+      'playground.module.select.title': 'Select Dropdown',
+      'playground.module.select.description': 'Practice automating selection from dropdown menus. Learn how to interact with <select> elements and verify selected values.',
+      'playground.module.select.tips': 'Use selectByValue or selectByVisibleText in your automation tool. Verify the selected value after interaction. Handle dynamic dropdowns and disabled options.',
+      'playground.module.select.simulation': 'This module simulates a dropdown menu with various options. Practice selecting different values and verifying the selection.',
+      'playground.module.select.choose': 'Choose an option:',
+      'playground.module.select.select': 'Select a value',
+      'playground.module.select.apple': 'Apple',
+      'playground.module.select.banana': 'Banana',
+      'playground.module.select.cherry': 'Cherry',
+      'playground.module.select.grape': 'Grape',
+      'playground.module.select.selected': 'Selected: {value}',
+      
+      'playground.module.choices.label': 'Checkboxes & Radios',
+      'playground.module.choices.title': 'Checkboxes & Radio Buttons',
+      'playground.module.choices.description': 'Practice automating selection of checkboxes and radio buttons. Learn how to check, uncheck, and verify options.',
+      'playground.module.choices.tips': 'Use click or check actions for checkboxes/radios. Verify checked state after interaction. Test keyboard accessibility (Tab, Space, Arrow keys).',
+      'playground.module.choices.simulation': 'This module provides checkboxes and radio buttons for practice. Learn to handle multiple selections and verify states.',
+      'playground.module.choices.subscribe': 'Subscribe',
+      'playground.module.choices.newsletter': 'Newsletter',
+      'playground.module.choices.updates': 'Product Updates',
+      'playground.module.choices.choosePlan': 'Choose Your Plan',
+      'playground.module.choices.basic': 'Basic',
+      'playground.module.choices.pro': 'Professional',
+      
+      // New modules
+      'playground.module.dragDrop.label': 'Drag & Drop',
+      'playground.module.dragDrop.title': 'Drag & Drop Automation',
+      'playground.module.dragDrop.description': 'Practice automating drag & drop operations with interactive Kanban board. Learn drag event handling and element position verification.',
+      'playground.module.dragDrop.tips': 'Use data-testid attributes to identify drag sources and drop targets. Test drag and drop using framework-specific methods (e.g., page.dragAndDrop() in Playwright). Verify that items appear in correct containers after drop. Check that item counts in each column are updated. Test edge cases like dropping on the same container.',
+      'playground.module.dragDrop.todo': 'To Do',
+      'playground.module.dragDrop.inProgress': 'In Progress',
+      'playground.module.dragDrop.done': 'Done',
+      'playground.module.dragDrop.automationTips': 'Automation Tips',
+      
+      'playground.module.fileUpload.label': 'File Upload',
+      'playground.module.fileUpload.title': 'File Upload & Download Testing',
+      'playground.module.fileUpload.description': 'Practice automating file upload and download operations. Learn file input handling and upload success verification.',
+      'playground.module.fileUpload.tips': 'Use input[type="file"] selectors and .setInputFiles() method. Verify file appears in upload area after selection. Check upload progress indicators and success messages. Test download functionality by clicking download links. Validate file type restrictions and size limits.',
+      'playground.module.fileUpload.area': 'File Upload Area',
+      'playground.module.fileUpload.uploading': 'Uploading file...',
+      'playground.module.fileUpload.success': 'Upload Successful!',
+      'playground.module.fileUpload.file': 'File',
+      'playground.module.fileUpload.size': 'Size',
+      'playground.module.fileUpload.download': 'Download File',
+      
+      'playground.module.alerts.label': 'Browser Alerts',
+      'playground.module.alerts.title': 'Handling Browser Alerts & Confirm Dialogs',
+      'playground.module.alerts.description': 'Practice handling JavaScript alerts, confirms, and prompts. Learn to accept, dismiss, and interact with browser dialogs.',
+      'playground.module.alerts.tips': 'Use page.on("dialog") to handle alerts before they appear. Accept dialogs with dialog.accept() or dismiss with dialog.dismiss(). For prompts, use dialog.accept(text) to enter text. Test both accepting and dismissing dialogs. Verify page state changes after dialog interactions.',
+      'playground.module.alerts.practice': 'Practice automating browser dialog handling (alert, confirm, prompt)',
+      'playground.module.alerts.showAlert': 'Show Alert',
+      'playground.module.alerts.showConfirm': 'Show Confirm',
+      'playground.module.alerts.showPrompt': 'Show Prompt',
+      'playground.module.alerts.lastAction': 'Last Action Result:',
+      
+      'playground.module.localization.label': 'Localization',
+      'playground.module.localization.title': 'Localization & Language Switching',
+      'playground.module.localization.description': 'Practice testing multi-language applications and localization features. Learn to verify text changes and layout adaptations.',
+      'playground.module.localization.tips': 'Test language switching by clicking language selectors. Verify text changes in multiple UI elements after language switch. Check that page layouts adapt to different text lengths. Test RTL (right-to-left) languages if supported. Validate that form labels, error messages, and tooltips are translated.',
+      'playground.module.localization.welcome': 'Welcome to Testing Forge!',
+      'playground.module.localization.description_text': 'This is a platform for learning test automation.',
+      'playground.module.localization.start_learning': 'Start Learning',
+      'playground.module.localization.help': 'Help',
+      'playground.module.localization.current_language': 'Current language: English',
+      'playground.module.localization.tips.1': 'Test language switching by clicking language selectors',
+      'playground.module.localization.tips.2': 'Verify text changes in multiple UI elements after language switch',
+      'playground.module.localization.tips.3': 'Check that page layouts adapt to different text lengths',
+      'playground.module.localization.tips.4': 'Test RTL (right-to-left) languages if supported',
+      'playground.module.localization.tips.5': 'Validate that form labels, error messages, and tooltips are translated',
+      
+      // Challenge translations EN
       'challenge.secretMessage.title': 'Secret Message',
       'challenge.secretMessage.description': 'Encode a message to base64 (common web encoding).',
       'challenge.secretMessage.category': 'Logic',
@@ -292,65 +195,25 @@ Next up: Network Monitoring — see how data flows between frontend and backend.
       'challenge.jsonValidator.title': 'JSON Validator',
       'challenge.jsonValidator.description': 'Practice validating JSON responses manually',
       'challenge.jsonValidator.category': 'API',
-      'difficulty.beginner': 'Beginner',
-      'difficulty.medium': 'Medium',
-      'playground.title': 'Automation Playground',
-      'playground.description': 'Welcome to the Automation Playground! This is your dedicated space for practicing web automation. Each module provides a controlled environment to practice different automation scenarios using tools like Selenium, Playwright, or Cypress. No flags or challenges - just pure automation practice!',
-      'playground.module.dynamicUI.label': 'Dynamic UI',
-      'playground.module.dynamicUI.title': 'Dynamic UI Elements',
-      'playground.module.dynamicUI.description': 'Practice automating interactions with elements that appear and disappear dynamically. Perfect for learning wait strategies and element detection.',
-      'playground.module.dynamicUI.tips': 'Use explicit waits to handle the element\'s visibility. Consider using polling strategies for better reliability. Handle potential StaleElementReferenceException.',
-      'playground.module.dynamicUI.simulation': 'This module simulates a button that appears and disappears every 5 seconds. Practice waiting for and interacting with dynamic elements.',
-      'playground.module.dynamicUI.button': 'Click Me!',
-      'playground.tips': 'Tips',
-      'playground.module.ajax.label': 'AJAX Requests',
-      'playground.module.ajax.title': 'AJAX Requests',
-      'playground.module.ajax.description': 'Train your automation skills with asynchronous data loading. Learn how to handle loading states and wait for dynamic content.',
-      'playground.module.ajax.tips': 'Wait for loading spinner to disappear. Use explicit waits for the data to appear. Consider using custom wait conditions.',
-      'playground.module.form.label': 'Form Validation',
-      'playground.module.form.title': 'Form Validation',
-      'playground.module.form.description': 'Practice automating form interactions with real-time validation. Learn how to handle input validation and form submission.',
-      'playground.module.form.tips': 'Validate all fields before submitting. Handle error messages and edge cases. Test both valid and invalid inputs.',
-      'playground.module.table.label': 'Tables & Lists',
-      'playground.module.table.title': 'Tables & Lists',
-      'playground.module.table.description': 'Practice automating table interactions including sorting and data selection. Learn how to work with dynamic table data.',
-      'playground.module.table.tips': 'Sort tables before selecting data. Verify table contents after actions. Handle dynamic row and column changes.',
-      'playground.module.select.label': 'Select Dropdown',
-      'playground.module.select.title': 'Select Dropdown',
-      'playground.module.select.description': 'Practice automating selection from dropdown menus. Learn how to interact with <select> elements and verify selected values.',
-      'playground.module.select.tips': 'Use selectByValue or selectByVisibleText in your automation tool. Verify the selected value after interaction. Handle dynamic dropdowns and disabled options.',
-      'playground.module.select.simulation': 'This module simulates a dropdown menu with various options. Practice selecting different values and verifying the selection.',
-      'playground.module.select.choose': 'Choose an option:',
-      'playground.module.select.select': 'Select a value',
-      'playground.module.choices.label': 'Checkboxes & Radios',
-      'playground.module.choices.title': 'Checkboxes & Radio Buttons',
-      'playground.module.choices.description': 'Practice automating selection of checkboxes and radio buttons. Learn how to check, uncheck, and verify options.',
-      'playground.module.choices.tips': 'Use click or check actions for checkboxes/radios. Verify checked state after interaction. Test keyboard accessibility (Tab, Space, Arrow keys).',
-      'Home': 'Home',
-      'Challenges': 'Challenges',
-      'Playground': 'Playground',
-      'Learn': 'Learn',
-      'Community': 'Community',
-      'Dashboard': 'Dashboard',
-      'Logout': 'Logout',
-      'Login': 'Login',
-      'Sign Up': 'Sign Up',
-      'General Discussion': 'General Discussion',
-      'Discuss anything related to software testing and quality assurance.': 'Discuss anything related to software testing and quality assurance.',
-      'Test Automation': 'Test Automation',
-      'Share your automation experiences and get help with your scripts.': 'Share your automation experiences and get help with your scripts.',
-      'AI in Testing': 'AI in Testing',
-      'Discuss the latest trends in AI-powered testing solutions.': 'Discuss the latest trends in AI-powered testing solutions.',
-      'Introduction to AI Testing': 'Introduction to AI Testing',
-      'Webinar': 'Webinar',
-      'Hands-on Selenium Workshop': 'Hands-on Selenium Workshop',
-      'Workshop': 'Workshop',
-      'Testing Community Meetup': 'Testing Community Meetup',
-      'Meetup': 'Meetup',
-      'Join our community of testers, share knowledge, and grow together': 'Join our community of testers, share knowledge, and grow together',
-      'topics': 'topics',
-      'posts': 'posts',
-      'Register Now': 'Register Now',
+      'challenge.elementHighlighter.title': 'Element Highlighter',
+      'challenge.elementHighlighter.description': 'In DevTools, open the Elements panel, find the <h1 id="main-title"> and add style outline: 3px solid red;. The flag is in the data-flag attribute of this element.',
+      'challenge.elementHighlighter.category': 'UI',
+      'challenge.networkTiming.title': 'Network Timing',
+      'challenge.networkTiming.description': 'In the Network tab, refresh the page. Click the first request (e.g., /api/config). In the Headers tab, in response headers, find X-Flag-Code with the flag value.',
+      'challenge.networkTiming.category': 'API',
+      'challenge.formInputFuzzer.title': 'Form Input Fuzzer',
+      'challenge.formInputFuzzer.description': 'On the registration page, fill all fields with an extremely long string (e.g., 200 random characters). After clicking "Submit", in the JSON response (Network → Preview) you will find the flag field.',
+      'challenge.formInputFuzzer.category': 'Web',
+      'challenge.raceConditionTester.title': 'Order API Flag Challenge',
+      'challenge.raceConditionTester.description': 'Edit the JSON below and add "flag": true as a property. Then send a POST request. If the server receives flag: true, it will return the flag in the response. Find the flag in the response and enter it below.',
+      'challenge.raceConditionTester.category': 'API',
+      'challenge.domMutationObserver.title': 'DOM Mutation Observer',
+      'challenge.domMutationObserver.description': 'On the product list, click "Load more". In the console, run the provided MutationObserver code. Then click "Load more" again – the flag will appear in the console.',
+      'challenge.domMutationObserver.category': 'UI',
+      'challenge.accessibilityAudit.title': 'Accessibility Audit',
+      'challenge.accessibilityAudit.description': 'There is an image below without alt attribute. Use DevTools to add alt="FLAG_IMG_ALT_123" to the image. When the correct alt is set, the flag will appear below. Enter the flag to complete the challenge.',
+      'challenge.accessibilityAudit.category': 'Web',
+      // Learn translations EN
       'learn.courses.title': 'Courses',
       'learn.courses.description': 'Comprehensive, multi-week programs for deep learning. Paid access.',
       'learn.minicourses.title': 'Mini Courses',
@@ -365,105 +228,26 @@ Next up: Network Monitoring — see how data flows between frontend and backend.
       'learn.minicourse.devtools.duration': '1 hour',
       'learn.minicourse.devtools.cta': 'Start now',
       'learn.comingSoon': 'Coming soon',
-      'playground.module.table.simulation': 'This module simulates a product table with sorting and filtering capabilities. Practice automating table interactions and data verification.',
-      'playground.module.table.product1': 'Premium Plan',
-      'playground.module.table.product2': 'Basic Plan',
-      'playground.module.table.product3': 'Standard Plan',
-      'playground.module.table.product4': 'Enterprise Plan',
-      'playground.module.ajax.simulation': 'This module simulates asynchronous data loading with a loading spinner. Practice handling dynamic content and loading states.',
-      'playground.module.ajax.loading': 'Loading data...',
-      'playground.module.ajax.data': 'Data loaded successfully!',
-      'playground.module.form.simulation': 'This module provides a form with real-time validation. Practice form automation with various input types and validation rules.',
-      'playground.module.form.name': 'Name',
-      'playground.module.form.email': 'Email',
-      'playground.module.form.password': 'Password',
-      'playground.module.form.submit': 'Submit',
-      'playground.module.iframe.simulation': 'This module demonstrates iframe and modal interactions. Practice switching contexts and handling nested elements.',
-      'playground.module.iframe.open': 'Open Modal',
-      'playground.module.iframe.close': 'Close',
-      'playground.module.choices.simulation': 'This module provides checkboxes and radio buttons for practice. Learn to handle multiple selections and verify states.',
-      'playground.module.choices.checkbox1': 'Option 1',
-      'playground.module.choices.checkbox2': 'Option 2',
-      'playground.module.choices.radio1': 'Choice A',
-      'playground.module.choices.radio2': 'Choice B',
-      'playground.module.form.phone': 'Phone Number',
-      'playground.module.ajax.loadData': 'Load Data',
-      'playground.module.choices.subscribe': 'Subscribe',
-      'playground.module.choices.newsletter': 'Newsletter',
-      'playground.module.choices.updates': 'Product Updates',
-      'playground.module.choices.choosePlan': 'Choose Your Plan',
-      'playground.module.choices.basic': 'Basic',
-      'playground.module.choices.pro': 'Professional',
-      'playground.module.table.header.name': 'Product Name',
-      'playground.module.table.header.price': 'Price',
-      'playground.module.table.header.rating': 'Rating',
-      'playground.module.table.header.actions': 'Actions',
-      'playground.module.table.sort': 'Sort by',
-      'playground.module.table.filter': 'Filter by price',
-      'playground.module.table.view': 'View Details',
-      'playground.module.table.edit': 'Edit',
-      'playground.module.table.delete': 'Delete',
-      'playground.module.table.rating.good': 'Good',
-      'playground.module.table.rating.excellent': 'Excellent',
-      'playground.module.table.rating.average': 'Average',
-      'playground.module.select.placeholder': 'Select an option',
-      'playground.module.select.option1': 'Option 1',
-      'playground.module.select.option2': 'Option 2',
-      'playground.module.select.option3': 'Option 3',
-      'playground.module.select.option4': 'Option 4',
-      'playground.module.select.option5': 'Option 5',
-      'playground.module.select.selected': 'Selected:',
-      'playground.module.select.change': 'Change Selection',
-      'playground.module.iframe.title': 'Embedded Content',
-      'playground.module.iframe.content': 'This is the content inside the iframe',
-      'playground.module.iframe.switch': 'Switch to iframe',
-      'playground.module.iframe.switchBack': 'Switch back to main content',
-      'playground.module.iframe.interact': 'Interact with iframe content',
-      'playground.module.iframe.button': 'Click me inside iframe',
-      'playground.module.iframe.success': 'Successfully interacted with iframe!',
-      'playground.module.button.click': 'Click Me',
-      'playground.module.button.doubleClick': 'Double Click Me',
-      'playground.module.button.rightClick': 'Right Click Me',
-      'playground.module.button.hover': 'Hover Over Me',
-      'playground.module.button.drag': 'Drag Me',
-      'playground.module.button.drop': 'Drop Here',
-      'playground.module.button.success': 'Button clicked successfully!',
-      'playground.module.button.doubleSuccess': 'Double click successful!',
-      'playground.module.button.rightSuccess': 'Right click successful!',
-      'playground.module.button.hoverSuccess': 'Hover detected!',
-      'playground.module.button.dragSuccess': 'Drag and drop successful!',
-      'playground.module.form.errorName': 'Name is required',
-      'playground.module.form.errorEmail': 'Invalid email format',
-      'playground.module.form.errorPhone': 'Phone must be at least 9 digits',
-      'playground.module.form.success': 'Form submitted successfully!',
-      'playground.module.iframe.openModal': 'Open Modal',
-      'playground.module.iframe.modalTitle': 'Modal Content',
-      'playground.module.iframe.openIframe': 'Open iFrame',
-      'playground.module.table.product': 'Product',
-      'playground.module.select.apple': 'Apple',
-      'playground.module.select.banana': 'Banana',
-      'playground.module.select.cherry': 'Cherry',
-      'playground.module.select.grape': 'Grape',
-      'playground.module.iframe.label': 'iFrames & Modals',
+      // Difficulty levels
+      'difficulty.beginner': 'Beginner',
+      'difficulty.medium': 'Medium',
     }
   },
   pl: {
     translation: {
-      // Add Polish translations here
+      // Navigation
+      'Home': 'Strona główna',
+      'Challenges': 'Wyzwania',
+      'Playground': 'Playground',
+      'Learn': 'Kursy',
+      'Community': 'Społeczność',
+      'Dashboard': 'Panel',
+      'Logout': 'Wyloguj',
+      'Login': 'Zaloguj',
+      'Sign Up': 'Załóż konto',
+      
+      // Main page
       'Testing Community': 'Społeczność Testerów',
-      'Discussion Forums': 'Fora dyskusyjne',
-      'Upcoming Events': 'Nadchodzące wydarzenia',
-      'Active Members': 'Aktywni członkowie',
-      'Completed Challenges': 'Ukończone zadania',
-      'Forum Posts': 'Posty na forum',
-      'QA Interactive Challenges': 'Interaktywne wyzwania QA',
-      'Improve your testing skills with interactive challenges on Testing Forge!': 'Rozwijaj umiejętności testowania dzięki interaktywnym zadaniom na Testing Forge!',
-      'Back': 'Wstecz',
-      'Filter by Difficulty:': 'Filtruj według trudności:',
-      'All': 'Wszystkie',
-      'Beginner': 'Początkujący',
-      'Medium': 'Średni',
-      'Start Learning →': 'Rozpocznij naukę →',
       'Master Software Testing with AI': 'Rozwijaj swoje umiejętności testerskie',
       'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.': 'Interaktywne wyzwania, mini kursy i społeczność dla testerów na każdym poziomie.',
       'Why Choose AI Test Forge?': 'Dlaczego Testing Forge?',
@@ -475,232 +259,137 @@ Next up: Network Monitoring — see how data flows between frontend and backend.
       'Connect with other testers and share your experiences.': 'Łącz się z innymi testerami i dziel się doświadczeniami.',
       'Stay Current': 'Bądź na bieżąco',
       'Learn the latest testing techniques and tools.': 'Poznawaj najnowsze techniki i narzędzia testerskie.',
-      'Try a Sample Challenge': 'Wypróbuj przykładowe zadanie',
-      'API Testing Challenge': 'Zadanie testowania API',
-      'Test a REST API endpoint that manages user profiles. Your task is to:': 'Przetestuj endpoint REST API zarządzający profilami użytkowników. Twoje zadanie to:',
-      'Verify the GET /users endpoint returns correct user data': 'Zweryfikuj, czy GET /users zwraca poprawne dane użytkownika',
-      'Test POST /users with invalid data handling': 'Przetestuj POST /users pod kątem obsługi niepoprawnych danych',
-      'Implement proper error handling': 'Zaimplementuj odpowiednią obsługę błędów',
-      'Try This Challenge': 'Spróbuj tego zadania',
-      'Who is this for?': 'Dla kogo jest ta platforma?',
-      'Beginner Testers': 'Testerzy początkujący',
-      'Start your testing journey with fundamental concepts and basic challenges.': 'Rozpocznij swoją przygodę z testowaniem od podstawowych pojęć i zadań.',
-      'Mid-Level Testers': 'Testerzy średniozaawansowani',
-      'Enhance your skills with advanced scenarios and automation challenges.': 'Rozwijaj umiejętności dzięki zaawansowanym scenariuszom i zadaniom automatyzacyjnym.',
-      'Senior Testers': 'Testerzy zaawansowani',
-      'Master AI testing and lead complex testing initiatives.': 'Opanuj zaawansowane testowanie i prowadź złożone inicjatywy.',
-      'Technologies Covered': 'Technologie na platformie',
-      'Selenium': 'Selenium',
-      'Playwright': 'Playwright',
-      'Postman': 'Postman',
-      'AI Testing': 'Testowanie AI',
-      'What Our Users Say': 'Opinie użytkowników',
-      'The AI-powered challenges helped me improve my testing skills significantly. Highly recommended!': 'Wyzwania z AI znacząco poprawiły moje umiejętności testerskie. Gorąco polecam!',
-      'Best platform for learning modern testing techniques. The community is incredibly supportive.': 'Najlepsza platforma do nauki nowoczesnych technik testowania. Społeczność jest bardzo pomocna.',
-      'The real-world scenarios are exactly what I needed to prepare for my testing career.': 'Scenariusze z życia wzięte to dokładnie to, czego potrzebowałem, by przygotować się do pracy testera.',
-      'Welcome to your dashboard, Tester!': 'Witaj na swoim panelu, Testerze!',
-      'Here is a summary of your progress on Testing Forge': 'Oto podsumowanie Twoich postępów na Testing Forge',
-      'Completed challenges': 'Ukończone zadania',
-      'Completed courses': 'Ukończone kursy',
-      'Progress': 'Postęp',
-      'Recently completed challenges': 'Ostatnio ukończone zadania',
-      'No completed challenges yet.': 'Nie ukończono jeszcze żadnych zadań.',
-      'Challenge': 'Zadanie',
-      'Browse challenges': 'Przeglądaj zadania',
-      'Browse courses': 'Przeglądaj kursy',
-      'learn.hero.title': 'Mini Kurs DevTools',
-      'learn.hero.description': 'Opanuj używanie narzędzi deweloperskich przeglądarki do tworzenia i debugowania stron internetowych',
-      'learn.startLearning': 'Rozpocznij naukę →',
-      'learn.backToCourses': '← Powrót do kursów',
-      'learn.moduleNotFound': 'Nie znaleziono modułu.',
-      'learn.features.title': 'Dlaczego warto uczyć się DevTools?',
-      'learn.features.expert.title': 'Treści od ekspertów',
-      'learn.features.expert.description': 'Ucz się od ekspertów branżowych z wieloletnim doświadczeniem w testowaniu.',
-      'learn.features.community.title': 'Wsparcie społeczności',
-      'learn.features.community.description': 'Dołącz do społeczności uczących się i otrzymuj pomoc, gdy jej potrzebujesz.',
-      'learn.features.practice.title': 'Praktyczne ćwiczenia',
-      'learn.features.practice.description': 'Zastosuj zdobytą wiedzę w rzeczywistych projektach i wyzwaniach.',
-      'learn.course.introduction.title': 'Wprowadzenie do DevTools',
-      'learn.course.introduction.description': 'Poznaj podstawy narzędzi deweloperskich przeglądarki i sposoby ich uruchamiania.',
-      'learn.course.introduction.content': `📗 Wprowadzenie do DevTools
-
-Dlaczego DevTools są ważne dla testerów:
-Narzędzia deweloperskie przeglądarki są niezbędne dla współczesnych testerów. Pozwalają na inspekcję struktury strony, debugowanie stylów i JavaScript, monitorowanie ruchu sieciowego, symulację urządzeń i wiele więcej. Zrozumienie DevTools pomaga testerom stać się bardziej niezależnymi, skutecznymi i technicznie kompetentnymi.
-
-Otwieranie DevTools:
-Możesz otworzyć DevTools w większości przeglądarek używając jednej z następujących metod:
-- Skróty klawiszowe:
-  - Chrome/Edge: Ctrl + Shift + I lub F12
-  - macOS: Cmd + Option + I
-- Kliknij prawym przyciskiem myszy na element strony i wybierz "Zbadaj"
-- Użyj menu przeglądarki: Więcej narzędzi > Narzędzia deweloperskie
-Wskazówka: Możesz zadokować DevTools na dole, po lewej, po prawej lub otworzyć w osobnym oknie.
-
-Przegląd interfejsu DevTools:
-Po otwarciu DevTools zobaczysz kilka zakładek. Oto najważniejsze dla testerów:
-1. Elements: Inspekcja DOM HTML i CSS strony. Modyfikuj style na żywo, aby testować problemy z układem.
-2. Console: Uruchamiaj komendy JavaScript. Przeglądaj ostrzeżenia, błędy i logi. Debuguj uszkodzone skrypty lub symuluj dane wejściowe.
-3. Network: Monitoruj żądania/odpowiedzi HTTP. Sprawdzaj błędy 404/500 lub długie czasy odpowiedzi.
-4. Application: Przeglądaj ciasteczka, localStorage, sessionStorage. Inspekcja service workers, cache i pamięci web.
-5. Sources (zaawansowane): Debuguj pliki JavaScript z punktami przerwania. Przeglądaj załadowane skrypty i stos wykonania.
-
-Ćwiczenie praktyczne: Modyfikacja interfejsu
-- Kliknij prawym przyciskiem myszy na dowolny element platformy i wybierz Zbadaj.
-- Znajdź linię HTML z tekstem, który chcesz zmienić.
-- Kliknij dwukrotnie tekst i zmodyfikuj go. Spróbuj zmienić etykietę przycisku!
-- W panelu Styles po prawej stronie zmień kolor tła przycisku, edytując regułę background-color.
-To jest tylko zmiana wizualna, nie będzie zachowana po odświeżeniu — ale jest potężnym narzędziem do szybkiego testowania!
-
-Podsumowanie:
-Ucząc się używać DevTools, testerzy mogą:
-- Weryfikować implementację interfejsu
-- Testować i debugować style oraz JavaScript bez pomocy programistów
-- Analizować wydajność strony i inspekcjonować interakcje z backendem
-Następnie: Inspekcja elementów — zagłębmy się w strukturę DOM i debugowanie CSS!`,
-      'learn.course.elements.title': 'Inspekcja elementów',
-      'learn.course.elements.description': 'Poznaj sposoby inspekcji i modyfikacji HTML oraz CSS przy użyciu panelu Elements.',
-      'learn.course.elements.content': `📚 Inspekcja elementów
-
-Czego się nauczysz:
-Inspekcja HTML i CSS to podstawowa umiejętność dla testerów. Pozwala na szybkie identyfikowanie problemów z układem, weryfikację obecności elementów i przygotowanie selektorów dla narzędzi automatyzacyjnych.
-
-Inspekcja elementów na stronie:
-Aby zbadać element:
-1. Right-click on any element on a webpage.
-2. Choose Inspect or Inspect Element.
-3. This opens the Elements tab in DevTools and highlights the DOM node.
-The left pane shows the HTML structure (DOM), while the right pane displays CSS styles, computed values, and layout metrics.
-Pro Tip: Hover over elements in the HTML tree to highlight them visually on the page.
-
-Live Editing HTML & CSS:
-You can edit both HTML and CSS directly within the Elements tab. This is useful for verifying UI fixes, reproducing bugs, or prototyping changes.
-Editing HTML:
-- Double-click any tag or attribute to edit it.
-- Right-click to add or remove elements.
-Editing CSS:
-- Modify existing rules or add new ones in the Styles pane.
-- Toggle individual properties on/off.
-- View computed styles and box model to understand layout behavior.
-Practice Task:
-- Change a paragraph's text color.
-- Add a border: 2px solid red; to a div.
-- Hide an element with display: none;
-
-Finding Selectors for Automation:
-Automation tools like Selenium or Playwright rely on unique selectors to find elements.
-Strategies to Find Good Selectors:
-- Look for data-testid, id, or name attributes first.
-- Use class names only if they are stable.
-- Avoid using text content as the only selector.
-How to Copy Selectors:
-- Right-click on an element in the Elements tab.
-- Select Copy > Copy selector or Copy > Copy XPath
-Tip: Use the copied selector to test in the Console:
-document.querySelector('your-selector')
-
-Summary:
-The Elements panel is your window into the DOM. With it, you can:
-- Investigate layout and rendering issues
-- Validate or prototype frontend changes
-- Discover and verify selectors for automation
-Next up: Console Usage — learn how to interact with the browser through code.`,
-      'learn.course.console.title': 'Używanie konsoli',
-      'learn.course.console.description': 'Zrozum, jak używać konsoli do debugowania i logowania.',
-      'learn.course.console.content': `💾 Używanie konsoli
-
-Dlaczego konsola jest ważna dla testerów:
-Konsola JavaScript to nie tylko narzędzie dla programistów. Dla testerów jest to niezwykle potężne narzędzie do:
-- Uruchamiania komend bezpośrednio w przeglądarce
-- Debugowania zachowania aplikacji
-- Sprawdzania błędów wykonania
-- Symulowania akcji użytkownika lub odpowiedzi backendu
-Zbadajmy, jak używać jej efektywnie.
-
-Opening the Console:
-You can access the Console panel via:
-- Shortcut: Ctrl + Shift + J (Windows/Linux) or Cmd + Option + J (macOS)
-- From DevTools tabs: click on the Console tab
-The console will show logs, warnings, and errors generated by the page's JavaScript.
-
-Console Basics:
-Logging Output:
-Use the following commands to output information:
-console.log('This is a log');
-console.warn('This is a warning');
-console.error('This is an error');
-
-Variable Testing:
-You can access global JavaScript variables or inspect objects:
-document.title
-window.location.href
-document.querySelector('h1')
-Spróbuj wpisać document.body, aby zobaczyć pełne drzewo DOM.
-
-Interacting with the Page:
-The console allows you to simulate changes without touching the UI:
-Zmiana tekstu:
-document.querySelector('button').innerText = 'Kliknięto!';
-Zmiana stylów:
-document.querySelector('div').style.backgroundColor = 'yellow';
-Wywołanie kliknięć:
-document.querySelector('#submit').click();
-Jest to szczególnie przydatne do testowania scenariuszy jak stan przycisku, dynamiczny interfejs lub zdarzenia JS.
-
-Debugging with Console:
-Czytanie błędów:
-Błędy pokazane na czerwono pomagają zlokalizować linię i plik, w którym wystąpił wyjątek.
-- Kliknij na nazwę pliku, aby przejść do kodu źródłowego
-- Użyj śladu stosu, aby prześledzić pochodzenie problemu
-Testowanie poprawek na żywo:
-Jeśli podejrzewasz, że zmienna jest niezdefiniowana, spróbuj zdefiniować ją tymczasowo:
-let testFlag = 'FLAG-TEST-123';
-console.log(testFlag);
-
-Summary:
-Konsola pozwala Ci:
-- Interrogować DOM i środowisko wykonawcze JS
-- Symulować zdarzenia i zmiany stanu
-- Debugować i eksperymentować szybko
-Następnie: Monitorowanie sieci — zobacz, jak dane przepływają między frontendem a backendem.`,
-      'learn.course.network.title': 'Monitorowanie sieci',
-      'learn.course.network.description': 'Naucz się monitorować żądania i odpowiedzi sieciowe przy użyciu panelu Network.',
-      'learn.course.network.content': `Panel **Network** pozwala monitorować całą aktywność sieciową (XHR, fetch, obrazy, skrypty, itp.).
-
-**Jak używać:**
-- Przeładuj stronę z otwartym panelem Network, aby przechwycić wszystkie żądania.
-- Kliknij na dowolne żądanie, aby zobaczyć nagłówki, dane i odpowiedź.
-- Filtruj żądania według typu (XHR, JS, CSS, itp.).
-- Analizuj czas (waterfall), aby znaleźć wolne zasoby.
-
-**Przypadki użycia:**
-- Debugowanie wywołań API i sprawdzanie danych żądania/odpowiedzi
-- Identyfikacja nieudanych lub wolnych żądań
-- Inspekcja ciasteczek i nagłówków autoryzacji
-
-**Wskazówki:**
-- Kliknij prawym przyciskiem myszy na żądanie, aby skopiować jako cURL lub fetch.
-- Użyj "Preserve log", aby zachować żądania po nawigacji.`,
-      'learn.course.performance.title': 'Analiza wydajności',
-      'learn.course.performance.description': 'Odkryj, jak analizować i poprawiać wydajność przy użyciu panelu Performance.',
-      'learn.course.performance.content': `Panel **Performance** pomaga analizować i optymalizować szybkość Twojej aplikacji webowej.
-
-**Jak używać:**
-- Kliknij "Record" i wchodź w interakcję ze swoją stroną.
-- Zatrzymaj nagrywanie, aby zobaczyć podział na skrypty, renderowanie i malowanie.
-- Identyfikuj długie zadania, przesunięcia układu i wąskie gardła.
-
-**Kluczowe metryki:**
-- FPS (klatki na sekundę)
-- Użycie CPU
-- Sieć i ładowanie zasobów
-
-**Wskazówki optymalizacji:**
-- Minimalizuj czas wykonania JavaScript
-- Optymalizuj obrazy i zasoby
-- Zmniejsz thrashing układu
-
-**Pro Tip:**
-- Użyj panelu "Lighthouse" do automatycznych audytów wydajności i sugestii ulepszeń.`,
+      'Start Learning →': 'Rozpocznij naukę →',
+      
+      // Playground
+      'playground.title': 'Playground Automatyzacji',
+      'playground.description': 'Witaj w Playground Automatyzacji! To jest Twoje dedykowane miejsce do ćwiczenia automatyzacji web. Każdy moduł zapewnia kontrolowane środowisko do praktyki różnych scenariuszy automatyzacji z narzędziami takimi jak Selenium, Playwright czy Cypress. Bez flag czy wyzwań - tylko czysta praktyka automatyzacji!',
+      'playground.tips': 'Wskazówki',
+      
+      // Playground modules
+      'playground.module.dynamicUI.label': 'Dynamiczny UI',
+      'playground.module.dynamicUI.title': 'Dynamiczne Elementy UI',
+      'playground.module.dynamicUI.description': 'Ćwicz automatyzację interakcji z elementami pojawiającymi się i znikającymi dynamicznie. Idealne do nauki strategii czekania i wykrywania elementów.',
+      'playground.module.dynamicUI.tips': 'Używaj jawnych waitów do obsługi widoczności elementu. Rozważ strategie pollingowe dla większej niezawodności. Obsłuż potencjalny StaleElementReferenceException.',
+      'playground.module.dynamicUI.simulation': 'Ten moduł symuluje przycisk, który pojawia się i znika co 5 sekund. Ćwicz czekanie na dynamiczne elementy i interakcję z nimi.',
+      'playground.module.dynamicUI.button': 'Kliknij mnie!',
+      
+      'playground.module.ajax.label': 'Żądania AJAX',
+      'playground.module.ajax.title': 'Żądania AJAX',
+      'playground.module.ajax.description': 'Trenuj umiejętności automatyzacji z asynchronicznym ładowaniem danych. Naucz się obsługi stanów ładowania i czekania na dynamiczne treści.',
+      'playground.module.ajax.tips': 'Czekaj aż spinner ładowania zniknie. Używaj jawnych waitów na pojawienie się danych. Rozważ własne warunki oczekiwania.',
+      'playground.module.ajax.simulation': 'Ten moduł symuluje asynchroniczne ładowanie danych ze spinnerem. Ćwicz obsługę dynamicznych treści i stanów ładowania.',
+      'playground.module.ajax.loading': 'Ładowanie danych...',
+      'playground.module.ajax.loadData': 'Załaduj dane',
+      
+      'playground.module.form.label': 'Walidacja Formularza',
+      'playground.module.form.title': 'Walidacja Formularza',
+      'playground.module.form.description': 'Ćwicz automatyzację interakcji z formularzami z walidacją w czasie rzeczywistym. Naucz się obsługi walidacji i wysyłania formularzy.',
+      'playground.module.form.tips': 'Waliduj wszystkie pola przed wysłaniem. Obsłuż komunikaty o błędach i przypadki brzegowe. Testuj poprawne i niepoprawne dane.',
+      'playground.module.form.simulation': 'Ten moduł zapewnia formularz z walidacją w czasie rzeczywistym. Ćwicz automatyzację formularzy z różnymi typami pól i regułami walidacji.',
+      'playground.module.form.name': 'Imię',
+      'playground.module.form.email': 'Email',
+      'playground.module.form.phone': 'Numer telefonu',
+      'playground.module.form.submit': 'Wyślij',
+      'playground.module.form.errorName': 'Imię jest wymagane',
+      'playground.module.form.errorEmail': 'Nieprawidłowy format email',
+      'playground.module.form.errorPhone': 'Telefon musi mieć co najmniej 9 cyfr',
+      'playground.module.form.success': 'Formularz wysłany pomyślnie!',
+      
+      'playground.module.iframe.label': 'iFrame i Modale',
+      'playground.module.iframe.title': 'iFrame i Modale',
+      'playground.module.iframe.description': 'Ćwicz automatyzację interakcji z iframe i modalami. Naucz się przełączania kontekstu i obsługi zagnieżdżonych elementów.',
+      'playground.module.iframe.tips': 'Przełącz do kontekstu iframe przed interakcją z elementami. Używaj odpowiednich strategii czekania na pojawienie się modali. Testuj zamykanie iframe i modali.',
+      'playground.module.iframe.simulation': 'Ten moduł demonstruje interakcje z iframe i modalami. Ćwicz przełączanie kontekstów i obsługę zagnieżdżonych elementów.',
+      'playground.module.iframe.openModal': 'Otwórz Modal',
+      'playground.module.iframe.modalTitle': 'Zawartość Modala',
+      'playground.module.iframe.button': 'Ukryty Przycisk',
+      'playground.module.iframe.openIframe': 'Otwórz iFrame',
+      
+      'playground.module.table.label': 'Tabele i Listy',
+      'playground.module.table.title': 'Tabele i Listy',
+      'playground.module.table.description': 'Ćwicz automatyzację interakcji z tabelami, sortowanie i wybieranie danych. Naucz się obsługi dynamicznych danych w tabelach.',
+      'playground.module.table.tips': 'Sortuj tabele przed wyborem danych. Weryfikuj zawartość po akcjach. Obsłuż dynamiczne wiersze i kolumny.',
+      'playground.module.table.simulation': 'Ten moduł symuluje tabelę produktów z możliwością sortowania i filtrowania. Ćwicz automatyzację interakcji z tabelami i weryfikację danych.',
+      'playground.module.table.product': 'Produkt',
+      'playground.module.table.price': 'Cena',
+      'playground.module.table.product1': 'Plan Premium',
+      'playground.module.table.product2': 'Plan Podstawowy',
+      'playground.module.table.product3': 'Plan Standardowy',
+      'playground.module.table.product4': 'Plan Enterprise',
+      
+      'playground.module.select.label': 'Lista rozwijana',
+      'playground.module.select.title': 'Lista rozwijana',
+      'playground.module.select.description': 'Ćwicz automatyzację wyboru z list rozwijanych. Naucz się obsługiwać elementy <select> i weryfikować wybrane wartości.',
+      'playground.module.select.tips': 'Użyj selectByValue lub selectByVisibleText w narzędziu automatyzującym. Weryfikuj wybraną wartość po interakcji. Obsłuż dynamiczne i zablokowane opcje.',
+      'playground.module.select.simulation': 'Ten moduł symuluje listę rozwijaną z różnymi opcjami. Ćwicz wybieranie różnych wartości i weryfikację wyboru.',
+      'playground.module.select.choose': 'Wybierz opcję:',
+      'playground.module.select.select': 'Wybierz wartość',
+      'playground.module.select.apple': 'Jabłko',
+      'playground.module.select.banana': 'Banan',
+      'playground.module.select.cherry': 'Wiśnia',
+      'playground.module.select.grape': 'Winogrono',
+      'playground.module.select.selected': 'Wybrano: {value}',
+      
+      'playground.module.choices.label': 'Checkboxy i Radio',
+      'playground.module.choices.title': 'Checkboxy i Przyciski Radio',
+      'playground.module.choices.description': 'Ćwicz automatyzację zaznaczania checkboxów i przycisków radio. Naucz się zaznaczać, odznaczać i weryfikować opcje.',
+      'playground.module.choices.tips': 'Używaj akcji click lub check dla checkboxów/radio. Weryfikuj stan po interakcji. Testuj dostępność z klawiatury (Tab, Spacja, Strzałki).',
+      'playground.module.choices.simulation': 'Ten moduł zapewnia checkboxy i przyciski radio do ćwiczeń. Naucz się obsługi wielokrotnych wyborów i weryfikacji stanów.',
+      'playground.module.choices.subscribe': 'Subskrybuj',
+      'playground.module.choices.newsletter': 'Newsletter',
+      'playground.module.choices.updates': 'Aktualizacje produktu',
+      'playground.module.choices.choosePlan': 'Wybierz swój plan',
+      'playground.module.choices.basic': 'Podstawowy',
+      'playground.module.choices.pro': 'Profesjonalny',
+      
+      // New modules
+      'playground.module.dragDrop.label': 'Przeciągnij i Upuść',
+      'playground.module.dragDrop.title': 'Automatyzacja Drag & Drop',
+      'playground.module.dragDrop.description': 'Ćwicz automatyzację operacji przeciągania i upuszczania z interaktywną tablicą Kanban. Naucz się obsługi zdarzeń drag i weryfikacji pozycji elementów.',
+      'playground.module.dragDrop.tips': 'Używaj atrybutów data-testid do identyfikacji źródeł i celów przeciągania. Testuj drag & drop używając metod specyficznych dla frameworka (np. page.dragAndDrop() w Playwright). Weryfikuj, że elementy pojawiają się w odpowiednich kontenerach po upuszczeniu. Sprawdzaj, czy liczba elementów w kolumnach jest aktualizowana. Testuj przypadki brzegowe jak upuszczanie w tym samym kontenerze.',
+      'playground.module.dragDrop.todo': 'Do zrobienia',
+      'playground.module.dragDrop.inProgress': 'W trakcie',
+      'playground.module.dragDrop.done': 'Zrobione',
+      'playground.module.dragDrop.automationTips': 'Wskazówki automatyzacji',
+      
+      'playground.module.fileUpload.label': 'Upload Plików',
+      'playground.module.fileUpload.title': 'Testowanie Upload i Download Plików',
+      'playground.module.fileUpload.description': 'Ćwicz automatyzację operacji upload i download plików. Naucz się obsługi inputów plików i weryfikacji sukcesu uploadu.',
+      'playground.module.fileUpload.tips': 'Używaj selektorów input[type="file"] i metody .setInputFiles(). Weryfikuj, że plik pojawia się w obszarze uploadu po wybraniu. Sprawdzaj wskaźniki postępu i komunikaty o sukcesie. Testuj funkcjonalność pobierania klikając linki download. Waliduj ograniczenia typów plików i rozmiarów.',
+      'playground.module.fileUpload.area': 'Obszar uploadu plików',
+      'playground.module.fileUpload.uploading': 'Wysyłanie pliku...',
+      'playground.module.fileUpload.success': 'Upload zakończony sukcesem!',
+      'playground.module.fileUpload.file': 'Plik',
+      'playground.module.fileUpload.size': 'Rozmiar',
+      'playground.module.fileUpload.download': 'Pobierz plik',
+      
+      'playground.module.alerts.label': 'Alerty Przeglądarki',
+      'playground.module.alerts.title': 'Obsługa Alertów i Okien Dialogowych',
+      'playground.module.alerts.description': 'Ćwicz obsługę alertów JavaScript, potwierdzeń i promptów. Naucz się akceptować, odrzucać i wchodzić w interakcje z oknami dialogowymi przeglądarki.',
+      'playground.module.alerts.tips': 'Używaj page.on("dialog") do obsługi alertów zanim się pojawią. Akceptuj dialogi z dialog.accept() lub odrzucaj z dialog.dismiss(). Dla promptów używaj dialog.accept(text) do wprowadzania tekstu. Testuj zarówno akceptowanie jak i odrzucanie dialogów. Weryfikuj zmiany stanu strony po interakcjach z dialogami.',
+      'playground.module.alerts.practice': 'Ćwicz automatyzację obsługi okien dialogowych (alert, confirm, prompt)',
+      'playground.module.alerts.showAlert': 'Pokaż Alert',
+      'playground.module.alerts.showConfirm': 'Pokaż Potwierdzenie',
+      'playground.module.alerts.showPrompt': 'Pokaż Prompt',
+      'playground.module.alerts.lastAction': 'Ostatnia akcja:',
+      
+      'playground.module.localization.label': 'Lokalizacja',
+      'playground.module.localization.title': 'Lokalizacja i Przełączanie Języków',
+      'playground.module.localization.description': 'Ćwicz testowanie aplikacji wielojęzycznych i funkcji lokalizacji. Naucz się weryfikować zmiany tekstu i adaptacje układu.',
+      'playground.module.localization.tips': 'Testuj przełączanie języków klikając selektory języków. Weryfikuj zmiany tekstu w wielu elementach UI po zmianie języka. Sprawdzaj, czy układy stron dostosowują się do różnych długości tekstu. Testuj języki RTL (right-to-left) jeśli są obsługiwane. Waliduj, że etykiety formularzy, komunikaty błędów i tooltips są przetłumaczone.',
+      'playground.module.localization.welcome': 'Witaj w Testing Forge!',
+      'playground.module.localization.description_text': 'To jest platforma do nauki automatyzacji testów.',
+      'playground.module.localization.start_learning': 'Rozpocznij Naukę',
+      'playground.module.localization.help': 'Pomoc',
+      'playground.module.localization.current_language': 'Obecny język: Polski',
+      'playground.module.localization.tips.1': 'Testuj przełączanie języków klikając selektory języków',
+      'playground.module.localization.tips.2': 'Weryfikuj zmiany tekstu w wielu elementach UI po zmianie języka',
+      'playground.module.localization.tips.3': 'Sprawdzaj, czy układy stron dostosowują się do różnych długości tekstu',
+      'playground.module.localization.tips.4': 'Testuj języki RTL (right-to-left) jeśli są obsługiwane',
+      'playground.module.localization.tips.5': 'Waliduj, że etykiety formularzy, komunikaty błędów i tooltips są przetłumaczone',
+      
+      // Challenge translations PL
       'challenge.secretMessage.title': 'Tajna Wiadomość',
       'challenge.secretMessage.description': 'Zakoduj wiadomość do base64 (popularne kodowanie webowe).',
       'challenge.secretMessage.category': 'Logika',
@@ -737,65 +426,25 @@ Następnie: Monitorowanie sieci — zobacz, jak dane przepływają między front
       'challenge.jsonValidator.title': 'Walidator JSON',
       'challenge.jsonValidator.description': 'Poćwicz ręczną walidację odpowiedzi JSON',
       'challenge.jsonValidator.category': 'API',
-      'difficulty.beginner': 'Początkujący',
-      'difficulty.medium': 'Średni',
-      'playground.title': 'Playground Automatyzacji',
-      'playground.description': 'Witamy w Playgroundzie Automatyzacji! To Twoje miejsce do ćwiczenia automatyzacji webowej. Każdy moduł to kontrolowane środowisko do praktyki różnych scenariuszy automatyzacji z użyciem Selenium, Playwright lub Cypress. Bez flag i wyzwań – tylko czysta praktyka!',
-      'playground.module.dynamicUI.label': 'Dynamiczny UI',
-      'playground.module.dynamicUI.title': 'Dynamiczne Elementy UI',
-      'playground.module.dynamicUI.description': 'Ćwicz automatyzację interakcji z elementami pojawiającymi się i znikającymi dynamicznie. Idealne do nauki strategii czekania i wykrywania elementów.',
-      'playground.module.dynamicUI.tips': 'Używaj jawnych waitów do obsługi widoczności elementu. Rozważ strategie pollingowe dla większej niezawodności. Obsłuż potencjalny StaleElementReferenceException.',
-      'playground.module.dynamicUI.simulation': 'This module simulates a button that appears and disappears every 5 seconds. Practice waiting for and interacting with dynamic elements.',
-      'playground.module.dynamicUI.button': 'Click Me!',
-      'playground.tips': 'Wskazówki',
-      'playground.module.ajax.label': 'Żądania AJAX',
-      'playground.module.ajax.title': 'Żądania AJAX',
-      'playground.module.ajax.description': 'Trenuj umiejętności automatyzacji z asynchronicznym ładowaniem danych. Naucz się obsługi stanów ładowania i czekania na dynamiczne treści.',
-      'playground.module.ajax.tips': 'Czekaj aż spinner ładowania zniknie. Używaj jawnych waitów na pojawienie się danych. Rozważ własne warunki oczekiwania.',
-      'playground.module.form.label': 'Walidacja Formularza',
-      'playground.module.form.title': 'Walidacja Formularza',
-      'playground.module.form.description': 'Ćwicz automatyzację interakcji z formularzami z walidacją w czasie rzeczywistym. Naucz się obsługi walidacji i wysyłania formularzy.',
-      'playground.module.form.tips': 'Waliduj wszystkie pola przed wysłaniem. Obsłuż komunikaty o błędach i przypadki brzegowe. Testuj poprawne i niepoprawne dane.',
-      'playground.module.table.label': 'Tabele i Listy',
-      'playground.module.table.title': 'Tabele i Listy',
-      'playground.module.table.description': 'Ćwicz automatyzację interakcji z tabelami, sortowanie i wybieranie danych. Naucz się obsługi dynamicznych danych w tabelach.',
-      'playground.module.table.tips': 'Sortuj tabele przed wyborem danych. Weryfikuj zawartość po akcjach. Obsłuż dynamiczne wiersze i kolumny.',
-      'playground.module.select.label': 'Lista rozwijana',
-      'playground.module.select.title': 'Lista rozwijana',
-      'playground.module.select.description': 'Ćwicz automatyzację wyboru z list rozwijanych. Naucz się obsługiwać elementy <select> i weryfikować wybrane wartości.',
-      'playground.module.select.tips': 'Użyj selectByValue lub selectByVisibleText w narzędziu automatyzującym. Weryfikuj wybraną wartość po interakcji. Obsłuż dynamiczne i zablokowane opcje.',
-      'playground.module.select.simulation': 'This module simulates a dropdown menu with various options. Practice selecting different values and verifying the selection.',
-      'playground.module.select.choose': 'Wybierz opcję:',
-      'playground.module.select.select': 'Wybierz wartość',
-      'playground.module.choices.label': 'Checkboxy i Radio',
-      'playground.module.choices.title': 'Checkboxy i Przyciski Radio',
-      'playground.module.choices.description': 'Ćwicz automatyzację zaznaczania checkboxów i przycisków radio. Naucz się zaznaczać, odznaczać i weryfikować opcje.',
-      'playground.module.choices.tips': 'Używaj akcji click lub check dla checkboxów/radio. Weryfikuj stan po interakcji. Testuj dostępność z klawiatury (Tab, Spacja, Strzałki).',
-      'Home': 'Strona główna',
-      'Challenges': 'Wyzwania',
-      'Playground': 'Playground',
-      'Learn': 'Kursy',
-      'Community': 'Społeczność',
-      'Dashboard': 'Panel',
-      'Logout': 'Wyloguj',
-      'Login': 'Zaloguj',
-      'Sign Up': 'Załóż konto',
-      'General Discussion': 'Dyskusja ogólna',
-      'Discuss anything related to software testing and quality assurance.': 'Dyskutuj o wszystkim, co związane z testowaniem oprogramowania i zapewnianiem jakości.',
-      'Test Automation': 'Automatyzacja testów',
-      'Share your automation experiences and get help with your scripts.': 'Podziel się doświadczeniami z automatyzacją i uzyskaj pomoc do swoich skryptów.',
-      'AI in Testing': 'AI w testowaniu',
-      'Discuss the latest trends in AI-powered testing solutions.': 'Dyskutuj o najnowszych trendach w testowaniu wspieranym przez AI.',
-      'Introduction to AI Testing': 'Wprowadzenie do testowania AI',
-      'Webinar': 'Webinar',
-      'Hands-on Selenium Workshop': 'Warsztaty Selenium w praktyce',
-      'Workshop': 'Warsztat',
-      'Testing Community Meetup': 'Spotkanie społeczności testerów',
-      'Meetup': 'Spotkanie',
-      'Join our community of testers, share knowledge, and grow together': 'Dołącz do naszej społeczności testerów, dziel się wiedzą i rozwijaj razem z nami',
-      'topics': 'tematy',
-      'posts': 'posty',
-      'Register Now': 'Zarejestruj się',
+      'challenge.elementHighlighter.title': 'Podświetlanie Elementu',
+      'challenge.elementHighlighter.description': 'W DevTools otwórz panel Elements, znajdź nagłówek <h1 id="main-title"> i dodaj mu styl outline: 3px solid red;. W atrybucie data-flag tego elementu znajdziesz flagę.',
+      'challenge.elementHighlighter.category': 'UI',
+      'challenge.networkTiming.title': 'Czas Sieci',
+      'challenge.networkTiming.description': 'W zakładce Network odśwież stronę. Kliknij na pierwszy request (np. do /api/config). W zakładce Headers w polu response headers znajdziesz nagłówek X-Flag-Code, którego wartość to flaga.',
+      'challenge.networkTiming.category': 'API',
+      'challenge.formInputFuzzer.title': 'Fuzzer Pola Formularza',
+      'challenge.formInputFuzzer.description': 'Na stronie rejestracji wypełnij wszystkie pola ekstremalnie długim ciągiem (np. 200-znakowy losowy string). Po kliknięciu "Submit" w odpowiedzi JSON (zakładka Network → Preview) będzie pole flag.',
+      'challenge.formInputFuzzer.category': 'Web',
+      'challenge.raceConditionTester.title': 'API – Flaga w zamówieniu',
+      'challenge.raceConditionTester.description': 'Edytuj poniższy JSON i dodaj pole "flag": true. Następnie wyślij POST. Jeśli serwer otrzyma flag: true, zwróci flagę w odpowiedzi. Znajdź flagę w odpowiedzi i wpisz ją poniżej.',
+      'challenge.raceConditionTester.category': 'API',
+      'challenge.domMutationObserver.title': 'Obserwator Mutacji DOM',
+      'challenge.domMutationObserver.description': 'Na liście produktów kliknij "Load more". W konsoli uruchom podany kod MutationObserver. Następnie kliknij "Load more" – w konsoli zobaczysz flagę.',
+      'challenge.domMutationObserver.category': 'UI',
+      'challenge.accessibilityAudit.title': 'Audyt Dostępności',
+      'challenge.accessibilityAudit.description': 'Poniżej znajduje się obrazek bez atrybutu alt. Użyj DevTools, aby dodać alt="FLAG_IMG_ALT_123" do obrazka. Gdy alt będzie poprawny, flaga pojawi się poniżej. Wpisz flagę, aby zaliczyć zadanie.',
+      'challenge.accessibilityAudit.category': 'Web',
+      // Learn translations PL
       'learn.courses.title': 'Kursy',
       'learn.courses.description': 'Kompleksowe, kilkutygodniowe programy nauki. Dostęp płatny.',
       'learn.minicourses.title': 'Mini kursy',
@@ -810,86 +459,9 @@ Następnie: Monitorowanie sieci — zobacz, jak dane przepływają między front
       'learn.minicourse.devtools.duration': '1 godzina',
       'learn.minicourse.devtools.cta': 'Zacznij teraz',
       'learn.comingSoon': 'Wkrótce dostępny',
-      'playground.module.table.simulation': 'This module simulates a product table with sorting and filtering capabilities. Practice automating table interactions and data verification.',
-      'playground.module.table.product1': 'Plan Premium',
-      'playground.module.table.product2': 'Plan Podstawowy',
-      'playground.module.table.product3': 'Plan Standardowy',
-      'playground.module.table.product4': 'Plan Enterprise',
-      'playground.module.ajax.simulation': 'This module simulates asynchronous data loading with a loading spinner. Practice handling dynamic content and loading states.',
-      'playground.module.ajax.loading': 'Ładowanie danych...',
-      'playground.module.ajax.data': 'Dane załadowane pomyślnie!',
-      'playground.module.form.simulation': 'This module provides a form with real-time validation. Practice form automation with various input types and validation rules.',
-      'playground.module.form.name': 'Imię',
-      'playground.module.form.email': 'Email',
-      'playground.module.form.password': 'Hasło',
-      'playground.module.form.submit': 'Wyślij',
-      'playground.module.iframe.simulation': 'This module demonstrates iframe and modal interactions. Practice switching contexts and handling nested elements.',
-      'playground.module.iframe.open': 'Open Modal',
-      'playground.module.iframe.close': 'Close',
-      'playground.module.choices.simulation': 'This module provides checkboxes and radio buttons for practice. Learn to handle multiple selections and verify states.',
-      'playground.module.choices.checkbox1': 'Opcja 1',
-      'playground.module.choices.checkbox2': 'Opcja 2',
-      'playground.module.choices.radio1': 'Wybór A',
-      'playground.module.choices.radio2': 'Wybór B',
-      'playground.module.form.phone': 'Numer telefonu',
-      'playground.module.ajax.loadData': 'Załaduj dane',
-      'playground.module.choices.subscribe': 'Subskrybuj',
-      'playground.module.choices.newsletter': 'Newsletter',
-      'playground.module.choices.updates': 'Aktualizacje produktu',
-      'playground.module.choices.choosePlan': 'Wybierz swój plan',
-      'playground.module.choices.basic': 'Podstawowy',
-      'playground.module.choices.pro': 'Profesjonalny',
-      'playground.module.table.header.name': 'Nazwa produktu',
-      'playground.module.table.header.price': 'Cena',
-      'playground.module.table.header.rating': 'Ocena',
-      'playground.module.table.header.actions': 'Akcje',
-      'playground.module.table.sort': 'Sortuj według',
-      'playground.module.table.filter': 'Filtruj według ceny',
-      'playground.module.table.view': 'Zobacz szczegóły',
-      'playground.module.table.edit': 'Edytuj',
-      'playground.module.table.delete': 'Usuń',
-      'playground.module.table.rating.good': 'Dobra',
-      'playground.module.table.rating.excellent': 'Doskonała',
-      'playground.module.table.rating.average': 'Średnia',
-      'playground.module.select.placeholder': 'Wybierz opcję',
-      'playground.module.select.option1': 'Opcja 1',
-      'playground.module.select.option2': 'Opcja 2',
-      'playground.module.select.option3': 'Opcja 3',
-      'playground.module.select.option4': 'Opcja 4',
-      'playground.module.select.option5': 'Opcja 5',
-      'playground.module.select.selected': 'Wybrano:',
-      'playground.module.select.change': 'Zmień wybór',
-      'playground.module.iframe.title': 'Embedded Content',
-      'playground.module.iframe.content': 'This is the content inside the iframe',
-      'playground.module.iframe.switch': 'Switch to iframe',
-      'playground.module.iframe.switchBack': 'Switch back to main content',
-      'playground.module.iframe.interact': 'Interact with iframe content',
-      'playground.module.iframe.button': 'Click me inside iframe',
-      'playground.module.iframe.success': 'Successfully interacted with iframe!',
-      'playground.module.button.click': 'Kliknij mnie',
-      'playground.module.button.doubleClick': 'Kliknij dwukrotnie',
-      'playground.module.button.rightClick': 'Kliknij prawym przyciskiem',
-      'playground.module.button.hover': 'Najedź na mnie',
-      'playground.module.button.drag': 'Przeciągnij mnie',
-      'playground.module.button.drop': 'Upuść tutaj',
-      'playground.module.button.success': 'Przycisk kliknięty pomyślnie!',
-      'playground.module.button.doubleSuccess': 'Podwójne kliknięcie udane!',
-      'playground.module.button.rightSuccess': 'Kliknięcie prawym przyciskiem udane!',
-      'playground.module.button.hoverSuccess': 'Wykryto najechanie!',
-      'playground.module.button.dragSuccess': 'Przeciągnięcie i upuszczenie udane!',
-      'playground.module.form.errorName': 'Imię jest wymagane',
-      'playground.module.form.errorEmail': 'Nieprawidłowy format email',
-      'playground.module.form.errorPhone': 'Telefon musi mieć co najmniej 9 cyfr',
-      'playground.module.form.success': 'Formularz wysłany pomyślnie!',
-      'playground.module.iframe.openModal': 'Open Modal',
-      'playground.module.iframe.modalTitle': 'Modal Content',
-      'playground.module.iframe.openIframe': 'Open iFrame',
-      'playground.module.table.product': 'Produkt',
-      'playground.module.select.apple': 'Jabłko',
-      'playground.module.select.banana': 'Banan',
-      'playground.module.select.cherry': 'Wiśnia',
-      'playground.module.select.grape': 'Winogrono',
-      'playground.module.iframe.label': 'iFrame i Modale',
+      // Difficulty levels
+      'difficulty.beginner': 'Początkujący',
+      'difficulty.medium': 'Średni',
     }
   }
 };

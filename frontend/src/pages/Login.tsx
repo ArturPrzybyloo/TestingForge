@@ -28,8 +28,8 @@ const Login: React.FC = () => {
     if (user) {
       // In a real app, we would set a token in localStorage or use a state management solution
       localStorage.setItem('user', JSON.stringify({ email: user.email }));
-      // Refresh the page to update the navigation state
-      window.location.href = '/dashboard';
+      // Use React Router navigation instead of full page refresh
+      navigate('/dashboard');
     } else {
       setError('Invalid email or password');
     }

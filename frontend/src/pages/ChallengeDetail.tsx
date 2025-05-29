@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import MainLayout from '../layouts/MainLayout';
 import Challenge1Caesar from '../challenges/Challenge1Caesar';
 import Challenge2Order from '../challenges/Challenge2Order';
 import Challenge3UIBug from '../challenges/Challenge3UIBug';
@@ -13,6 +12,12 @@ import Challenge9CookieHacker from '../challenges/Challenge9CookieHacker';
 import Challenge10LocalStorageInspector from '../challenges/Challenge10LocalStorageInspector';
 import Challenge11BrokenDOM from '../challenges/Challenge11BrokenDOM';
 import Challenge12JSONValidator from '../challenges/Challenge12JSONValidator';
+import Challenge13ElementHighlighter from '../challenges/Challenge13ElementHighlighter';
+import Challenge14NetworkTiming from '../challenges/Challenge14NetworkTiming';
+import Challenge15FormInputFuzzer from '../challenges/Challenge15FormInputFuzzer';
+import Challenge16RaceConditionTester from '../challenges/Challenge16RaceConditionTester';
+import Challenge17DOMMutationObserver from '../challenges/Challenge17DOMMutationObserver';
+import Challenge18AccessibilityAudit from '../challenges/Challenge18AccessibilityAudit';
 
 const challengeMap: Record<string, React.FC> = {
   '1': Challenge1Caesar,
@@ -27,6 +32,12 @@ const challengeMap: Record<string, React.FC> = {
   '10': Challenge10LocalStorageInspector,
   '11': Challenge11BrokenDOM,
   '12': Challenge12JSONValidator,
+  '13': Challenge13ElementHighlighter,
+  '14': Challenge14NetworkTiming,
+  '15': Challenge15FormInputFuzzer,
+  '16': Challenge16RaceConditionTester,
+  '17': Challenge17DOMMutationObserver,
+  '18': Challenge18AccessibilityAudit,
 };
 
 const ChallengeDetail: React.FC = () => {

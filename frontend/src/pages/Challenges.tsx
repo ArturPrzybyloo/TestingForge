@@ -116,6 +116,54 @@ const Challenges: React.FC = () => {
       difficulty: t('difficulty.beginner'),
       category: t('challenge.jsonValidator.category'),
     },
+    {
+      id: '13',
+      title: t('challenge.elementHighlighter.title'),
+      description: t('challenge.elementHighlighter.description'),
+      icon: <EyeDropperIcon className="h-8 w-8 text-blue-500" />,
+      difficulty: t('difficulty.beginner'),
+      category: t('challenge.elementHighlighter.category'),
+    },
+    {
+      id: '14',
+      title: t('challenge.networkTiming.title'),
+      description: t('challenge.networkTiming.description'),
+      icon: <MagnifyingGlassIcon className="h-8 w-8 text-green-500" />,
+      difficulty: t('difficulty.beginner'),
+      category: t('challenge.networkTiming.category'),
+    },
+    {
+      id: '15',
+      title: t('challenge.formInputFuzzer.title'),
+      description: t('challenge.formInputFuzzer.description'),
+      icon: <DocumentTextIcon className="h-8 w-8 text-blue-500" />,
+      difficulty: t('difficulty.beginner'),
+      category: t('challenge.formInputFuzzer.category'),
+    },
+    {
+      id: '16',
+      title: t('challenge.raceConditionTester.title'),
+      description: t('challenge.raceConditionTester.description'),
+      icon: <ArrowPathIcon className="h-8 w-8 text-yellow-500" />,
+      difficulty: t('difficulty.medium'),
+      category: t('challenge.raceConditionTester.category'),
+    },
+    {
+      id: '17',
+      title: t('challenge.domMutationObserver.title'),
+      description: t('challenge.domMutationObserver.description'),
+      icon: <BugAntIcon className="h-8 w-8 text-green-500" />,
+      difficulty: t('difficulty.medium'),
+      category: t('challenge.domMutationObserver.category'),
+    },
+    {
+      id: '18',
+      title: t('challenge.accessibilityAudit.title'),
+      description: t('challenge.accessibilityAudit.description'),
+      icon: <ExclamationTriangleIcon className="h-8 w-8 text-blue-500" />,
+      difficulty: t('difficulty.medium'),
+      category: t('challenge.accessibilityAudit.category'),
+    },
   ], [t, i18n.language]);
   const [completed, setCompleted] = useState<{[key:string]:boolean}>({});
   const [filterDifficulty, setFilterDifficulty] = useState<string>(t('All'));
@@ -163,8 +211,8 @@ const Challenges: React.FC = () => {
             className="bg-gray-700 text-white rounded px-4 py-2"
           >
             <option value={t('All')}>{t('All')}</option>
-            <option value={t('Beginner')}>{t('Beginner')}</option>
-            <option value={t('Medium')}>{t('Medium')}</option>
+            <option value={t('difficulty.beginner')}>{t('difficulty.beginner')}</option>
+            <option value={t('difficulty.medium')}>{t('difficulty.medium')}</option>
           </select>
         </div>
         {/* Challenges Grid */}
@@ -182,7 +230,7 @@ const Challenges: React.FC = () => {
               <p className="text-gray-400 mb-4 flex-1">{challenge.description}</p>
               <div className="flex justify-between items-center text-sm text-gray-400 mt-auto">
                 <span className="px-2 py-1 rounded bg-gray-700 text-xs font-medium">{challenge.category}</span>
-                <span className={`px-2 py-1 rounded text-xs font-medium ${challenge.difficulty === t('Beginner') ? 'bg-green-500/20 text-green-500' : 'bg-blue-500/20 text-blue-500'}`}>{challenge.difficulty}</span>
+                <span className={`px-2 py-1 rounded text-xs font-medium ${challenge.difficulty === t('difficulty.beginner') ? 'bg-green-500/20 text-green-500' : 'bg-blue-500/20 text-blue-500'}`}>{challenge.difficulty}</span>
                 {completed[challenge.id] && <span className="ml-2 text-green-400 font-bold">✔</span>}
               </div>
             </Link>

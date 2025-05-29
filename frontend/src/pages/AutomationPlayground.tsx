@@ -51,6 +51,34 @@ const modules = [
     descriptionKey: 'playground.module.choices.description',
     tipsKey: 'playground.module.choices.tips',
   },
+  {
+    key: 'drag-drop',
+    labelKey: 'playground.module.dragDrop.label',
+    titleKey: 'playground.module.dragDrop.title',
+    descriptionKey: 'playground.module.dragDrop.description',
+    tipsKey: 'playground.module.dragDrop.tips',
+  },
+  {
+    key: 'file-upload',
+    labelKey: 'playground.module.fileUpload.label',
+    titleKey: 'playground.module.fileUpload.title',
+    descriptionKey: 'playground.module.fileUpload.description',
+    tipsKey: 'playground.module.fileUpload.tips',
+  },
+  {
+    key: 'alerts',
+    labelKey: 'playground.module.alerts.label',
+    titleKey: 'playground.module.alerts.title',
+    descriptionKey: 'playground.module.alerts.description',
+    tipsKey: 'playground.module.alerts.tips',
+  },
+  {
+    key: 'localization',
+    labelKey: 'playground.module.localization.label',
+    titleKey: 'playground.module.localization.title',
+    descriptionKey: 'playground.module.localization.description',
+    tipsKey: 'playground.module.localization.tips',
+  },
 ];
 
 // --- Module Components ---
@@ -412,6 +440,354 @@ function ChoicesModule() {
   );
 }
 
+// --- New Module: Drag & Drop ---
+function DragDropModule() {
+  const { t } = useTranslation();
+  const [todoItems, setTodoItems] = useState([
+    { id: 1, text: t('playground.module.dragDrop.todo') + ' 1', status: 'todo' },
+    { id: 2, text: t('playground.module.dragDrop.todo') + ' 2', status: 'todo' },
+    { id: 3, text: t('playground.module.dragDrop.todo') + ' 3', status: 'todo' },
+  ]);
+  const [inProgressItems, setInProgressItems] = useState([
+    { id: 4, text: t('playground.module.dragDrop.inProgress') + ' 1', status: 'progress' },
+  ]);
+  const [doneItems, setDoneItems] = useState([
+    { id: 5, text: t('playground.module.dragDrop.done') + ' 1', status: 'done' },
+  ]);
+
+  const handleDragStart = (e: React.DragEvent, item: any) => {
+    e.dataTransfer.setData('text/plain', JSON.stringify(item));
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e: React.DragEvent, targetStatus: string) => {
+    e.preventDefault();
+    const itemData = JSON.parse(e.dataTransfer.getData('text/plain'));
+    if (itemData.status === 'todo') {
+      setTodoItems(prev => prev.filter(item => item.id !== itemData.id));
+    } else if (itemData.status === 'progress') {
+      setInProgressItems(prev => prev.filter(item => item.id !== itemData.id));
+    } else if (itemData.status === 'done') {
+      setDoneItems(prev => prev.filter(item => item.id !== itemData.id));
+    }
+    const updatedItem = { ...itemData, status: targetStatus };
+    if (targetStatus === 'todo') {
+      setTodoItems(prev => [...prev, updatedItem]);
+    } else if (targetStatus === 'progress') {
+      setInProgressItems(prev => [...prev, updatedItem]);
+    } else if (targetStatus === 'done') {
+      setDoneItems(prev => [...prev, updatedItem]);
+    }
+  };
+
+  // Tips jako lista zdań
+  const tips = t('playground.module.dragDrop.tips').split('. ').filter((tip: string) => tip.trim());
+
+  return (
+    <div>
+      <div className="grid grid-cols-3 gap-4 mb-8">
+        {/* To Do Column */}
+        <div 
+          className="bg-gray-700 rounded-lg p-4 min-h-48"
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, 'todo')}
+          data-testid="todo-column"
+        >
+          <h3 className="text-lg font-semibold mb-3 text-blue-400">{t('playground.module.dragDrop.todo')} ({todoItems.length})</h3>
+          {todoItems.map(item => (
+            <div
+              key={item.id}
+              draggable
+              onDragStart={(e) => handleDragStart(e, item)}
+              className="bg-blue-600 p-3 rounded mb-2 cursor-move hover:bg-blue-500 transition-colors"
+              data-testid={`todo-item-${item.id}`}
+            >
+              {item.text}
+            </div>
+          ))}
+        </div>
+        {/* In Progress Column */}
+        <div 
+          className="bg-gray-700 rounded-lg p-4 min-h-48"
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, 'progress')}
+          data-testid="progress-column"
+        >
+          <h3 className="text-lg font-semibold mb-3 text-yellow-400">{t('playground.module.dragDrop.inProgress')} ({inProgressItems.length})</h3>
+          {inProgressItems.map(item => (
+            <div
+              key={item.id}
+              draggable
+              onDragStart={(e) => handleDragStart(e, item)}
+              className="bg-yellow-600 p-3 rounded mb-2 cursor-move hover:bg-yellow-500 transition-colors"
+              data-testid={`progress-item-${item.id}`}
+            >
+              {item.text}
+            </div>
+          ))}
+        </div>
+        {/* Done Column */}
+        <div 
+          className="bg-gray-700 rounded-lg p-4 min-h-48"
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, 'done')}
+          data-testid="done-column"
+        >
+          <h3 className="text-lg font-semibold mb-3 text-green-400">{t('playground.module.dragDrop.done')} ({doneItems.length})</h3>
+          {doneItems.map(item => (
+            <div
+              key={item.id}
+              draggable
+              onDragStart={(e) => handleDragStart(e, item)}
+              className="bg-green-600 p-3 rounded mb-2 cursor-move hover:bg-green-500 transition-colors"
+              data-testid={`done-item-${item.id}`}
+            >
+              {item.text}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="mt-8 p-4 bg-gray-700 rounded-lg">
+        <h3 className="text-lg font-semibold mb-2 text-green-400">{t('playground.module.dragDrop.automationTips')}</h3>
+        <ul className="list-disc list-inside text-gray-300 space-y-2">
+          {tips.map((tip: string, idx: number) => (
+            <li key={idx}>{tip}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// --- New Module: File Upload & Download ---
+function FileUploadModule() {
+  const { t } = useTranslation();
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [uploadStatus, setUploadStatus] = useState('');
+  const [downloadUrl, setDownloadUrl] = useState('');
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setUploadedFile(file);
+      setUploadStatus('uploading');
+      setTimeout(() => {
+        setUploadStatus('success');
+        const url = URL.createObjectURL(file);
+        setDownloadUrl(url);
+      }, 2000);
+    }
+  };
+
+  // Tips jako lista zdań
+  const tips = t('playground.module.fileUpload.tips').split('. ').filter((tip: string) => tip.trim());
+
+  return (
+    <div>
+      <div className="bg-gray-700 rounded-lg p-6 mb-6">
+        <h3 className="text-lg font-semibold mb-4">{t('playground.module.fileUpload.area')}</h3>
+        <input
+          type="file"
+          onChange={handleFileUpload}
+          className="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600"
+          data-testid="file-input"
+          accept=".txt,.pdf,.jpg,.png"
+        />
+        {uploadStatus === 'uploading' && (
+          <div className="mt-4 flex items-center text-yellow-400" data-testid="upload-progress">
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-yellow-400 mr-2"></div>
+            {t('playground.module.fileUpload.uploading')}
+          </div>
+        )}
+        {uploadedFile && uploadStatus === 'success' && (
+          <div className="mt-4 p-4 bg-green-600 rounded-lg" data-testid="upload-success">
+            <h4 className="font-semibold">{t('playground.module.fileUpload.success')}</h4>
+            <p className="text-sm">{t('playground.module.fileUpload.file')}: {uploadedFile.name}</p>
+            <p className="text-sm">{t('playground.module.fileUpload.size')}: {Math.round(uploadedFile.size / 1024)} KB</p>
+            {downloadUrl && (
+              <a
+                href={downloadUrl}
+                download={uploadedFile.name}
+                className="inline-block mt-2 bg-white text-green-600 px-4 py-2 rounded font-medium hover:bg-gray-100"
+                data-testid="download-link"
+              >
+                {t('playground.module.fileUpload.download')}
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+      <div className="mt-8 p-4 bg-gray-700 rounded-lg">
+        <h3 className="text-lg font-semibold mb-2 text-green-400">{t('playground.module.fileUpload.tips')}</h3>
+        <ul className="list-disc list-inside text-gray-300 space-y-2">
+          {tips.map((tip: string, idx: number) => (
+            <li key={idx}>{tip}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// --- New Module: Browser Alerts & Confirms ---
+function AlertsModule() {
+  const { t } = useTranslation();
+  const [lastAction, setLastAction] = useState('');
+
+  const showAlert = () => {
+    window.alert('This is a test alert! Click OK to continue.');
+    setLastAction(t('playground.module.alerts.showAlert'));
+  };
+
+  const showConfirm = () => {
+    const result = window.confirm('Do you want to delete this item?');
+    if (result) {
+      setLastAction('Confirm: User clicked OK - Item deleted');
+    } else {
+      setLastAction('Confirm: User clicked Cancel - Action cancelled');
+    }
+  };
+
+  const showPrompt = () => {
+    const result = window.prompt('Enter your name:');
+    if (result) {
+      setLastAction(`Prompt: User entered "${result}"`);
+    } else {
+      setLastAction('Prompt: User cancelled or entered empty value');
+    }
+  };
+
+  // Tips jako lista zdań
+  const tips = t('playground.module.alerts.tips').split('. ').filter((tip: string) => tip.trim());
+
+  return (
+    <div>
+      <div className="grid grid-cols-3 gap-4 mb-6">
+        <button
+          onClick={showAlert}
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg font-medium"
+          data-testid="alert-button"
+        >
+          {t('playground.module.alerts.showAlert')}
+        </button>
+        <button
+          onClick={showConfirm}
+          className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-3 rounded-lg font-medium"
+          data-testid="confirm-button"
+        >
+          {t('playground.module.alerts.showConfirm')}
+        </button>
+        <button
+          onClick={showPrompt}
+          className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-3 rounded-lg font-medium"
+          data-testid="prompt-button"
+        >
+          {t('playground.module.alerts.showPrompt')}
+        </button>
+      </div>
+      {lastAction && (
+        <div className="bg-gray-700 rounded-lg p-4 mb-6" data-testid="action-result">
+          <h4 className="font-semibold text-green-400 mb-2">{t('playground.module.alerts.lastAction')}</h4>
+          <p className="text-gray-300">{lastAction}</p>
+        </div>
+      )}
+      <div className="mt-8 p-4 bg-gray-700 rounded-lg">
+        <h3 className="text-lg font-semibold mb-2 text-green-400">{t('playground.module.alerts.tips')}</h3>
+        <ul className="list-disc list-inside text-gray-300 space-y-2">
+          {tips.map((tip: string, idx: number) => (
+            <li key={idx}>{tip}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// --- New Module: Localization & Language Switching ---
+function LocalizationModule() {
+  const { t, i18n } = useTranslation();
+  const [currentLang, setCurrentLang] = useState(i18n.language);
+  
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+    setCurrentLang(lang);
+  };
+
+  const tips = [
+    'Test language switching by clicking language selectors',
+    'Verify text changes in multiple UI elements after language switch',
+    'Check that page layouts adapt to different text lengths',
+    'Test RTL (right-to-left) languages if supported',
+    'Validate that form labels, error messages, and tooltips are translated'
+  ];
+
+  return (
+    <div>
+      <p className="mb-4 text-gray-300">Practice testing multi-language applications and localization</p>
+      
+      <div className="bg-gray-700 rounded-lg p-6 mb-6">
+        <h3 className="text-lg font-semibold mb-4">Language Selector</h3>
+        
+        <div className="flex gap-2 mb-6">
+          <button
+            onClick={() => changeLanguage('en')}
+            className={`px-4 py-2 rounded-lg font-medium ${currentLang === 'en' ? 'bg-green-500 text-white' : 'bg-gray-600 text-gray-300 hover:bg-gray-500'}`}
+            data-testid="lang-en"
+          >
+            English
+          </button>
+          <button
+            onClick={() => changeLanguage('pl')}
+            className={`px-4 py-2 rounded-lg font-medium ${currentLang === 'pl' ? 'bg-green-500 text-white' : 'bg-gray-600 text-gray-300 hover:bg-gray-500'}`}
+            data-testid="lang-pl"
+          >
+            Polski
+          </button>
+        </div>
+        
+        <div className="space-y-4">
+          <div data-testid="welcome-text">
+            <h4 className="font-semibold text-blue-400">
+              {t('playground.module.localization.welcome')}
+            </h4>
+          </div>
+          
+          <div data-testid="description-text">
+            <p className="text-gray-300">
+              {t('playground.module.localization.description_text')}
+            </p>
+          </div>
+          
+          <div className="flex gap-2">
+            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-medium" data-testid="start-button">
+              {t('playground.module.localization.start_learning')}
+            </button>
+            <button className="bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded font-medium" data-testid="help-button">
+              {t('playground.module.localization.help')}
+            </button>
+          </div>
+          
+          <div className="text-sm text-gray-400" data-testid="current-lang">
+            {t('playground.module.localization.current_language')}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-8 p-4 bg-gray-700 rounded-lg">
+        <h3 className="text-lg font-semibold mb-2 text-green-400">Automation Tips</h3>
+        <ul className="list-disc list-inside text-gray-300 space-y-2">
+          {tips.map((tip: string, idx: number) => (
+            <li key={idx}>{tip}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 // --- Main Page ---
 
 const AutomationPlayground: React.FC = () => {
@@ -458,6 +834,10 @@ const AutomationPlayground: React.FC = () => {
             {selected === 'table' && <TableModule />}
             {selected === 'select' && <SelectModule />}
             {selected === 'choices' && <ChoicesModule />}
+            {selected === 'drag-drop' && <DragDropModule />}
+            {selected === 'file-upload' && <FileUploadModule />}
+            {selected === 'alerts' && <AlertsModule />}
+            {selected === 'localization' && <LocalizationModule />}
           </div>
         </main>
       </div>
@@ -465,4 +845,4 @@ const AutomationPlayground: React.FC = () => {
   );
 };
 
-export default AutomationPlayground; 
+export default AutomationPlayground;

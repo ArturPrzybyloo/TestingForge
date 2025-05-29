@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Challenges from './pages/Challenges';
 import Dashboard from './pages/Dashboard';
 import Community from './pages/Community';
+import ForumCategory from './pages/ForumCategory';
 import { Learn, CourseDetail } from './pages/Learn';
 import AutomationPlayground from './pages/AutomationPlayground';
 import ChallengeDetail from './pages/ChallengeDetail';
@@ -22,6 +23,7 @@ const App: React.FC = () => {
           <Route path="challenges/:id" element={<ChallengeDetail />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="community" element={<Community />} />
+          <Route path="community/forum/:categoryId" element={<ForumCategory />} />
           <Route path="learn" element={<Learn />} />
           <Route path="learn/:moduleId" element={<CourseDetail />} />
           <Route path="automation-playground" element={<AutomationPlayground />} />
