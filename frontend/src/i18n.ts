@@ -211,7 +211,7 @@ const resources = {
       'challenge.domMutationObserver.description': 'On the product list, click "Load more". In the console, run the provided MutationObserver code. Then click "Load more" again – the flag will appear in the console.',
       'challenge.domMutationObserver.category': 'UI',
       'challenge.accessibilityAudit.title': 'Accessibility Audit',
-      'challenge.accessibilityAudit.description': 'There is an image below without alt attribute. Use DevTools to add alt="FLAG_IMG_ALT_123" to the image. When the correct alt is set, the flag will appear below. Enter the flag to complete the challenge.',
+      'challenge.accessibilityAudit.description': 'Use TAB to navigate through the interactive elements below. One of them cannot be focused using TAB (it is broken for keyboard users). Enter the id of the broken element to unlock the flag field.',
       'challenge.accessibilityAudit.category': 'Web',
       // Learn translations EN
       'learn.courses.title': 'Courses',
@@ -442,7 +442,7 @@ const resources = {
       'challenge.domMutationObserver.description': 'Na liście produktów kliknij "Load more". W konsoli uruchom podany kod MutationObserver. Następnie kliknij "Load more" – w konsoli zobaczysz flagę.',
       'challenge.domMutationObserver.category': 'UI',
       'challenge.accessibilityAudit.title': 'Audyt Dostępności',
-      'challenge.accessibilityAudit.description': 'Poniżej znajduje się obrazek bez atrybutu alt. Użyj DevTools, aby dodać alt="FLAG_IMG_ALT_123" do obrazka. Gdy alt będzie poprawny, flaga pojawi się poniżej. Wpisz flagę, aby zaliczyć zadanie.',
+      'challenge.accessibilityAudit.description': 'Użyj TAB, aby przechodzić po interaktywnych elementach poniżej. Jeden z nich nie może być wybrany klawiszem TAB (jest niedostępny dla klawiatury). Podaj id tego elementu, aby odblokować pole na flagę.',
       'challenge.accessibilityAudit.category': 'Web',
       // Learn translations PL
       'learn.courses.title': 'Kursy',
