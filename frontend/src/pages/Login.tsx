@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-
-// Mock users for testing
-const MOCK_USERS = [
-  { email: 'test@example.com', password: 'test123' },
-  { email: 'admin@example.com', password: 'admin123' },
-];
+import api from '../services/api';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -15,23 +10,35 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
-    // Mock authentication
-    const user = MOCK_USERS.find(
-      (u) => u.email === email && u.password === password
-    );
+    try {
+      // Call real API
+      const response = await api.post('/auth/login', { 
+        email, 
+        password 
+      });
 
-    if (user) {
-      // In a real app, we would set a token in localStorage or use a state management solution
-      localStorage.setItem('user', JSON.stringify({ email: user.email }));
-      // Use React Router navigation instead of full page refresh
-      navigate('/dashboard');
-    } else {
-      setError('Invalid email or password');
+      if (response.data && response.data.token) {
+        // Store token and user data
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user || { email }));
+        
+        // Navigate to dashboard
+        navigate('/dashboard');
+      } else {
+        setError('Login failed. No token received.');
+      }
+    } catch (err: any) {
+      console.error('Login error:', err);
+      setError(err.response?.data?.message || err.message || 'Login failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,7 +75,8 @@ const Login: React.FC = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 block w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  disabled={loading}
+                  className="mt-1 block w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent disabled:opacity-50"
                   placeholder="Enter your email"
                 />
               </div>
@@ -86,13 +94,15 @@ const Login: React.FC = () => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="block w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    disabled={loading}
+                    className="block w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent disabled:opacity-50"
                     placeholder="Enter your password"
                   />
                   <button
                     type="button"
                     className="absolute inset-y-0 right-0 pr-3 flex items-center"
                     onClick={() => setShowPassword(!showPassword)}
+                    disabled={loading}
                   >
                     {showPassword ? (
                       <EyeSlashIcon className="h-5 w-5 text-gray-400" />
@@ -111,6 +121,7 @@ const Login: React.FC = () => {
                   name="remember-me"
                   type="checkbox"
                   className="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-700 rounded bg-gray-800"
+                  disabled={loading}
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-400">
                   Remember me
@@ -127,9 +138,10 @@ const Login: React.FC = () => {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+                disabled={loading}
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign in
+                {loading ? 'Signing in...' : 'Sign in'}
               </button>
             </div>
 
@@ -141,13 +153,11 @@ const Login: React.FC = () => {
             </div>
           </form>
 
-          {/* Test Accounts Info */}
+          {/* Test Account Info */}
           <div className="mt-8 p-4 bg-gray-800 rounded-lg">
-            <h3 className="text-sm font-medium text-gray-300 mb-2">Test Accounts:</h3>
+            <h3 className="text-sm font-medium text-gray-300 mb-2">Test Account:</h3>
             <div className="space-y-2 text-sm text-gray-400">
-              <p>Email: test@example.com</p>
-              <p>Password: test123</p>
-              <p className="mt-2">Email: admin@example.com</p>
+              <p>Email: admin@qa-platform.com</p>
               <p>Password: admin123</p>
             </div>
           </div>
