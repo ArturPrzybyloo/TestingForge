@@ -10,7 +10,8 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'http://localhost:3001', 
-    'https://arturprzybylo.github.io' // Your GitHub Pages domain
+    'https://arturprzybylo.github.io', // GitHub Pages root
+    'https://arturprzybylo.github.io/TestingForge' // GitHub Pages app path
   ],
   credentials: true,
   optionsSuccessStatus: 200
