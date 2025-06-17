@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const app = express();
 
-// CORS Configuration
+// CORS Configuration - Allow all GitHub Pages origins
 const corsOptions = {
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
@@ -15,11 +15,14 @@ const corsOptions = {
       'http://localhost:3000',
       'http://localhost:3001',
       'https://arturprzybylo.github.io',
-      'https://arturprzybylo.github.io/TestingForge'
+      'https://arturprzybyloo.github.io', // Fixed typo - double 'o'
+      'https://arturprzybylo.github.io/TestingForge',
+      'https://arturprzybyloo.github.io/TestingForge'
     ];
     
-    // Check if origin is allowed or if it's a GitHub Pages subdomain
-    if (allowedOrigins.includes(origin) || origin.includes('arturprzybylo.github.io')) {
+    // Check if origin is allowed or contains github.io
+    if (allowedOrigins.includes(origin) || origin.includes('github.io')) {
+      console.log(`✅ CORS allowed origin: ${origin}`);
       callback(null, true);
     } else {
       console.log(`❌ CORS blocked origin: ${origin}`);
