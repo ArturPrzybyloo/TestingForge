@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
-// Use environment variable for production, fallback to localhost for development
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3002/api';
+// Use Render backend URL for production, fallback to localhost for development
+const API_URL = process.env.REACT_APP_API_URL || 'https://testingforge.onrender.com/api';
 
 const api = axios.create({
   baseURL: API_URL,
