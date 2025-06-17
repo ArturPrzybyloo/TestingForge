@@ -7,15 +7,35 @@ const app = express();
 
 // CORS Configuration
 const corsOptions = {
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:3001', 
-    'https://arturprzybylo.github.io', // GitHub Pages root
-    'https://arturprzybylo.github.io/TestingForge' // GitHub Pages app path
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'https://arturprzybylo.github.io',
+      'https://arturprzybylo.github.io/TestingForge'
+    ];
+    
+    // Check if origin is allowed or if it's a GitHub Pages subdomain
+    if (allowedOrigins.includes(origin) || origin.includes('arturprzybylo.github.io')) {
+      callback(null, true);
+    } else {
+      console.log(`❌ CORS blocked origin: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200
 };
+
+// Debug middleware to log all requests
+app.use((req, res, next) => {
+  console.log(`📝 ${req.method} ${req.url} from origin: ${req.headers.origin || 'no-origin'}`);
+  console.log(`🔍 Referer: ${req.headers.referer || 'no-referer'}`);
+  next();
+});
 
 // Middleware
 app.use(cors(corsOptions));
