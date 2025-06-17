@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/TestingForge/static/css/main.50f1ec29.css",
-    "main.js": "/TestingForge/static/js/main.2ada9cbd.js",
+    "main.css": "/TestingForge/static/css/main.396cd0ed.css",
+    "main.js": "/TestingForge/static/js/main.4c3c3828.js",
     "static/js/453.d01fa86f.chunk.js": "/TestingForge/static/js/453.d01fa86f.chunk.js",
     "index.html": "/TestingForge/index.html",
-    "main.50f1ec29.css.map": "/TestingForge/static/css/main.50f1ec29.css.map",
-    "main.2ada9cbd.js.map": "/TestingForge/static/js/main.2ada9cbd.js.map",
+    "main.396cd0ed.css.map": "/TestingForge/static/css/main.396cd0ed.css.map",
+    "main.4c3c3828.js.map": "/TestingForge/static/js/main.4c3c3828.js.map",
     "453.d01fa86f.chunk.js.map": "/TestingForge/static/js/453.d01fa86f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.50f1ec29.css",
-    "static/js/main.2ada9cbd.js"
+    "static/css/main.396cd0ed.css",
+    "static/js/main.4c3c3828.js"
   ]
 }
