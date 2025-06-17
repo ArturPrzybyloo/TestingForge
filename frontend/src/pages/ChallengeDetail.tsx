@@ -19,7 +19,37 @@ import Challenge16RaceConditionTester from '../challenges/Challenge16RaceConditi
 import Challenge17DOMMutationObserver from '../challenges/Challenge17DOMMutationObserver';
 import Challenge18AccessibilityAudit from '../challenges/Challenge18AccessibilityAudit';
 
+// Map new challenge IDs to frontend components
 const challengeMap: Record<string, React.FC> = {
+  // New string-based IDs matching challenges.ts
+  'caesar-cipher': Challenge1Caesar,
+  'order-matters': Challenge2Order,
+  'ui-bug': Challenge3UIBug,
+  'url-param': Challenge4UrlParam,
+  'cookie-challenge': Challenge5Cookie,
+  'json-challenge': Challenge6Json,
+  'xhr-detective': Challenge7XHRDetective,
+  'css-debugger': Challenge8CSSDebugger,
+  'cookie-hacker': Challenge9CookieHacker,
+  'localstorage-inspector': Challenge10LocalStorageInspector,
+  'broken-dom': Challenge11BrokenDOM,
+  'json-validator': Challenge12JSONValidator,
+  'element-highlighter': Challenge13ElementHighlighter,
+  'network-timing': Challenge14NetworkTiming,
+  'form-input-fuzzer': Challenge15FormInputFuzzer,
+  'race-condition-tester': Challenge16RaceConditionTester,
+  'dom-mutation-observer': Challenge17DOMMutationObserver,
+  'accessibility-audit': Challenge18AccessibilityAudit,
+  
+  // Keep legacy mappings for backwards compatibility  
+  'missing-button': Challenge1Caesar,
+  'broken-api': Challenge2Order,
+  'slow-page': Challenge3UIBug,
+  'xss-vulnerability': Challenge4UrlParam,
+  'color-contrast': Challenge5Cookie,
+  'mobile-responsive': Challenge6Json,
+  
+  // Legacy numeric mapping
   '1': Challenge1Caesar,
   '2': Challenge2Order,
   '3': Challenge3UIBug,
@@ -51,13 +81,23 @@ const ChallengeDetail: React.FC = () => {
         onClick={() => navigate(-1)}
         className="mb-8 flex items-center self-start text-green-400 hover:text-green-300 transition-colors"
       >
-        <svg className="h-5 w-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+        <svg className="h-5 w-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
         Back
       </button>
       {ChallengeComponent ? (
         <ChallengeComponent />
       ) : (
-        <div className="text-center text-red-400 text-2xl mt-12">Challenge not found.</div>
+        <div className="text-center text-red-400 text-2xl mt-12">
+          Challenge not found.
+          <div className="text-sm text-gray-400 mt-2">
+            Challenge ID: {id}
+          </div>
+          <div className="text-xs text-gray-500 mt-4">
+            Available challenges: {Object.keys(challengeMap).filter(k => !k.match(/^\d+$/)).join(', ')}
+          </div>
+        </div>
       )}
     </div>
   );
