@@ -1,110 +1,207 @@
-# QA Learning Platform - Backend
+# 🧪 Testing Forge - QA Learning Platform
 
-Backend API for the QA Learning Platform built with Node.js, Express, and MongoDB.
+<div align="center">
 
-## Features
+![Testing Forge Logo](https://img.shields.io/badge/Testing-Forge-green?style=for-the-badge&logo=react)
 
-- User authentication (register/login) with JWT
-- Challenge management system
-- Flag submission and validation
-- Progress tracking and leaderboard
-- Admin panel for challenge management
+**Interactive platform for mastering software testing skills with AI-powered challenges**
 
-## Setup
+[![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=flat-square)](https://arturprzybylo.github.io/TestingForge/)
+[![Backend API](https://img.shields.io/badge/Backend-API-green?style=flat-square)](https://testingforge.onrender.com)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+
+[🌐 Live Platform](https://arturprzybylo.github.io/TestingForge/) • [📚 Documentation](#documentation) • [🚀 Getting Started](#getting-started)
+
+</div>
+
+## 📖 About
+
+Testing Forge is a comprehensive learning platform designed for QA professionals and aspiring testers. It combines interactive challenges, real-world scenarios, and modern testing tools to help users master software testing skills.
+
+### ✨ Key Features
+
+- 🎯 **18+ Interactive Challenges** - Hands-on testing scenarios covering UI, API, DevTools, and more
+- 🤖 **AI-Powered Learning** - Intelligent feedback and personalized guidance
+- 🎮 **Automation Playground** - Practice test automation with real scenarios
+- 📚 **Learning Paths** - Structured courses from beginner to advanced
+- 🏆 **Progress Tracking** - Detailed dashboards, points system, and achievements
+- 👥 **Community Features** - Connect with fellow testers and share experiences
+- 🌍 **Multi-language Support** - Available in English and Polish
+- 📱 **Responsive Design** - Works seamlessly on desktop and mobile
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **React 18** with TypeScript
+- **Tailwind CSS** for styling
+- **React Router** for navigation
+- **Heroicons** for icons
+- **i18next** for internationalization
+
+### Backend
+- **Node.js** with Express
+- **MongoDB** with Mongoose
+- **JWT** for authentication
+- **bcryptjs** for password hashing
+- **CORS** for cross-origin requests
+
+### Deployment
+- **Frontend**: GitHub Pages
+- **Backend**: Render
+- **Database**: MongoDB Atlas
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- MongoDB (local or cloud)
+- Node.js (v16 or higher)
+- npm or yarn
+- MongoDB (local or Atlas)
 
-### Installation
+### Local Development Setup
 
-1. Clone the repository
+1. **Clone the repository**
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/ArturPrzybyloo/TestingForge.git
+cd TestingForge
+```
+
+2. **Backend Setup**
+```bash
 cd backend
-```
-
-2. Install dependencies
-```bash
 npm install
-```
 
-3. Create environment variables
-```bash
+# Create environment file
 cp .env.example .env
-```
+# Edit .env with your MongoDB URI and JWT secret
 
-4. Update `.env` file with your configuration:
-```bash
-MONGODB_URI=your-mongodb-connection-string
-JWT_SECRET=your-jwt-secret-key
-PORT=5000
-```
-
-5. Start the server
-```bash
-# Development mode
+# Start backend server
 npm run dev
+```
 
-# Production mode
+3. **Frontend Setup**
+```bash
+cd ../frontend
+npm install
+
+# Start development server
 npm start
 ```
 
-## API Endpoints
+4. **Access the application**
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:3002
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/auth/me` - Get current user profile
+### Environment Variables
 
-### Challenges
-- `GET /api/challenges` - Get all challenges
-- `GET /api/challenges/:id` - Get single challenge
-- `POST /api/challenges` - Create challenge (Admin only)
-- `PUT /api/challenges/:id` - Update challenge (Admin only)
-- `DELETE /api/challenges/:id` - Delete challenge (Admin only)
+#### Backend (.env)
+```bash
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/qa-learning-platform
+JWT_SECRET=your-super-secret-jwt-key-here
+PORT=3002
+NODE_ENV=development
+```
 
-### Submissions
-- `POST /api/submissions` - Submit flag for challenge
-- `GET /api/submissions/my-progress` - Get user progress
-- `GET /api/submissions/leaderboard` - Get leaderboard
+#### Frontend (optional)
+```bash
+REACT_APP_API_URL=http://localhost:3002/api
+```
 
-## Deployment on Render
+## 🎯 Challenge Categories
 
-1. Connect your GitHub repository to Render
-2. Set environment variables in Render dashboard:
-   - `MONGODB_URI` - Your MongoDB Atlas connection string
-   - `JWT_SECRET` - Your secret key
+### 🖥️ UI Testing
+- Element inspection and interaction
+- Form validation and edge cases
+- CSS debugging and layout issues
+- Accessibility auditing
+
+### 🔌 API Testing
+- REST endpoint validation
+- Request/response analysis
+- Authentication testing
+- Network timing analysis
+
+### 🌐 Browser DevTools
+- Console debugging
+- Network monitoring
+- Element highlighting
+- Local storage manipulation
+
+### 🔧 Automation Practice
+- Drag & drop operations
+- File upload/download
+- Dynamic content handling
+- Cross-browser compatibility
+
+## 📱 Features Overview
+
+### For Learners
+- **Interactive Challenges**: Solve real-world testing scenarios
+- **Skill Progression**: Track your learning journey with points and levels
+- **Automation Playground**: Practice with Selenium, Playwright, and Cypress scenarios
+- **DevTools Mastery**: Learn browser developer tools effectively
+
+### For Educators
+- **Challenge Management**: Create and manage testing scenarios
+- **Progress Analytics**: Monitor student progress and engagement
+- **Community Building**: Foster collaboration among learners
+
+### For Professionals
+- **Skill Validation**: Demonstrate testing expertise
+- **Continuous Learning**: Stay updated with latest testing techniques
+- **Portfolio Building**: Showcase completed challenges and achievements
+
+## 🌐 Deployment
+
+### Backend (Render)
+1. Connect GitHub repository to Render
+2. Configure environment variables:
+   - `MONGODB_URI`
+   - `JWT_SECRET` 
    - `NODE_ENV=production`
-3. Deploy!
+3. Deploy from `backend` directory
 
-## Environment Variables
+### Frontend (GitHub Pages)
+1. Push changes to GitHub
+2. Enable GitHub Pages in repository settings
+3. Select source branch for deployment
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `MONGODB_URI` | MongoDB connection string | `mongodb://localhost:27017/qa-learning-platform` |
-| `JWT_SECRET` | Secret key for JWT tokens | Required |
-| `JWT_EXPIRES_IN` | JWT token expiration | `30d` |
-| `PORT` | Server port | `5000` |
-| `NODE_ENV` | Environment mode | `development` |
+## 🤝 Contributing
 
-## Database Models
-
-### User
-- username, email, password
-- isAdmin, role
-- progress (completedChallenges, totalPoints, level)
-
-### Challenge
-- id, title, description
-- category, difficulty, points
-- flag, hints, tags
-- isActive, completionCount
-
-## Contributing
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request 
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **React Community** for excellent documentation and tools
+- **MongoDB** for robust database solutions
+- **Render** for reliable hosting services
+- **GitHub** for version control and Pages hosting
+- **Heroicons** for beautiful icon set
+- **Tailwind CSS** for utility-first CSS framework
+
+## 📞 Support
+
+- 📧 Email: support@testingforge.com
+- 💬 Community: [Join our Discord](https://discord.gg/testingforge)
+- 🐛 Issues: [GitHub Issues](https://github.com/ArturPrzybyloo/TestingForge/issues)
+- 📖 Docs: [Documentation](https://docs.testingforge.com)
+
+---
+
+<div align="center">
+
+**Made with ❤️ for the QA Community**
+
+⭐ Star this repo if you find it helpful!
+
+</div> 

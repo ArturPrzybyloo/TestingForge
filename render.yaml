@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: testing-forge-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    rootDir: backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_EXPIRES_IN
+        value: 30d
+      - key: PORT
+        sync: false
+    autoDeploy: true
+    branch: main 
