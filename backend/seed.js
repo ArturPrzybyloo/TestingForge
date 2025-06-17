@@ -91,6 +91,50 @@ const seedDatabase = async () => {
         flag: 'NO_VIEWPORT',
         hints: ['Check viewport meta tag', 'Test on different screen sizes'],
         tags: ['mobile', 'responsive', 'css']
+      },
+      {
+        id: 'sql-orders-total',
+        title: 'SQL Orders Total Challenge',
+        description: 'Calculate the total amount of orders for a specific customer using SQL SUM function.',
+        category: 'sql',
+        difficulty: 'easy',
+        points: 30,
+        flag: 'SQL-ORDERS-TOTAL-350',
+        hints: ['Use SUM() function to calculate total amount', 'Filter by customer_name in WHERE clause'],
+        tags: ['sql', 'database', 'aggregation']
+      },
+      {
+        id: 'sql-login-frequency',
+        title: 'SQL Login Frequency Challenge',
+        description: 'Find the user with the most frequent logins in the last 30 days using SQL GROUP BY and COUNT.',
+        category: 'sql',
+        difficulty: 'medium',
+        points: 40,
+        flag: 'SQL-LOGIN-FREQ-USER-1001',
+        hints: ['Use GROUP BY user_id with COUNT(*)', 'Filter by date range with WHERE clause', 'Order by COUNT(*) DESC and use LIMIT 1'],
+        tags: ['sql', 'database', 'analytics', 'grouping']
+      },
+      {
+        id: 'unauthorized-access-log',
+        title: 'Unauthorized Access Log Challenge',
+        description: 'Analyze server logs to find the IP address with the most failed login attempts (status code 401).',
+        category: 'logs',
+        difficulty: 'medium',
+        points: 40,
+        flag: 'LOG-ANALYSIS-IP-192.168.1.45',
+        hints: ['Filter logs by status code 401', 'Count occurrences per IP address', 'Look for POST requests to /api/login'],
+        tags: ['logs', 'analysis', 'security', 'forensics']
+      },
+      {
+        id: 'slowest-request',
+        title: 'Slowest Request Challenge',
+        description: 'Find the endpoint with the longest response time among successful requests (status 200).',
+        category: 'logs',
+        difficulty: 'medium',
+        points: 40,
+        flag: 'LOG-SLOWEST-ENDPOINT-/api/reports/generate',
+        hints: ['Filter logs by status code 200', 'Sort by response_time field', 'Find the highest response time value'],
+        tags: ['logs', 'performance', 'analysis', 'monitoring']
       }
     ];
 

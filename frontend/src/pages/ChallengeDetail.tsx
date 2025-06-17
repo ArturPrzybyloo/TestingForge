@@ -18,6 +18,12 @@ import Challenge15FormInputFuzzer from '../challenges/Challenge15FormInputFuzzer
 import Challenge16RaceConditionTester from '../challenges/Challenge16RaceConditionTester';
 import Challenge17DOMMutationObserver from '../challenges/Challenge17DOMMutationObserver';
 import Challenge18AccessibilityAudit from '../challenges/Challenge18AccessibilityAudit';
+import Challenge19SQLOrdersTotal from '../challenges/Challenge19SQLOrdersTotal';
+import Challenge20SQLLoginFrequency from '../challenges/Challenge20SQLLoginFrequency';
+import Challenge21EncodedToken from '../challenges/Challenge21EncodedToken';
+import Challenge22CSSPuzzle from '../challenges/Challenge22CSSPuzzle';
+import Challenge23UnauthorizedAccessLog from '../challenges/Challenge23UnauthorizedAccessLog';
+import Challenge24SlowestRequest from '../challenges/Challenge24SlowestRequest';
 
 // Map new challenge IDs to frontend components
 const challengeMap: Record<string, React.FC> = {
@@ -40,6 +46,12 @@ const challengeMap: Record<string, React.FC> = {
   'race-condition-tester': Challenge16RaceConditionTester,
   'dom-mutation-observer': Challenge17DOMMutationObserver,
   'accessibility-audit': Challenge18AccessibilityAudit,
+  'sql-orders-total': Challenge19SQLOrdersTotal,
+  'sql-login-frequency': Challenge20SQLLoginFrequency,
+  'encoded-token': Challenge21EncodedToken,
+  'css-puzzle': Challenge22CSSPuzzle,
+  'unauthorized-access-log': Challenge23UnauthorizedAccessLog,
+  'slowest-request': Challenge24SlowestRequest,
   
   // Keep legacy mappings for backwards compatibility  
   'missing-button': Challenge1Caesar,

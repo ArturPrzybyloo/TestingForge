@@ -5,10 +5,15 @@ const User = require('../models/User');
 const protect = async (req, res, next) => {
   let token;
 
+  // Log request details for debugging
+  console.log(`🔐 Auth request: ${req.method} ${req.originalUrl} from IP: ${req.ip || req.connection.remoteAddress}`);
+  console.log(`🔍 User-Agent: ${req.headers['user-agent'] || 'Unknown'}`);
+
   // Check for token in Authorization header
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     try {
       token = req.headers.authorization.split(' ')[1];
+      console.log(`🎫 Token found, length: ${token.length}`);
       
       // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
@@ -28,6 +33,7 @@ const protect = async (req, res, next) => {
   }
 
   if (!token) {
+    console.log(`❌ No token provided for ${req.method} ${req.originalUrl}`);
     return res.status(401).json({ message: 'Not authorized, no token' });
   }
 };

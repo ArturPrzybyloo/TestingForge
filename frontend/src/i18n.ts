@@ -15,19 +15,21 @@ const resources = {
       'Login': 'Login',
       'Sign Up': 'Sign Up',
       
-      // Main page
+      // Main page - Hero Section
       'Testing Community': 'Testing Community',
-      'Master Software Testing with AI': 'Master Software Testing with AI',
-      'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.': 'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.',
-      'Why Choose AI Test Forge?': 'Why Choose AI Test Forge?',
-      'Real-World Challenges': 'Real-World Challenges',
-      'Practice with scenarios that mirror actual testing situations.': 'Practice with scenarios that mirror actual testing situations.',
-      'AI-Powered Learning': 'AI-Powered Learning',
-      'Get personalized feedback and guidance from our AI assistant.': 'Get personalized feedback and guidance from our AI assistant.',
-      'Active Community': 'Active Community',
-      'Connect with other testers and share your experiences.': 'Connect with other testers and share your experiences.',
-      'Stay Current': 'Stay Current',
-      'Learn the latest testing techniques and tools.': 'Learn the latest testing techniques and tools.',
+      'home.hero.title': 'Master Software Testing Skills',
+      'home.hero.description': 'Level up your testing expertise with interactive challenges, real-world scenarios, and hands-on practice.',
+      
+      // Why Choose Section
+      'home.whyChoose.title': 'Why Choose Testing Forge?',
+      'home.whyChoose.realWorld.title': 'Real-World Challenges',
+      'home.whyChoose.realWorld.description': 'Practice with scenarios that mirror actual testing situations from the industry.',
+      'home.whyChoose.handson.title': 'Hands-On Learning',
+      'home.whyChoose.handson.description': 'Learn by doing with interactive challenges and practical exercises.',
+      'home.whyChoose.community.title': 'Active Community',
+      'home.whyChoose.community.description': 'Connect with other testers and share your experiences.',
+      'home.whyChoose.current.title': 'Stay Current',
+      'home.whyChoose.current.description': 'Learn the latest testing techniques and industry best practices.',
       'Start Learning →': 'Start Learning →',
       'Login to Browse Challenges': 'Login to Browse Challenges',
       'Login to Try Challenges': 'Login to Try Challenges',
@@ -53,30 +55,43 @@ const resources = {
       'home.cta.register': 'Create Free Account',
       'home.cta.login': 'Already have an account? Sign In',
       
-      // Additional homepage sections
-      'Try a Sample Challenge': 'Try a Sample Challenge',
-      'API Testing Challenge': 'API Testing Challenge',
-      'Test a REST API endpoint that manages user profiles. Your task is to:': 'Test a REST API endpoint that manages user profiles. Your task is to:',
-      'Verify the GET /users endpoint returns correct user data': 'Verify the GET /users endpoint returns correct user data',
-      'Test POST /users with invalid data handling': 'Test POST /users with invalid data handling',
-      'Implement proper error handling': 'Implement proper error handling',
-      'Try This Challenge': 'Try This Challenge',
-      'Who is this for?': 'Who is this for?',
-      'Beginner Testers': 'Beginner Testers',
-      'Start your testing journey with fundamental concepts and basic challenges.': 'Start your testing journey with fundamental concepts and basic challenges.',
-      'Mid-Level Testers': 'Mid-Level Testers',
-      'Enhance your skills with advanced scenarios and automation challenges.': 'Enhance your skills with advanced scenarios and automation challenges.',
-      'Senior Testers': 'Senior Testers',
-      'Master AI testing and lead complex testing initiatives.': 'Master AI testing and lead complex testing initiatives.',
-      'Technologies Covered': 'Technologies Covered',
-      'Selenium': 'Selenium',
-      'Playwright': 'Playwright',
-      'Postman': 'Postman',
-      'AI Testing': 'AI Testing',
-      'What Our Users Say': 'What Our Users Say',
-      'The AI-powered challenges helped me improve my testing skills significantly. Highly recommended!': 'The AI-powered challenges helped me improve my testing skills significantly. Highly recommended!',
-      'Best platform for learning modern testing techniques. The community is incredibly supportive.': 'Best platform for learning modern testing techniques. The community is incredibly supportive.',
-      'The real-world scenarios are exactly what I needed to prepare for my testing career.': 'The real-world scenarios are exactly what I needed to prepare for my testing career.',
+      // Sample Challenge Section
+      'home.sampleChallenge.title': 'Try a Sample Challenge',
+      'home.sampleChallenge.apiTitle': 'API Testing Challenge',
+      'home.sampleChallenge.description': 'Test a REST API endpoint that manages user profiles. Your task is to:',
+      'home.sampleChallenge.task1': 'Verify the GET /users endpoint returns correct user data',
+      'home.sampleChallenge.task2': 'Test POST /users with invalid data handling',
+      'home.sampleChallenge.task3': 'Implement proper error handling',
+      'home.sampleChallenge.try': 'Try This Challenge',
+      
+      // Audience Section
+      'home.audience.title': 'Who is this for?',
+      'home.audience.beginner.title': 'Beginner Testers',
+      'home.audience.beginner.description': 'Start your testing journey with fundamental concepts and basic challenges.',
+      'home.audience.midLevel.title': 'Mid-Level Testers',
+      'home.audience.midLevel.description': 'Enhance your skills with advanced scenarios and automation challenges.',
+      'home.audience.senior.title': 'Senior Testers',
+      'home.audience.senior.description': 'Lead testing initiatives and prepare for future AI-enhanced testing workflows.',
+      
+      // Technologies Section
+      'home.technologies.title': 'Technologies Covered',
+      'home.technologies.selenium': 'Selenium',
+      'home.technologies.playwright': 'Playwright',
+      'home.technologies.postman': 'Postman',
+      'home.technologies.devtools': 'DevTools',
+      
+      // Future Roadmap Section
+      'home.roadmap.title': 'Future Learning Path',
+      'home.roadmap.description': 'We\'re building something special for the QA community. Once we have a solid user base, we\'ll launch an exclusive course.',
+      'home.roadmap.aiCourse.title': 'Coming Soon: AI Agents for QA',
+      'home.roadmap.aiCourse.description': 'Learn how to build and implement AI testing agents to revolutionize your QA workflows. This advanced course will be available to our community members.',
+      'home.roadmap.aiCourse.note': 'This course will be launched after we build a strong community of testers.',
+      
+      // Testimonials Section
+      'home.testimonials.title': 'What Our Users Say',
+      'home.testimonials.sarah': 'The interactive challenges helped me improve my testing skills significantly. Highly recommended!',
+      'home.testimonials.michael': 'Best platform for learning modern testing techniques. The community is incredibly supportive.',
+      'home.testimonials.david': 'The real-world scenarios are exactly what I needed to prepare for my testing career.',
       
       // Playground
       'playground.title': 'Automation Playground',
@@ -261,6 +276,24 @@ const resources = {
       'challenge.accessibilityAudit.title': 'Accessibility Audit',
       'challenge.accessibilityAudit.description': 'Use TAB to navigate through the interactive elements below. One of them cannot be focused using TAB (it is broken for keyboard users). Enter the id of the broken element to unlock the flag field.',
       'challenge.accessibilityAudit.category': 'Web',
+      
+      // SQL Challenges
+      'SQL Orders Total Challenge': 'SQL Orders Total Challenge',
+      'Calculate the total amount of orders for a specific customer using SQL SUM function.': 'Calculate the total amount of orders for a specific customer using SQL SUM function.',
+      'SQL Login Frequency Challenge': 'SQL Login Frequency Challenge',
+      'Find the user with the most frequent logins in the last 30 days using SQL GROUP BY and COUNT.': 'Find the user with the most frequent logins in the last 30 days using SQL GROUP BY and COUNT.',
+      
+      // Hard Challenges
+      'Encoded Token Challenge': 'Encoded Token Challenge',
+      'JWT token with exposed secret key in source code. Create a valid token with premium_user role to access the flag.': 'JWT token with exposed secret key in source code. Create a valid token with premium_user role to access the flag.',
+      'CSS Puzzle Challenge': 'CSS Puzzle Challenge',
+      'Flag hidden using advanced CSS techniques. Write CSS code to make the hidden flag visible.': 'Flag hidden using advanced CSS techniques. Write CSS code to make the hidden flag visible.',
+      
+      // Categories
+      'sql': 'SQL',
+      'cryptography': 'Cryptography',
+      'css': 'CSS',
+      'logs': 'Logs',
       // Learn translations EN
       'learn.courses.title': 'Courses',
       'learn.courses.description': 'Comprehensive, multi-week programs for deep learning. Paid access.',
@@ -318,19 +351,21 @@ const resources = {
       'Login': 'Zaloguj',
       'Sign Up': 'Załóż konto',
       
-      // Main page
+      // Main page - Hero Section
       'Testing Community': 'Społeczność Testerów',
-      'Master Software Testing with AI': 'Rozwijaj swoje umiejętności testerskie',
-      'Level up your testing skills with interactive challenges, real-world scenarios, and AI-powered learning.': 'Interaktywne wyzwania, mini kursy i społeczność dla testerów na każdym poziomie.',
-      'Why Choose AI Test Forge?': 'Dlaczego Testing Forge?',
-      'Real-World Challenges': 'Praktyczne wyzwania testerskie',
-      'Practice with scenarios that mirror actual testing situations.': 'Ćwicz na scenariuszach odzwierciedlających rzeczywiste sytuacje testerskie.',
-      'AI-Powered Learning': 'Nowoczesne narzędzia (w tym AI)',
-      'Get personalized feedback and guidance from our AI assistant.': 'Poznaj nowoczesne narzędzia jak Selenium, Playwright, Postman i AI. Otrzymuj feedback i wsparcie od społeczności oraz inteligentnych asystentów.',
-      'Active Community': 'Aktywna społeczność',
-      'Connect with other testers and share your experiences.': 'Łącz się z innymi testerami i dziel się doświadczeniami.',
-      'Stay Current': 'Bądź na bieżąco',
-      'Learn the latest testing techniques and tools.': 'Poznawaj najnowsze techniki i narzędzia testerskie.',
+      'home.hero.title': 'Rozwijaj Umiejętności Testerskie',
+      'home.hero.description': 'Podnieś swoje kompetencje QA dzięki interaktywnym wyzwaniom, rzeczywistym scenariuszom i praktycznej nauce.',
+      
+      // Why Choose Section
+      'home.whyChoose.title': 'Dlaczego Testing Forge?',
+      'home.whyChoose.realWorld.title': 'Praktyczne Wyzwania',
+      'home.whyChoose.realWorld.description': 'Ćwicz na scenariuszach odzwierciedlających rzeczywiste sytuacje testerskie z branży.',
+      'home.whyChoose.handson.title': 'Nauka przez Praktykę',
+      'home.whyChoose.handson.description': 'Ucz się robiąc - interaktywne wyzwania i praktyczne ćwiczenia.',
+      'home.whyChoose.community.title': 'Aktywna Społeczność',
+      'home.whyChoose.community.description': 'Łącz się z innymi testerami i dziel się doświadczeniami.',
+      'home.whyChoose.current.title': 'Bądź na Bieżąco',
+      'home.whyChoose.current.description': 'Poznawaj najnowsze techniki testerskie i najlepsze praktyki branżowe.',
       'Start Learning →': 'Rozpocznij naukę →',
       'Login to Browse Challenges': 'Zaloguj się, aby przeglądać wyzwania',
       'Login to Try Challenges': 'Zaloguj się, aby próbować wyzwań',
@@ -356,30 +391,43 @@ const resources = {
       'home.cta.register': 'Utwórz Darmowe Konto',
       'home.cta.login': 'Masz już konto? Zaloguj się',
       
-      // Additional homepage sections PL
-      'Try a Sample Challenge': 'Wypróbuj Przykładowe Wyzwanie',
-      'API Testing Challenge': 'Wyzwanie Testowania API',
-      'Test a REST API endpoint that manages user profiles. Your task is to:': 'Przetestuj endpoint REST API zarządzający profilami użytkowników. Twoim zadaniem jest:',
-      'Verify the GET /users endpoint returns correct user data': 'Sprawdź, czy endpoint GET /users zwraca poprawne dane użytkowników',
-      'Test POST /users with invalid data handling': 'Przetestuj POST /users z obsługą nieprawidłowych danych',
-      'Implement proper error handling': 'Zaimplementuj właściwą obsługę błędów',
-      'Try This Challenge': 'Wypróbuj To Wyzwanie',
-      'Who is this for?': 'Dla kogo to jest?',
-      'Beginner Testers': 'Początkujący Testerzy',
-      'Start your testing journey with fundamental concepts and basic challenges.': 'Rozpocznij swoją podróż testerską z podstawowymi konceptami i prostymi wyzwaniami.',
-      'Mid-Level Testers': 'Testerzy Średnio-Zaawansowani',
-      'Enhance your skills with advanced scenarios and automation challenges.': 'Rozwijaj swoje umiejętności z zaawansowanymi scenariuszami i wyzwaniami automatyzacji.',
-      'Senior Testers': 'Starsi Testerzy',
-      'Master AI testing and lead complex testing initiatives.': 'Opanuj testowanie AI i prowadź złożone inicjatywy testerskie.',
-      'Technologies Covered': 'Omawiane Technologie',
-      'Selenium': 'Selenium',
-      'Playwright': 'Playwright',
-      'Postman': 'Postman',
-      'AI Testing': 'Testowanie AI',
-      'What Our Users Say': 'Co Mówią Nasi Użytkownicy',
-      'The AI-powered challenges helped me improve my testing skills significantly. Highly recommended!': 'Wyzwania wspierane przez AI znacznie pomogły mi poprawić umiejętności testerskie. Gorąco polecam!',
-      'Best platform for learning modern testing techniques. The community is incredibly supportive.': 'Najlepsza platforma do nauki nowoczesnych technik testowania. Społeczność jest niesamowicie wspierająca.',
-      'The real-world scenarios are exactly what I needed to prepare for my testing career.': 'Scenariusze z rzeczywistego świata to dokładnie to, czego potrzebowałem do przygotowania się na karierę testera.',
+      // Sample Challenge Section
+      'home.sampleChallenge.title': 'Wypróbuj Przykładowe Wyzwanie',
+      'home.sampleChallenge.apiTitle': 'Wyzwanie Testowania API',
+      'home.sampleChallenge.description': 'Przetestuj endpoint REST API zarządzający profilami użytkowników. Twoim zadaniem jest:',
+      'home.sampleChallenge.task1': 'Sprawdź, czy endpoint GET /users zwraca poprawne dane użytkowników',
+      'home.sampleChallenge.task2': 'Przetestuj POST /users z obsługą nieprawidłowych danych',
+      'home.sampleChallenge.task3': 'Zaimplementuj właściwą obsługę błędów',
+      'home.sampleChallenge.try': 'Wypróbuj To Wyzwanie',
+      
+      // Audience Section
+      'home.audience.title': 'Dla kogo to jest?',
+      'home.audience.beginner.title': 'Początkujący Testerzy',
+      'home.audience.beginner.description': 'Rozpocznij swoją podróż testerską z podstawowymi konceptami i prostymi wyzwaniami.',
+      'home.audience.midLevel.title': 'Testerzy Średnio-Zaawansowani',
+      'home.audience.midLevel.description': 'Rozwijaj swoje umiejętności z zaawansowanymi scenariuszami i wyzwaniami automatyzacji.',
+      'home.audience.senior.title': 'Starsi Testerzy',
+      'home.audience.senior.description': 'Prowadź inicjatywy testerskie i przygotuj się na przyszłe workflow wspierane przez AI.',
+      
+      // Technologies Section
+      'home.technologies.title': 'Omawiane Technologie',
+      'home.technologies.selenium': 'Selenium',
+      'home.technologies.playwright': 'Playwright',
+      'home.technologies.postman': 'Postman',
+      'home.technologies.devtools': 'DevTools',
+      
+      // Future Roadmap Section
+      'home.roadmap.title': 'Przyszła Ścieżka Nauki',
+      'home.roadmap.description': 'Budujemy coś wyjątkowego dla społeczności QA. Po zbudowaniu solidnej bazy użytkowników uruchomimy ekskluzywny kurs.',
+      'home.roadmap.aiCourse.title': 'Wkrótce: Agenci AI dla QA',
+      'home.roadmap.aiCourse.description': 'Naucz się budować i implementować agentów AI do testowania, aby zrewolucjonizować swoje workflow QA. Ten zaawansowany kurs będzie dostępny dla członków naszej społeczności.',
+      'home.roadmap.aiCourse.note': 'Ten kurs zostanie uruchomiony po zbudowaniu silnej społeczności testerów.',
+      
+      // Testimonials Section
+      'home.testimonials.title': 'Co Mówią Nasi Użytkownicy',
+      'home.testimonials.sarah': 'Interaktywne wyzwania znacznie pomogły mi poprawić umiejętności testerskie. Gorąco polecam!',
+      'home.testimonials.michael': 'Najlepsza platforma do nauki nowoczesnych technik testowania. Społeczność jest niesamowicie wspierająca.',
+      'home.testimonials.david': 'Scenariusze z rzeczywistego świata to dokładnie to, czego potrzebowałem do przygotowania się na karierę testera.',
       
       // Playground
       'playground.title': 'Playground Automatyzacji',
@@ -564,6 +612,30 @@ const resources = {
       'challenge.accessibilityAudit.title': 'Audyt Dostępności',
       'challenge.accessibilityAudit.description': 'Użyj TAB, aby przechodzić po interaktywnych elementach poniżej. Jeden z nich nie może być wybrany klawiszem TAB (jest niedostępny dla klawiatury). Podaj id tego elementu, aby odblokować pole na flagę.',
       'challenge.accessibilityAudit.category': 'Web',
+      
+      // SQL Challenges PL
+      'SQL Orders Total Challenge': 'Wyzwanie SQL - Suma Zamówień',
+      'Calculate the total amount of orders for a specific customer using SQL SUM function.': 'Oblicz łączną kwotę zamówień dla konkretnego klienta używając funkcji SQL SUM.',
+      'SQL Login Frequency Challenge': 'Wyzwanie SQL - Częstotliwość Logowań',
+      'Find the user with the most frequent logins in the last 30 days using SQL GROUP BY and COUNT.': 'Znajdź użytkownika z najczęstszymi logowaniami w ostatnich 30 dniach używając SQL GROUP BY i COUNT.',
+      
+      // Hard Challenges PL
+      'Encoded Token Challenge': 'Wyzwanie Zakodowanego Tokenu',
+      'JWT token with exposed secret key in source code. Create a valid token with premium_user role to access the flag.': 'Token JWT z ujawnionym kluczem w kodzie źródłowym. Stwórz poprawny token z rolą premium_user aby uzyskać dostęp do flagi.',
+      'CSS Puzzle Challenge': 'Wyzwanie Zagadki CSS',
+      'Flag hidden using advanced CSS techniques. Write CSS code to make the hidden flag visible.': 'Flaga ukryta przy użyciu zaawansowanych technik CSS. Napisz kod CSS aby ujawnić ukrytą flagę.',
+      
+      // Log Challenges PL
+      'Unauthorized Access Log Challenge': 'Wyzwanie Analizy Logów - Nieautoryzowany Dostęp',
+      'Analyze server logs to find the IP address with the most failed login attempts (status code 401).': 'Przeanalizuj logi serwera aby znaleźć adres IP z największą liczbą nieudanych prób logowania (kod statusu 401).',
+      'Slowest Request Challenge': 'Wyzwanie Najwolniejszego Żądania',
+      'Find the endpoint with the longest response time among successful requests (status 200).': 'Znajdź endpoint z najdłuższym czasem odpowiedzi spośród udanych żądań (status 200).',
+      
+      // Categories PL
+      'sql': 'SQL',
+      'cryptography': 'Kryptografia',
+      'css': 'CSS',
+      'logs': 'Logi',
       // Learn translations PL
       'learn.courses.title': 'Kursy',
       'learn.courses.description': 'Kompleksowe, kilkutygodniowe programy nauki. Dostęp płatny.',
