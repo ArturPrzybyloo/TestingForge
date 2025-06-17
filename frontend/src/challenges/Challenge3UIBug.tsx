@@ -1,122 +1,108 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+import { useFlagSubmission } from '../hooks/useFlagSubmission';
 
-const FLAG = 'FLAG-UI-INVISIBLE-BUTTON';
+const FLAG = 'UI-BUG-FOUND';
+const CHALLENGE_ID = 'ui-bug';
+const CHALLENGE_POINTS = 35;
 
 const Challenge3UIBug: React.FC<{onComplete?: () => void}> = ({ onComplete }) => {
-  const [email, setEmail] = useState('');
-  const [feedback, setFeedback] = useState('');
-  const [showFlag, setShowFlag] = useState(false);
-  const [shake, setShake] = useState(false);
-  const fakeBtnRef = useRef<HTMLButtonElement>(null);
-  const realBtnRef = useRef<HTMLButtonElement>(null);
   const [flagInput, setFlagInput] = useState('');
-  const [flagFeedback, setFlagFeedback] = useState('');
+  const [feedback, setFeedback] = useState('');
+  const [showHiddenButton, setShowHiddenButton] = useState(false);
 
-  // Animate fake button on click
-  const handleFakeSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFeedback('Error: submission failed.');
-    setShake(true);
-    setTimeout(() => setShake(false), 350);
-  };
+  const { submitFlag, isSubmitting, isCompleted } = useFlagSubmission();
+  const challengeCompleted = isCompleted(CHALLENGE_ID);
 
-  // Reveal flag on real submit
-  const handleRealSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShowFlag(true);
-    setFeedback('');
-    if (onComplete) onComplete();
-  };
-
-  const handleFlagCheck = () => {
-    if (flagInput.trim() === FLAG) {
-      setFlagFeedback('Challenge passed! 🎉');
-      if (onComplete) onComplete();
-      const done = JSON.parse(localStorage.getItem('forge_completed_challenges') || '{}');
-      localStorage.setItem('forge_completed_challenges', JSON.stringify({ ...done, 3: true }));
-    } else {
-      setFlagFeedback('Incorrect flag, try again. ❌');
+  // Simulate a UI bug - double click reveals hidden button
+  const handleDoubleClick = () => {
+    if (!challengeCompleted) {
+      setShowHiddenButton(true);
     }
   };
 
-  // Allow keyboard navigation to hidden button
-  // (tab order: email input -> fake button -> real button)
+  const checkFlag = async () => {
+    if (flagInput.trim() === FLAG) {
+      const result = await submitFlag(CHALLENGE_ID, FLAG, CHALLENGE_POINTS);
+      if (result.success) {
+        setFeedback(`Challenge passed! 🎉 (+${result.pointsEarned} pts)`);
+        if (onComplete) onComplete();
+      } else {
+        setFeedback(`Error: ${result.message}`);
+      }
+    } else {
+      setFeedback('Incorrect flag, try again. ❌');
+    }
+  };
 
   return (
-    <div className="bg-gray-800 rounded-xl p-6 border-2 border-gray-700 max-w-xl mx-auto mt-8 shadow-lg">
-      <h2 className="text-2xl font-bold mb-2 text-green-400">UI Bug Hunt: Lost Submit Button</h2>
-      <p className="text-gray-300 mb-6">
-        This form has a visual bug — the real submit button is hidden or misaligned. Can you find it and click it to reveal the flag?
+    <div className={`bg-gray-800 rounded-xl p-6 border-2 max-w-xl mx-auto mt-8 ${
+      challengeCompleted ? 'border-green-500' : 'border-gray-700'
+    }`}>
+      <h2 className="text-2xl font-bold mb-2 text-blue-400">
+        UI Bug Challenge
+        {challengeCompleted && <span className="text-green-500 ml-2">✓</span>}
+      </h2>
+      <p className="text-gray-300 mb-4">
+        There's a UI bug in this interface. Find it and exploit it to reveal the hidden functionality.
+        Try interacting with different elements in unexpected ways.
       </p>
-      <form className="flex flex-col gap-5 relative" autoComplete="off">
-        <div>
-          <label htmlFor="email" className="block text-blue-400 mb-1 font-medium">Email</label>
+      
+      <div className="mb-4 p-4 bg-gray-700 rounded-lg">
+        <h3 className="text-lg font-semibold text-white mb-2">Sample Application</h3>
+        <p className="text-gray-300 mb-4">This is a normal application interface...</p>
+        
+        <button 
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mr-2"
+          onDoubleClick={handleDoubleClick}
+          disabled={challengeCompleted}
+        >
+          Normal Button
+        </button>
+        
+        <button 
+          className="bg-gray-500 text-white px-4 py-2 rounded opacity-50 cursor-not-allowed"
+          disabled
+        >
+          Disabled Button
+        </button>
+        
+        {showHiddenButton && (
+          <div className="mt-4 p-3 bg-red-900 border border-red-500 rounded">
+            <p className="text-red-300 mb-2">🐛 Hidden functionality revealed!</p>
+            <p className="text-white font-mono text-sm">Flag: {FLAG}</p>
+          </div>
+        )}
+      </div>
+
+      {(showHiddenButton || challengeCompleted) && (
+        <div className="mb-4">
           <input
-            id="email"
-            type="email"
-            className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-blue-400 outline-none font-mono"
-            placeholder="Enter your email..."
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            autoComplete="off"
+            type="text"
+            placeholder="Enter the flag..."
+            value={flagInput}
+            onChange={(e) => setFlagInput(e.target.value)}
+            className="w-full p-2 rounded bg-gray-700 text-white mb-2"
+            disabled={challengeCompleted}
           />
+          <button 
+            onClick={checkFlag}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shadow py-2 transition-colors disabled:opacity-50"
+            disabled={isSubmitting || challengeCompleted}
+          >
+            {isSubmitting ? 'Submitting...' : challengeCompleted ? 'Completed' : 'Submit Flag'}
+          </button>
         </div>
-        {/* Fake Submit Button */}
-        <button
-          ref={fakeBtnRef}
-          type="button"
-          className={`btn-fake w-full py-3 rounded-lg font-semibold text-white bg-green-500 hover:bg-green-600 shadow transition-colors text-lg relative ${shake ? 'animate-shake' : ''}`}
-          onClick={handleFakeSubmit}
-          tabIndex={0}
-          onMouseOver={e => { e.currentTarget.title = 'Still broken?'; }}
-        >
-          Submit
-        </button>
-        {/* Real Hidden Submit Button (accessible via Tab) */}
-        <button
-          ref={realBtnRef}
-          type="submit"
-          aria-label="hidden-submit"
-          className="absolute opacity-0 left-0 top-0 w-1 h-1 z-0 focus:opacity-100 focus:z-10 focus:w-full focus:h-12 focus:rounded-lg focus:bg-blue-500 focus:text-white focus:font-bold transition-all duration-200"
-          style={{ pointerEvents: 'auto' }}
-          onClick={handleRealSubmit}
-          tabIndex={0}
-        >
-          (Real) Submit
-        </button>
-      </form>
-      <div className={`feedback mt-4 min-h-[24px] text-base ${feedback.includes('Error') ? 'text-red-500' : 'text-green-400'}`}>{feedback}</div>
-      {showFlag && (
-        <>
-          <div className="mt-6 p-4 bg-gray-900 border border-green-500 rounded-lg text-green-400 font-mono text-lg text-center select-all">
-            {FLAG}
-          </div>
-          <div className="mt-4">
-            <input
-              type="text"
-              className="w-full p-2 rounded bg-gray-700 text-white mb-2"
-              placeholder="Enter the flag..."
-              value={flagInput}
-              onChange={e => setFlagInput(e.target.value)}
-            />
-            <button className="w-full mb-2 bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shadow py-2 transition-colors" onClick={handleFlagCheck}>Check Flag</button>
-            <div className={`min-h-[24px] text-sm ${flagFeedback.includes('passed') ? 'text-green-400' : 'text-red-400'}`}>{flagFeedback}</div>
-          </div>
-        </>
       )}
-      <style>{`
-        .btn-fake.animate-shake {
-          animation: shake 0.3s;
-        }
-        @keyframes shake {
-          0% { transform: translateX(0); }
-          20% { transform: translateX(-7px); }
-          40% { transform: translateX(7px); }
-          60% { transform: translateX(-5px); }
-          80% { transform: translateX(5px); }
-          100% { transform: translateX(0); }
-        }
-      `}</style>
+
+      <div className={`min-h-[24px] text-sm ${feedback.includes('passed') ? 'text-green-400' : 'text-red-400'}`}>
+        {feedback}
+      </div>
+
+      {!showHiddenButton && !challengeCompleted && (
+        <div className="mt-4 text-sm text-gray-400">
+          💡 Hint: Try different mouse interactions with the buttons...
+        </div>
+      )}
     </div>
   );
 };

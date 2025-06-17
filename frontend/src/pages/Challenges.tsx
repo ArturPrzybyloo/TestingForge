@@ -4,21 +4,14 @@ import {
   KeyIcon,
   ArrowPathIcon,
   BugAntIcon,
-  LinkIcon,
-  CakeIcon,
-  DocumentTextIcon,
-  MagnifyingGlassIcon,
-  EyeDropperIcon,
-  LockClosedIcon,
-  CloudIcon,
-  WrenchScrewdriverIcon,
   ExclamationTriangleIcon,
-  DocumentCheckIcon,
   ShieldCheckIcon,
   GlobeAltIcon,
 } from '@heroicons/react/24/outline';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../contexts/AuthContext';
 import api from '../services/api';
+import challenges from '../challenges/challenges';
 
 // Icon mapping for different categories
 const categoryIcons: { [key: string]: React.ReactNode } = {
@@ -27,6 +20,13 @@ const categoryIcons: { [key: string]: React.ReactNode } = {
   performance: <ArrowPathIcon className="h-8 w-8 text-yellow-500" />,
   usability: <GlobeAltIcon className="h-8 w-8 text-green-500" />,
   functionality: <BugAntIcon className="h-8 w-8 text-purple-500" />,
+  cryptography: <KeyIcon className="h-8 w-8 text-cyan-500" />,
+  logic: <BugAntIcon className="h-8 w-8 text-indigo-500" />,
+  ui: <GlobeAltIcon className="h-8 w-8 text-pink-500" />,
+  web: <GlobeAltIcon className="h-8 w-8 text-orange-500" />,
+  data: <ArrowPathIcon className="h-8 w-8 text-teal-500" />,
+  network: <ArrowPathIcon className="h-8 w-8 text-violet-500" />,
+  dom: <BugAntIcon className="h-8 w-8 text-lime-500" />,
 };
 
 // Difficulty color mapping
@@ -36,90 +36,83 @@ const difficultyColors: { [key: string]: string } = {
   hard: 'text-red-500',
 };
 
-interface Challenge {
-  _id: string;
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  difficulty: string;
-  points: number;
-  hints: string[];
-  tags: string[];
-  isActive: boolean;
-  completionCount: number;
-}
+
 
 const Challenges: React.FC = () => {
   const { t } = useTranslation();
-  const [challenges, setChallenges] = useState<Challenge[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const { isAuthenticated } = useAuth();
   const [completed, setCompleted] = useState<{[key:string]:boolean}>({});
+  const [userProgress, setUserProgress] = useState<{completedChallenges: any[], totalPoints: number}>({
+    completedChallenges: [],
+    totalPoints: 0
+  });
   const [filterDifficulty, setFilterDifficulty] = useState<string>('All');
   const [filterCategory, setFilterCategory] = useState<string>('All');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchChallenges = async () => {
+    const fetchUserProgress = async () => {
+      if (!isAuthenticated) {
+        // Load from localStorage for non-authenticated users
+        const saved = localStorage.getItem('forge_completed_challenges');
+        if (saved) {
+          const savedCompleted = JSON.parse(saved);
+          setCompleted(savedCompleted);
+        }
+        return;
+      }
+
       try {
-        setLoading(true);
-        const response = await api.get('/challenges');
+        const response = await api.get('/submissions/my-progress');
         if (response.data && response.data.data) {
-          setChallenges(response.data.data);
+          const progress = response.data.data;
+          setUserProgress(progress);
+          
+          // Convert completed challenges array to object for easier lookup
+          const completedObj: {[key:string]:boolean} = {};
+          progress.completedChallenges.forEach((completion: any) => {
+            completedObj[completion.challengeId] = true;
+          });
+          setCompleted(completedObj);
         }
       } catch (err: any) {
-        console.error('Error fetching challenges:', err);
-        setError('Failed to load challenges. Please try again.');
-      } finally {
-        setLoading(false);
+        console.error('Error fetching user progress:', err);
+        // Fallback to localStorage
+        const saved = localStorage.getItem('forge_completed_challenges');
+        if (saved) {
+          setCompleted(JSON.parse(saved));
+        }
       }
     };
 
-    fetchChallenges();
-  }, []);
+    fetchUserProgress();
+  }, [isAuthenticated]);
 
-  useEffect(() => {
-    const saved = localStorage.getItem('forge_completed_challenges');
-    if (saved) setCompleted(JSON.parse(saved));
-  }, []);
+  // Use local challenges instead of API
+  const localChallenges = challenges.map(challenge => ({
+    _id: challenge.id,
+    id: challenge.id,
+    title: challenge.titleKey,
+    description: challenge.descriptionKey,
+    category: challenge.categoryKey,
+    difficulty: challenge.difficultyKey,
+    points: challenge.points,
+    hints: [],
+    tags: [],
+    isActive: true,
+    completionCount: 0
+  }));
 
-  const filteredChallenges = challenges.filter(challenge => {
+  const filteredChallenges = localChallenges.filter(challenge => {
     const difficultyMatch = filterDifficulty === 'All' || challenge.difficulty === filterDifficulty;
     const categoryMatch = filterCategory === 'All' || challenge.category === filterCategory;
     return difficultyMatch && categoryMatch && challenge.isActive;
   });
 
-  const categories = ['All', ...Array.from(new Set(challenges.map(c => c.category)))];
+  const categories = ['All', ...Array.from(new Set(localChallenges.map(c => c.category)))];
   const difficulties = ['All', 'easy', 'medium', 'hard'];
 
-  if (loading) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <div className="text-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto"></div>
-          <p className="mt-4 text-gray-400">Loading challenges...</p>
-        </div>
-      </div>
-    );
-  }
 
-  if (error) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <div className="text-center py-20">
-          <div className="text-red-500 mb-4">⚠️</div>
-          <p className="text-red-400">{error}</p>
-          <button 
-            onClick={() => window.location.reload()} 
-            className="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -142,6 +135,23 @@ const Challenges: React.FC = () => {
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             {t('Test your QA skills with real-world scenarios. Find bugs, identify security issues, and improve application quality.')}
           </p>
+          
+          {/* User Progress Display */}
+          {isAuthenticated && (
+            <div className="bg-gray-800 rounded-lg p-4 max-w-md mx-auto mb-8">
+              <h3 className="text-lg font-semibold text-white mb-2">Your Progress</h3>
+              <div className="flex justify-between text-gray-300">
+                <span>Completed: {userProgress.completedChallenges.length}/{localChallenges.length}</span>
+                <span>Points: {userProgress.totalPoints}</span>
+              </div>
+              <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
+                <div 
+                  className="bg-green-500 h-2 rounded-full" 
+                  style={{ width: `${(userProgress.completedChallenges.length / localChallenges.length) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Filters */}
@@ -177,80 +187,63 @@ const Challenges: React.FC = () => {
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-gray-800 rounded-lg p-4 text-center">
-            <div className="text-2xl font-bold text-green-500">{challenges.length}</div>
-            <div className="text-gray-400">Total Challenges</div>
-          </div>
-          <div className="bg-gray-800 rounded-lg p-4 text-center">
-            <div className="text-2xl font-bold text-blue-500">{Object.keys(completed).length}</div>
-            <div className="text-gray-400">Completed</div>
-          </div>
-          <div className="bg-gray-800 rounded-lg p-4 text-center">
-            <div className="text-2xl font-bold text-yellow-500">
-              {challenges.reduce((sum, c) => sum + c.points, 0)}
-            </div>
-            <div className="text-gray-400">Total Points Available</div>
-          </div>
-        </div>
-
         {/* Challenges Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredChallenges.map((challenge) => (
             <div
-              key={challenge._id}
-              className="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-colors border border-gray-700"
+              key={challenge.id}
+              className={`bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 border-l-4 ${
+                completed[challenge.id] ? 'border-green-500 bg-gray-800/50' : 'border-gray-600'
+              }`}
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center">
-                  {categoryIcons[challenge.category] || <KeyIcon className="h-8 w-8 text-gray-500" />}
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center">
+                    {categoryIcons[challenge.category] || <BugAntIcon className="h-8 w-8 text-gray-500" />}
+                    <div className="ml-3">
+                      <h3 className="text-lg font-semibold text-white">{challenge.title}</h3>
+                      <p className="text-sm text-gray-400 capitalize">{challenge.category}</p>
+                    </div>
+                  </div>
+                  {completed[challenge.id] && (
+                    <div className="text-green-500">
+                      <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
-                <div className="flex flex-col items-end">
-                  <span className={`text-sm font-medium ${difficultyColors[challenge.difficulty] || 'text-gray-400'}`}>
+
+                <p className="text-gray-300 text-sm mb-4 line-clamp-3">
+                  {challenge.description}
+                </p>
+
+                <div className="flex items-center justify-between mb-4">
+                  <span className={`text-sm font-medium ${difficultyColors[challenge.difficulty]}`}>
                     {challenge.difficulty.charAt(0).toUpperCase() + challenge.difficulty.slice(1)}
                   </span>
-                  <span className="text-sm text-green-500 font-bold">{challenge.points} pts</span>
-                </div>
-              </div>
-
-              <h3 className="text-xl font-semibold mb-2 text-white">{challenge.title}</h3>
-              <p className="text-gray-300 mb-4 text-sm">{challenge.description}</p>
-              
-              <div className="flex flex-wrap gap-1 mb-4">
-                {challenge.tags.map((tag, index) => (
-                  <span key={index} className="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">
-                    {tag}
+                  <span className="text-sm text-gray-400">
+                    {challenge.points} points
                   </span>
-                ))}
-              </div>
+                </div>
 
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-gray-400">
-                  {challenge.category.charAt(0).toUpperCase() + challenge.category.slice(1)}
-                </span>
                 <Link
                   to={`/challenges/${challenge.id}`}
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                  className={`block w-full text-center py-2 px-4 rounded-lg font-medium transition-colors ${
+                    completed[challenge.id]
+                      ? 'bg-green-600 hover:bg-green-700 text-white'
+                      : 'bg-blue-600 hover:bg-blue-700 text-white'
+                  }`}
                 >
-                  {completed[challenge.id] ? 'Review' : 'Start Challenge'}
+                  {completed[challenge.id] ? 'Review Challenge' : 'Start Challenge'}
                 </Link>
               </div>
-
-              {completed[challenge.id] && (
-                <div className="mt-2 flex items-center text-green-400 text-sm">
-                  <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Completed
-                </div>
-              )}
             </div>
           ))}
         </div>
 
         {filteredChallenges.length === 0 && (
-          <div className="text-center py-12">
+          <div className="text-center py-20">
             <p className="text-gray-400">No challenges match your current filters.</p>
           </div>
         )}

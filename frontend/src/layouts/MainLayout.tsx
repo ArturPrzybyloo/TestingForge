@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   HomeIcon, 
   AcademicCapIcon, 
   UserGroupIcon, 
   BookOpenIcon,
-  ChatBubbleLeftRightIcon,
   Squares2X2Icon,
-  BeakerIcon
+  BeakerIcon,
+  Bars3Icon,
+  XMarkIcon
 } from '@heroicons/react/24/outline';
 import Logo from '../components/Logo';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../contexts/AuthContext';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -19,14 +21,14 @@ interface MainLayoutProps {
 const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
   return (
-    <div className="flex gap-2 ml-4">
+    <div className="flex gap-1">
       <button
         onClick={() => i18n.changeLanguage('en')}
-        className={`px-2 py-1 rounded ${i18n.language === 'en' ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-200'}`}
+        className={`px-2 py-1 rounded text-xs ${i18n.language === 'en' ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-200'}`}
       >EN</button>
       <button
         onClick={() => i18n.changeLanguage('pl')}
-        className={`px-2 py-1 rounded ${i18n.language === 'pl' ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-200'}`}
+        className={`px-2 py-1 rounded text-xs ${i18n.language === 'pl' ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-200'}`}
       >PL</button>
     </div>
   );
@@ -34,19 +36,17 @@ const LanguageSwitcher: React.FC = () => {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
   const { t } = useTranslation();
-
-  useEffect(() => {
-    // Check if user is logged in
-    const user = localStorage.getItem('user');
-    setIsLoggedIn(!!user);
-  }, []);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    setIsLoggedIn(false);
-    navigate('/login');
+    logout();
+    navigate('/');
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -55,73 +55,200 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <nav className="bg-gray-800 border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <Link to="/" className="flex-shrink-0">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <Link to="/" onClick={closeMobileMenu}>
                 <Logo />
               </Link>
-              <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline space-x-4">
-                  <Link to="/" className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    <HomeIcon className="h-5 w-5 mr-1" />
-                    {t('Home')}
-                  </Link>
-                  <Link to="/challenges" className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    <BookOpenIcon className="h-5 w-5 mr-1" />
-                    {t('Challenges')}
-                  </Link>
-                  <Link to="/automation-playground" className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    <BeakerIcon className="h-5 w-5 mr-1" />
-                    {t('Playground')}
-                  </Link>
-                  <Link to="/learn" className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    <AcademicCapIcon className="h-5 w-5 mr-1" />
-                    {t('Learn')}
-                  </Link>
-                  <Link to="/community" className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                    <UserGroupIcon className="h-5 w-5 mr-1" />
-                    {t('Community')}
-                  </Link>
-                  {isLoggedIn && (
-                    <Link
-                      to="/dashboard"
-                      className="flex items-center text-green-500 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      <Squares2X2Icon className="h-5 w-5 mr-1" />
-                      {t('Dashboard')}
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:block">
+              <div className="flex items-center space-x-4">
+                <Link to="/" className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  <HomeIcon className="h-4 w-4 mr-1" />
+                  {t('Home')}
+                </Link>
+                {isAuthenticated && (
+                  <>
+                    <Link to="/challenges" className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                      <BookOpenIcon className="h-4 w-4 mr-1" />
+                      {t('Challenges')}
                     </Link>
-                  )}
-                </div>
+                    <Link to="/automation-playground" className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                      <BeakerIcon className="h-4 w-4 mr-1" />
+                      {t('Playground')}
+                    </Link>
+                    <Link to="/learn" className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                      <AcademicCapIcon className="h-4 w-4 mr-1" />
+                      {t('Learn')}
+                    </Link>
+                  </>
+                )}
+                <Link to="/community" className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  <UserGroupIcon className="h-4 w-4 mr-1" />
+                  {t('Community')}
+                </Link>
+                {isAuthenticated && (
+                  <Link
+                    to="/dashboard"
+                    className="flex items-center text-green-500 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    <Squares2X2Icon className="h-4 w-4 mr-1" />
+                    {t('Dashboard')}
+                  </Link>
+                )}
               </div>
             </div>
-            <div className="flex items-center">
+
+            {/* Right side - Language switcher and auth buttons */}
+            <div className="flex items-center space-x-2">
+              {/* Language Switcher - always visible */}
               <LanguageSwitcher />
-              <div className="ml-4 flex items-center md:ml-6">
-                {isLoggedIn ? (
-                  <button
-                    onClick={handleLogout}
-                    className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    {t('Logout')}
-                  </button>
+              
+              {/* Auth buttons - desktop */}
+              <div className="hidden md:flex items-center space-x-3">
+                {isAuthenticated ? (
+                  <>
+                    <span className="text-green-400 text-sm whitespace-nowrap">
+                      {user?.username}
+                    </span>
+                    <button
+                      onClick={handleLogout}
+                      className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap"
+                    >
+                      {t('Logout')}
+                    </button>
+                  </>
                 ) : (
-                  <div className="flex items-center space-x-4">
+                  <>
                     <Link
                       to="/login"
-                      className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap"
                     >
                       {t('Login')}
                     </Link>
                     <Link
                       to="/register"
-                      className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                      className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap"
                     >
                       {t('Sign Up')}
                     </Link>
+                  </>
+                )}
+              </div>
+
+              {/* Mobile auth buttons - visible on small screens */}
+              <div className="flex md:hidden items-center space-x-2">
+                {isAuthenticated ? (
+                  <button
+                    onClick={handleLogout}
+                    className="text-gray-300 hover:text-white px-2 py-1 rounded-md text-xs font-medium"
+                  >
+                    {t('Logout')}
+                  </button>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="text-gray-300 hover:text-white px-2 py-1 rounded-md text-xs font-medium"
+                    >
+                      {t('Login')}
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-md text-xs font-medium transition-colors"
+                    >
+                      {t('Sign Up')}
+                    </Link>
+                  </>
+                )}
+              </div>
+
+              {/* Mobile menu button */}
+              <div className="lg:hidden">
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="text-gray-300 hover:text-white p-2 rounded-md"
+                >
+                  {isMobileMenuOpen ? (
+                    <XMarkIcon className="h-6 w-6" />
+                  ) : (
+                    <Bars3Icon className="h-6 w-6" />
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMobileMenuOpen && (
+            <div className="lg:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1 bg-gray-700 rounded-md mt-2">
+                <Link
+                  to="/"
+                  onClick={closeMobileMenu}
+                  className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                >
+                  <HomeIcon className="h-5 w-5 mr-2" />
+                  {t('Home')}
+                </Link>
+                {isAuthenticated && (
+                  <>
+                    <Link
+                      to="/challenges"
+                      onClick={closeMobileMenu}
+                      className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      <BookOpenIcon className="h-5 w-5 mr-2" />
+                      {t('Challenges')}
+                    </Link>
+                    <Link
+                      to="/automation-playground"
+                      onClick={closeMobileMenu}
+                      className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      <BeakerIcon className="h-5 w-5 mr-2" />
+                      {t('Playground')}
+                    </Link>
+                    <Link
+                      to="/learn"
+                      onClick={closeMobileMenu}
+                      className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      <AcademicCapIcon className="h-5 w-5 mr-2" />
+                      {t('Learn')}
+                    </Link>
+                    <Link
+                      to="/dashboard"
+                      onClick={closeMobileMenu}
+                      className="flex items-center text-green-500 hover:text-green-400 px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      <Squares2X2Icon className="h-5 w-5 mr-2" />
+                      {t('Dashboard')}
+                    </Link>
+                  </>
+                )}
+                <Link
+                  to="/community"
+                  onClick={closeMobileMenu}
+                  className="flex items-center text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                >
+                  <UserGroupIcon className="h-5 w-5 mr-2" />
+                  {t('Community')}
+                </Link>
+                
+                {/* Mobile user info */}
+                {isAuthenticated && (
+                  <div className="px-3 py-2 border-t border-gray-600 mt-2">
+                    <span className="text-green-400 text-sm">
+                      {user?.username}
+                    </span>
                   </div>
                 )}
               </div>
             </div>
-          </div>
+          )}
         </div>
       </nav>
 
@@ -141,8 +268,17 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             <div>
               <h4 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">Platform</h4>
               <ul className="space-y-2">
-                <li><Link to="/challenges" className="text-gray-400 hover:text-white">Challenges</Link></li>
-                <li><Link to="/learn" className="text-gray-400 hover:text-white">Learning Path</Link></li>
+                {isAuthenticated ? (
+                  <>
+                    <li><Link to="/challenges" className="text-gray-400 hover:text-white">Challenges</Link></li>
+                    <li><Link to="/learn" className="text-gray-400 hover:text-white">Learning Path</Link></li>
+                  </>
+                ) : (
+                  <>
+                    <li><Link to="/login" className="text-gray-400 hover:text-white">Challenges (Login Required)</Link></li>
+                    <li><Link to="/login" className="text-gray-400 hover:text-white">Learning Path (Login Required)</Link></li>
+                  </>
+                )}
                 <li><Link to="/community" className="text-gray-400 hover:text-white">Community</Link></li>
                 <li><Link to="/chat" className="text-gray-400 hover:text-white">AI Chat</Link></li>
               </ul>

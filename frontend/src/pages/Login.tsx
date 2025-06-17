@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import api from '../services/api';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -25,9 +27,8 @@ const Login: React.FC = () => {
       });
 
       if (response.data && response.data.token) {
-        // Store token and user data
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user || { email }));
+        // Use AuthContext login function to properly set state
+        login(response.data.token);
         
         // Navigate to dashboard
         navigate('/dashboard');

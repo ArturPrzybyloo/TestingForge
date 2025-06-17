@@ -3,33 +3,20 @@ const Challenge = require('../models/Challenge');
 const { protect, admin } = require('../middleware/auth');
 const router = express.Router();
 
-// @desc    Get all challenges
+// @desc    Get all challenges (empty - challenges handled on frontend)
 // @route   GET /api/challenges
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const { category, difficulty, limit = 20, skip = 0 } = req.query;
-    
-    // Build filter object
-    const filter = { isActive: true };
-    if (category) filter.category = category;
-    if (difficulty) filter.difficulty = difficulty;
-
-    const challenges = await Challenge.find(filter)
-      .select('-flag') // Don't send flags to client
-      .limit(parseInt(limit))
-      .skip(parseInt(skip))
-      .sort({ createdAt: -1 });
-
-    const total = await Challenge.countDocuments(filter);
-
+    // Challenges are now handled on frontend
+    // This endpoint exists for compatibility but returns empty data
     res.json({
       success: true,
-      count: challenges.length,
-      total,
-      data: challenges
+      count: 0,
+      total: 0,
+      data: [],
+      message: 'Challenges are handled on frontend'
     });
-
   } catch (error) {
     console.error('Get challenges error:', error);
     res.status(500).json({ message: 'Server error' });

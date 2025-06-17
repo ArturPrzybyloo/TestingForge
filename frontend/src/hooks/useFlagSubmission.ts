@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 import api from '../services/api';
 
 interface FlagSubmissionResult {
@@ -12,26 +13,53 @@ interface FlagSubmissionResult {
 interface UseFlagSubmissionReturn {
   isSubmitting: boolean;
   error: string | null;
-  submitFlag: (challengeId: string, flag: string) => Promise<FlagSubmissionResult>;
+  submitFlag: (challengeId: string, flag: string, points?: number) => Promise<FlagSubmissionResult>;
   isCompleted: (challengeId: string) => boolean;
 }
 
 export const useFlagSubmission = (): UseFlagSubmissionReturn => {
+  const { isAuthenticated } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [completedChallenges, setCompletedChallenges] = useState<{[key: string]: boolean}>({});
 
-  const submitFlag = useCallback(async (challengeId: string, flag: string): Promise<FlagSubmissionResult> => {
+  const submitFlag = useCallback(async (challengeId: string, flag: string, points: number = 20): Promise<FlagSubmissionResult> => {
     setIsSubmitting(true);
     setError(null);
 
     try {
-      const response = await api.post('/submissions', {
-        challengeId,
-        flag: flag.trim()
-      });
+      if (isAuthenticated) {
+        // Send to backend for authenticated users
+        const response = await api.post('/submissions', {
+          challengeId,
+          flag: flag.trim(),
+          points
+        });
 
-      if (response.data && response.data.success) {
-        // Update localStorage as backup
+        if (response.data && response.data.success) {
+          // Update local state
+          setCompletedChallenges(prev => ({ 
+            ...prev, 
+            [challengeId]: true 
+          }));
+          
+          return {
+            success: true,
+            message: response.data.message || 'Flag submitted successfully!',
+            pointsEarned: response.data.pointsEarned,
+            totalPoints: response.data.totalPoints,
+            newLevel: response.data.newLevel
+          };
+        } else {
+          throw new Error(response.data?.message || 'Unknown error occurred');
+        }
+      } else {
+        // For non-authenticated users, just store in localStorage
+        setCompletedChallenges(prev => ({ 
+          ...prev, 
+          [challengeId]: true 
+        }));
+        
         const done = JSON.parse(localStorage.getItem('forge_completed_challenges') || '{}');
         localStorage.setItem('forge_completed_challenges', JSON.stringify({ 
           ...done, 
@@ -40,13 +68,11 @@ export const useFlagSubmission = (): UseFlagSubmissionReturn => {
 
         return {
           success: true,
-          message: response.data.message || 'Flag submitted successfully!',
-          pointsEarned: response.data.pointsEarned,
-          totalPoints: response.data.totalPoints,
-          newLevel: response.data.newLevel
+          message: 'Flag submitted successfully! (Login to track progress across sessions)',
+          pointsEarned: points,
+          totalPoints: points,
+          newLevel: 'Guest'
         };
-      } else {
-        throw new Error(response.data?.message || 'Unknown error occurred');
       }
     } catch (err: any) {
       const errorMessage = err.response?.data?.message || err.message || 'Failed to submit flag';
@@ -59,13 +85,41 @@ export const useFlagSubmission = (): UseFlagSubmissionReturn => {
     } finally {
       setIsSubmitting(false);
     }
-  }, []);
+  }, [isAuthenticated]);
+
+  // Load completed challenges on mount
+  useEffect(() => {
+    const loadCompletedChallenges = async () => {
+      if (isAuthenticated) {
+        try {
+          const response = await api.get('/submissions/my-progress');
+          if (response.data && response.data.data) {
+            const progress = response.data.data;
+            const completedObj: {[key: string]: boolean} = {};
+            progress.completedChallenges.forEach((completion: any) => {
+              completedObj[completion.challengeId] = true;
+            });
+            setCompletedChallenges(completedObj);
+          }
+        } catch (err) {
+          console.error('Error loading user progress:', err);
+          // Fallback to localStorage
+          const done = JSON.parse(localStorage.getItem('forge_completed_challenges') || '{}');
+          setCompletedChallenges(done);
+        }
+      } else {
+        // Load from localStorage for non-authenticated users
+        const done = JSON.parse(localStorage.getItem('forge_completed_challenges') || '{}');
+        setCompletedChallenges(done);
+      }
+    };
+
+    loadCompletedChallenges();
+  }, [isAuthenticated]);
 
   const isCompleted = useCallback((challengeId: string): boolean => {
-    // Check localStorage for now (can be enhanced to check API)
-    const done = JSON.parse(localStorage.getItem('forge_completed_challenges') || '{}');
-    return Boolean(done[challengeId]);
-  }, []);
+    return Boolean(completedChallenges[challengeId]);
+  }, [completedChallenges]);
 
   return {
     isSubmitting,

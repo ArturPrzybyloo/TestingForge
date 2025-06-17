@@ -4,6 +4,7 @@ import api from '../services/api'; // For making API calls if needed within cont
 
 interface IUser {
   _id: string;
+  id?: string;
   username: string;
   email: string;
   isAdmin: boolean;
@@ -43,9 +44,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             // If user not in local storage but token exists and is valid, fetch user details
             // This might happen if localStorage was cleared for user but not token
             // Or simply to ensure user data is fresh
-            api.get('/auth/profile') // Assuming this endpoint exists and returns user based on token
+            api.get('/auth/me')
               .then(response => {
-                const fetchedUser = response.data;
+                const userData = response.data.user;
+                const fetchedUser = {
+                  _id: userData.id || userData._id,
+                  id: userData.id,
+                  username: userData.username,
+                  email: userData.email,
+                  isAdmin: userData.isAdmin
+                };
                 setUser(fetchedUser);
                 localStorage.setItem('user', JSON.stringify(fetchedUser));
               })
@@ -68,11 +76,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const login = (newToken: string) => {
     try {
-      const decodedToken = jwtDecode<{ _id: string; username: string; email: string; isAdmin: boolean }>(newToken);
+      const decodedToken = jwtDecode<{ id?: string; _id?: string; username: string; email?: string; isAdmin: boolean }>(newToken);
       const userData: IUser = {
-        _id: decodedToken._id,
+        _id: decodedToken.id || decodedToken._id || '',
+        id: decodedToken.id,
         username: decodedToken.username,
-        email: decodedToken.email, 
+        email: decodedToken.email || '', 
         isAdmin: decodedToken.isAdmin,
       };
       localStorage.setItem('token', newToken);

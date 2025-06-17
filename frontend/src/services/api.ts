@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
+// Use environment variable for production, fallback to localhost for development
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3002/api';
 
 const api = axios.create({

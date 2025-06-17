@@ -1,107 +1,166 @@
 import React, { useState } from 'react';
+import { useFlagSubmission } from '../hooks/useFlagSubmission';
 
-const FLAG = 'FLAG-CHAIN-API-2025';
-
-const apiChain = [
-  {
-    label: 'GET /user',
-    path: '/user',
-    json: { id: 42, username: 'qa_tester', next: '/user/42' },
-  },
-  {
-    label: 'GET /user/42',
-    path: '/user/42',
-    json: { id: 42, profile: '/user/42/profile', secret: '/user/42/secret' },
-  },
-  {
-    label: 'GET /user/42/profile',
-    path: '/user/42/profile',
-    json: { id: 42, name: 'QA Tester', status: 'active' },
-  },
-  {
-    label: 'GET /user/42/secret',
-    path: '/user/42/secret',
-    json: { status: 'success', secretKey: FLAG },
-  },
-];
+const FLAG = 'JSON-PARSER-PRO';
+const CHALLENGE_ID = 'json-challenge';
+const CHALLENGE_POINTS = 35;
 
 const Challenge6Json: React.FC<{onComplete?: () => void}> = ({ onComplete }) => {
-  const [history, setHistory] = useState<string[]>([]);
-  const [currentIdx, setCurrentIdx] = useState<number | null>(null);
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState('');
   const [flagInput, setFlagInput] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [showFlag, setShowFlag] = useState(false);
 
-  const handleApiClick = (idx: number) => {
-    setCurrentIdx(idx);
-    setHistory(prev => {
-      const newPath = apiChain[idx].path;
-      // Only add if not already last
-      if (prev[prev.length - 1] !== newPath) {
-        return [...prev, newPath];
+  const { submitFlag, isSubmitting, isCompleted } = useFlagSubmission();
+  const challengeCompleted = isCompleted(CHALLENGE_ID);
+
+  const sampleData = `{
+  "users": [
+    {"id": 1, "name": "Alice", "role": "user"},
+    {"id": 2, "name": "Bob", "role": "admin"},
+    {"id": 3, "name": "Charlie", "role": "user"}
+  ],
+  "config": {
+    "version": "1.0",
+    "debug": false,
+    "secret_key": "hidden_flag_here"
+  },
+  "metadata": {
+    "created": "2024-01-01",
+    "flag": "${FLAG}"
+  }
+}`;
+
+  const parseJson = () => {
+    try {
+      if (input.trim() === '') {
+        setOutput('Please enter JSON data to parse');
+        return;
       }
-      return prev;
-    });
-    setFeedback('');
+
+      const parsed = JSON.parse(input);
+      setOutput(JSON.stringify(parsed, null, 2));
+      
+      // Check if the parsed JSON contains the flag
+      if (JSON.stringify(parsed).includes(FLAG)) {
+        setShowFlag(true);
+        setFeedback('Flag found in JSON data!');
+      }
+    } catch (error) {
+      setOutput('Invalid JSON format. Please check your syntax.');
+    }
   };
 
-  const handleFlagCheck = () => {
+  const loadSample = () => {
+    setInput(sampleData);
+    setOutput('');
+    setShowFlag(false);
+    setFeedback('Sample data loaded. Click "Parse JSON" to process it.');
+  };
+
+  const checkFlag = async () => {
     if (flagInput.trim() === FLAG) {
-      setFeedback('Challenge passed! 🎉');
-      if (onComplete) onComplete();
-      const done = JSON.parse(localStorage.getItem('forge_completed_challenges') || '{}');
-      localStorage.setItem('forge_completed_challenges', JSON.stringify({ ...done, 6: true }));
+      const result = await submitFlag(CHALLENGE_ID, FLAG, CHALLENGE_POINTS);
+      if (result.success) {
+        setFeedback(`Challenge passed! 🎉 (+${result.pointsEarned} pts)`);
+        if (onComplete) onComplete();
+      } else {
+        setFeedback(`Error: ${result.message}`);
+      }
     } else {
       setFeedback('Incorrect flag, try again. ❌');
     }
   };
 
-  // Breadcrumb
-  const breadcrumb = history.length > 0 ? history.join(' → ') : '/';
-
   return (
-    <div className="bg-gray-800 rounded-xl p-6 border-2 border-gray-700 max-w-xl mx-auto mt-8 shadow-lg">
-      <h2 className="text-2xl font-bold mb-2 text-blue-400">JSON Explorer: Trace the API Chain</h2>
-      <p className="text-gray-300 mb-6">
-        Click through the correct sequence of simulated API calls to reveal the flag hidden in the final JSON response.
+    <div className={`bg-gray-800 rounded-xl p-6 border-2 max-w-4xl mx-auto mt-8 ${
+      challengeCompleted ? 'border-green-500' : 'border-gray-700'
+    }`}>
+      <h2 className="text-2xl font-bold mb-2 text-blue-400">
+        JSON Challenge
+        {challengeCompleted && <span className="text-green-500 ml-2">✓</span>}
+      </h2>
+      <p className="text-gray-300 mb-4">
+        Parse and analyze JSON data to find the hidden flag. Load the sample data and examine its structure.
       </p>
-      {/* Breadcrumb */}
-      <div className="mb-4 text-sm text-blue-300 font-mono">
-        <span className="font-semibold">Path:</span> {breadcrumb}
+      
+      <div className="grid md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            JSON Input:
+          </label>
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="w-full h-64 p-3 rounded bg-gray-700 text-white font-mono text-sm"
+            placeholder="Enter JSON data here..."
+            disabled={challengeCompleted}
+          />
+          <div className="flex gap-2 mt-2">
+            <button 
+              onClick={parseJson}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
+              disabled={challengeCompleted}
+            >
+              Parse JSON
+            </button>
+            <button 
+              onClick={loadSample}
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
+              disabled={challengeCompleted}
+            >
+              Load Sample Data
+            </button>
+          </div>
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Parsed Output:
+          </label>
+          <div className="w-full h-64 p-3 rounded bg-gray-700 text-green-400 font-mono text-sm overflow-auto whitespace-pre">
+            {output || 'Output will appear here...'}
+          </div>
+        </div>
       </div>
-      {/* API Buttons */}
-      <div className="flex flex-wrap gap-3 mb-6">
-        {apiChain.map((api, idx) => (
-          <button
-            key={api.path}
-            className={`px-4 py-2 rounded-lg font-mono font-semibold shadow transition-colors text-base focus:outline-none focus:ring-2 focus:ring-blue-400 ${currentIdx === idx ? 'bg-blue-500 text-white' : 'bg-gray-700 text-blue-300 hover:bg-blue-600 hover:text-white'}`}
-            onClick={() => handleApiClick(idx)}
-            disabled={currentIdx !== null && idx < currentIdx}
-            tabIndex={0}
+
+      {showFlag && (
+        <div className="mb-4 p-4 bg-green-900 border border-green-500 rounded-lg">
+          <h3 className="text-green-400 font-semibold mb-2">🎉 Flag Found in JSON!</h3>
+          <p className="text-white font-mono">Flag: {FLAG}</p>
+        </div>
+      )}
+
+      {(showFlag || challengeCompleted) && (
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Enter the flag..."
+            value={flagInput}
+            onChange={(e) => setFlagInput(e.target.value)}
+            className="w-full p-2 rounded bg-gray-700 text-white mb-2"
+            disabled={challengeCompleted}
+          />
+          <button 
+            onClick={checkFlag}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shadow py-2 transition-colors disabled:opacity-50"
+            disabled={isSubmitting || challengeCompleted}
           >
-            {api.label}
+            {isSubmitting ? 'Submitting...' : challengeCompleted ? 'Completed' : 'Submit Flag'}
           </button>
-        ))}
+        </div>
+      )}
+
+      <div className={`min-h-[24px] text-sm ${feedback.includes('passed') ? 'text-green-400' : feedback.includes('found') ? 'text-blue-400' : 'text-red-400'}`}>
+        {feedback}
       </div>
-      {/* JSON Display */}
-      <div className="mb-6">
-        <pre className="bg-gray-900 text-blue-200 rounded p-4 text-sm overflow-x-auto min-h-[64px] border border-gray-700 transition-all duration-300">
-          <code>
-            {currentIdx !== null ? JSON.stringify(apiChain[currentIdx].json, null, 2) : '// Click an API button to view the response'}
-          </code>
-        </pre>
-      </div>
-      {/* Flag Entry */}
-      <div className="mb-2">
-        <input
-          type="text"
-          className="w-full p-2 rounded bg-gray-700 text-white mb-2 font-mono"
-          placeholder="Enter the flag..."
-          value={flagInput}
-          onChange={e => setFlagInput(e.target.value)}
-        />
-        <button className="w-full mb-2 bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shadow py-2 transition-colors" onClick={handleFlagCheck}>Check Flag</button>
-        <div className={`min-h-[24px] text-sm ${feedback.includes('passed') ? 'text-green-400' : feedback ? 'text-red-400' : ''}`}>{feedback}</div>
-      </div>
+
+      {!showFlag && !challengeCompleted && (
+        <div className="mt-4 text-sm text-gray-400">
+          💡 Hint: Load the sample data and examine the JSON structure carefully. Look for nested properties.
+        </div>
+      )}
     </div>
   );
 };

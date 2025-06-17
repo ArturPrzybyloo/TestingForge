@@ -2,18 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TrophyIcon, AcademicCapIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../contexts/AuthContext';
 import api from '../services/api';
-
-interface Challenge {
-  _id: string;
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  difficulty: string;
-  points: number;
-  isActive: boolean;
-}
+import challenges from '../challenges/challenges';
 
 interface UserStats {
   completedChallenges: string[];
@@ -21,11 +12,9 @@ interface UserStats {
   level: number;
 }
 
-const TOTAL_COURSES = 0; // Placeholder for future
-
 const Dashboard: React.FC = () => {
   const { t } = useTranslation();
-  const [challenges, setChallenges] = useState<Challenge[]>([]);
+  const { user } = useAuth();
   const [userStats, setUserStats] = useState<UserStats>({ completedChallenges: [], points: 0, level: 1 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -35,22 +24,15 @@ const Dashboard: React.FC = () => {
       try {
         setLoading(true);
         
-        // Fetch challenges and user data in parallel
-        const [challengesResponse, profileResponse] = await Promise.all([
-          api.get('/challenges'),
-          api.get('/auth/profile')
-        ]);
-
-        if (challengesResponse.data && challengesResponse.data.data) {
-          setChallenges(challengesResponse.data.data);
-        }
+        // Only fetch user profile data - use local challenges list
+        const profileResponse = await api.get('/auth/profile');
 
         if (profileResponse.data) {
-          const user = profileResponse.data;
+          const userProfile = profileResponse.data;
           setUserStats({
-            completedChallenges: user.completedChallenges || [],
-            points: user.points || 0,
-            level: user.level || 1
+            completedChallenges: userProfile.completedChallenges || [],
+            points: userProfile.points || 0,
+            level: userProfile.level || 1
           });
         }
       } catch (err: any) {
@@ -65,7 +47,7 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const completedCount = userStats.completedChallenges.length;
-  const totalChallenges = challenges.filter(c => c.isActive).length;
+  const totalChallenges = challenges.length; // Use local challenges list
   const progress = totalChallenges > 0 ? Math.round((completedCount / totalChallenges) * 100) : 0;
 
   // Get recently completed challenges with their titles
@@ -74,7 +56,7 @@ const Dashboard: React.FC = () => {
     .reverse()
     .map(challengeId => {
       const challenge = challenges.find(c => c.id === challengeId);
-      return challenge ? { id: challengeId, title: challenge.title } : { id: challengeId, title: `Challenge #${challengeId}` };
+      return challenge ? { id: challengeId, title: challenge.titleKey } : { id: challengeId, title: `Challenge #${challengeId}` };
     });
 
   if (loading) {
@@ -110,7 +92,7 @@ const Dashboard: React.FC = () => {
       {/* Welcome */}
       <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold bg-gradient-to-r from-green-500 to-blue-500 text-transparent bg-clip-text mb-2">
-          {t('Welcome to your dashboard, Tester!')}
+          Welcome to your dashboard, {user?.username || 'Tester'}!
         </h1>
         <p className="text-gray-400">{t('Here is a summary of your progress on Testing Forge')}</p>
       </div>

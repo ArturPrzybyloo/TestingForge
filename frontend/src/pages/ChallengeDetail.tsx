@@ -19,17 +19,37 @@ import Challenge16RaceConditionTester from '../challenges/Challenge16RaceConditi
 import Challenge17DOMMutationObserver from '../challenges/Challenge17DOMMutationObserver';
 import Challenge18AccessibilityAudit from '../challenges/Challenge18AccessibilityAudit';
 
-// Map backend challenge IDs to frontend components
+// Map new challenge IDs to frontend components
 const challengeMap: Record<string, React.FC> = {
-  // Backend challenge IDs mapped to existing components
-  'missing-button': Challenge1Caesar, // accessibility - missing button challenge
-  'broken-api': Challenge2Order, // functionality - API issue
-  'slow-page': Challenge3UIBug, // performance - slow loading
-  'xss-vulnerability': Challenge4UrlParam, // security - XSS vulnerability
-  'color-contrast': Challenge5Cookie, // accessibility - color contrast
-  'mobile-responsive': Challenge6Json, // usability - mobile responsive
+  // New string-based IDs matching challenges.ts
+  'caesar-cipher': Challenge1Caesar,
+  'order-matters': Challenge2Order,
+  'ui-bug': Challenge3UIBug,
+  'url-param': Challenge4UrlParam,
+  'cookie-challenge': Challenge5Cookie,
+  'json-challenge': Challenge6Json,
+  'xhr-detective': Challenge7XHRDetective,
+  'css-debugger': Challenge8CSSDebugger,
+  'cookie-hacker': Challenge9CookieHacker,
+  'localstorage-inspector': Challenge10LocalStorageInspector,
+  'broken-dom': Challenge11BrokenDOM,
+  'json-validator': Challenge12JSONValidator,
+  'element-highlighter': Challenge13ElementHighlighter,
+  'network-timing': Challenge14NetworkTiming,
+  'form-input-fuzzer': Challenge15FormInputFuzzer,
+  'race-condition-tester': Challenge16RaceConditionTester,
+  'dom-mutation-observer': Challenge17DOMMutationObserver,
+  'accessibility-audit': Challenge18AccessibilityAudit,
   
-  // Keep legacy numeric mapping for backwards compatibility
+  // Keep legacy mappings for backwards compatibility  
+  'missing-button': Challenge1Caesar,
+  'broken-api': Challenge2Order,
+  'slow-page': Challenge3UIBug,
+  'xss-vulnerability': Challenge4UrlParam,
+  'color-contrast': Challenge5Cookie,
+  'mobile-responsive': Challenge6Json,
+  
+  // Legacy numeric mapping
   '1': Challenge1Caesar,
   '2': Challenge2Order,
   '3': Challenge3UIBug,
@@ -73,6 +93,9 @@ const ChallengeDetail: React.FC = () => {
           Challenge not found.
           <div className="text-sm text-gray-400 mt-2">
             Challenge ID: {id}
+          </div>
+          <div className="text-xs text-gray-500 mt-4">
+            Available challenges: {Object.keys(challengeMap).filter(k => !k.match(/^\d+$/)).join(', ')}
           </div>
         </div>
       )}
