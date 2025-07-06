@@ -11,6 +11,7 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [needsVerification, setNeedsVerification] = useState(false);
@@ -26,12 +27,13 @@ const Login: React.FC = () => {
       // Call real API
       const response = await api.post('/auth/login', { 
         email, 
-        password 
+        password,
+        rememberMe 
       });
 
-      if (response.data && response.data.token) {
+      if (response.data && response.data.token && response.data.refreshToken) {
         // Use AuthContext login function to properly set state
-        login(response.data.token);
+        login(response.data.token, response.data.refreshToken);
         
         // Navigate to dashboard
         navigate('/dashboard');
@@ -164,11 +166,13 @@ const Login: React.FC = () => {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
                   className="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-700 rounded bg-gray-800"
                   disabled={loading}
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-400">
-                  Remember me
+                  Remember me (7 days)
                 </label>
               </div>
 

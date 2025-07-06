@@ -36,6 +36,14 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: null
   },
+  refreshToken: {
+    type: String,
+    default: null
+  },
+  refreshTokenExpires: {
+    type: Date,
+    default: null
+  },
   isAdmin: {
     type: Boolean,
     default: false
@@ -96,8 +104,28 @@ UserSchema.methods.generateAuthToken = function() {
       isAdmin: this.isAdmin 
     },
     process.env.JWT_SECRET || 'your-secret-key',
-    { expiresIn: process.env.JWT_EXPIRES_IN || '30d' }
+    { expiresIn: process.env.JWT_EXPIRES_IN || '1h' }
   );
+};
+
+// Generate refresh token
+UserSchema.methods.generateRefreshToken = function(rememberMe = false) {
+  const { v4: uuidv4 } = require('uuid');
+  const refreshToken = uuidv4();
+  
+  // Refresh token expires in 7 days if rememberMe, otherwise 1 day
+  const expirationTime = rememberMe ? 7 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
+  this.refreshToken = refreshToken;
+  this.refreshTokenExpires = new Date(Date.now() + expirationTime);
+  
+  return refreshToken;
+};
+
+// Validate refresh token
+UserSchema.methods.validateRefreshToken = function(token) {
+  return this.refreshToken === token && 
+         this.refreshTokenExpires && 
+         this.refreshTokenExpires > new Date();
 };
 
 module.exports = mongoose.model('User', UserSchema); 

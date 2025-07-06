@@ -202,7 +202,7 @@ router.post('/resend-verification', async (req, res) => {
 // @access  Public
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, rememberMe } = req.body;
 
     // Validation
     if (!email || !password) {
@@ -235,12 +235,15 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // Generate token
+    // Generate tokens
     const token = user.generateAuthToken();
+    const refreshToken = user.generateRefreshToken(rememberMe);
+    await user.save(); // Save refresh token to database
 
     res.json({
       success: true,
       token,
+      refreshToken,
       user: {
         id: user._id,
         username: user.username,
@@ -310,6 +313,88 @@ router.get('/profile', protect, async (req, res) => {
   } catch (error) {
     console.error('Get profile error:', error);
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @desc    Refresh access token
+// @route   POST /api/auth/refresh
+// @access  Public
+router.post('/refresh', async (req, res) => {
+  try {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+      return res.status(401).json({ 
+        success: false,
+        message: 'Refresh token is required' 
+      });
+    }
+
+    // Find user with this refresh token
+    const user = await User.findOne({ 
+      refreshToken,
+      refreshTokenExpires: { $gt: new Date() }
+    });
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid or expired refresh token'
+      });
+    }
+
+    // Generate new tokens
+    const newToken = user.generateAuthToken();
+    const newRefreshToken = user.generateRefreshToken();
+    await user.save();
+
+    res.json({
+      success: true,
+      token: newToken,
+      refreshToken: newRefreshToken,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        isEmailVerified: user.isEmailVerified,
+        progress: user.progress
+      }
+    });
+
+  } catch (error) {
+    console.error('Refresh token error:', error);
+    res.status(500).json({ 
+      success: false,
+      message: 'Server error during token refresh' 
+    });
+  }
+});
+
+// @desc    Logout user (invalidate refresh token)
+// @route   POST /api/auth/logout
+// @access  Private
+router.post('/logout', protect, async (req, res) => {
+  try {
+    // Clear refresh token from database
+    const user = await User.findById(req.user.id);
+    if (user) {
+      user.refreshToken = null;
+      user.refreshTokenExpires = null;
+      await user.save();
+    }
+
+    res.json({
+      success: true,
+      message: 'Logged out successfully'
+    });
+
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(500).json({ 
+      success: false,
+      message: 'Server error during logout' 
+    });
   }
 });
 
