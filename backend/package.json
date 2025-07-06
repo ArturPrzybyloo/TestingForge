@@ -9,7 +9,13 @@
     "seed": "node seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["qa", "testing", "learning", "platform", "api"],
+  "keywords": [
+    "qa",
+    "testing",
+    "learning",
+    "platform",
+    "api"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -18,7 +24,9 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.8.3"
+    "mongoose": "^8.8.3",
+    "nodemailer": "^7.0.4",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"

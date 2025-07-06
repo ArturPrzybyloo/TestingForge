@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-import { useAuth } from '../contexts/AuthContext';
+import { EyeIcon, EyeSlashIcon, EnvelopeIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import api from '../services/api';
 
 const Register: React.FC = () => {
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  // const navigate = useNavigate(); // Not needed for now
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -17,6 +15,8 @@ const Register: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [registrationMessage, setRegistrationMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -51,12 +51,12 @@ const Register: React.FC = () => {
         password: formData.password
       });
 
-      if (response.data && response.data.token) {
-        // Use AuthContext login function
-        login(response.data.token);
-        navigate('/challenges');
+      if (response.data && response.data.success) {
+        setSuccess(true);
+        setRegistrationMessage(response.data.message);
+        // Don't navigate immediately - let user see the success message
       } else {
-        setError('Registration failed. No token received.');
+        setError('Registration failed. Please try again.');
       }
     } catch (err: any) {
       console.error('Registration error:', err);
@@ -65,6 +65,68 @@ const Register: React.FC = () => {
       setLoading(false);
     }
   };
+
+  const handleResendVerification = async () => {
+    try {
+      setLoading(true);
+      await api.post('/auth/resend-verification', {
+        email: formData.email
+      });
+      setRegistrationMessage('Verification email resent successfully. Please check your email.');
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Failed to resend verification email.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (success) {
+    return (
+      <MainLayout>
+        <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-md w-full space-y-8">
+            <div className="text-center">
+              <CheckCircleIcon className="mx-auto h-16 w-16 text-green-500 mb-4" />
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Registration Successful!
+              </h2>
+              <div className="bg-blue-500/10 border border-blue-500 rounded-lg p-4 mb-6">
+                <EnvelopeIcon className="h-8 w-8 text-blue-500 mx-auto mb-2" />
+                <p className="text-blue-400 text-sm">
+                  {registrationMessage}
+                </p>
+              </div>
+              <div className="space-y-4">
+                <p className="text-gray-400">
+                  Check your email inbox for the verification link. Once you verify your email, you'll be able to log in.
+                </p>
+                <div className="flex flex-col gap-3">
+                  <button
+                    onClick={handleResendVerification}
+                    disabled={loading}
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50"
+                  >
+                    {loading ? 'Sending...' : 'Resend Verification Email'}
+                  </button>
+                  <Link
+                    to="/login"
+                    className="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors text-center"
+                  >
+                    Go to Login
+                  </Link>
+                </div>
+                {error && (
+                  <div className="bg-red-500/10 border border-red-500 text-red-500 px-4 py-3 rounded-lg text-sm">
+                    {error}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>

@@ -13,6 +13,7 @@ import AutomationPlayground from './pages/AutomationPlayground';
 import ChallengeDetail from './pages/ChallengeDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import EmailVerification from './pages/EmailVerification';
 import './i18n';
 
 const App: React.FC = () => {
@@ -40,6 +41,7 @@ const App: React.FC = () => {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/verify-email/:token" element={<EmailVerification />} />
         </Routes>
       </Router>
     </AuthProvider>

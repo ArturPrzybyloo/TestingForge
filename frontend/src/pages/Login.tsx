@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { EyeIcon, EyeSlashIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 import api from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -13,11 +13,14 @@ const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [needsVerification, setNeedsVerification] = useState(false);
+  const [verificationMessage, setVerificationMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
+    setNeedsVerification(false);
 
     try {
       // Call real API
@@ -37,7 +40,27 @@ const Login: React.FC = () => {
       }
     } catch (err: any) {
       console.error('Login error:', err);
-      setError(err.response?.data?.message || err.message || 'Login failed. Please try again.');
+      const errorData = err.response?.data;
+      
+      if (errorData?.requiresVerification) {
+        setNeedsVerification(true);
+        setError('');
+        setVerificationMessage(errorData.message);
+      } else {
+        setError(errorData?.message || err.message || 'Login failed. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendVerification = async () => {
+    try {
+      setLoading(true);
+      await api.post('/auth/resend-verification', { email });
+      setVerificationMessage('Verification email resent successfully. Please check your email.');
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Failed to resend verification email.');
     } finally {
       setLoading(false);
     }
@@ -60,6 +83,26 @@ const Login: React.FC = () => {
             {error && (
               <div className="bg-red-500/10 border border-red-500 text-red-500 px-4 py-3 rounded-lg">
                 {error}
+              </div>
+            )}
+
+            {needsVerification && (
+              <div className="bg-yellow-500/10 border border-yellow-500 rounded-lg p-4">
+                <div className="flex items-center mb-2">
+                  <EnvelopeIcon className="h-5 w-5 text-yellow-500 mr-2" />
+                  <h3 className="text-yellow-500 font-medium">Email Verification Required</h3>
+                </div>
+                <p className="text-yellow-400 text-sm mb-3">
+                  {verificationMessage}
+                </p>
+                <button
+                  type="button"
+                  onClick={handleResendVerification}
+                  disabled={loading}
+                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50"
+                >
+                  {loading ? 'Sending...' : 'Resend Verification Email'}
+                </button>
               </div>
             )}
 
@@ -160,6 +203,7 @@ const Login: React.FC = () => {
             <div className="space-y-2 text-sm text-gray-400">
               <p>Email: admin@qa-platform.com</p>
               <p>Password: admin123</p>
+              <p className="text-xs text-yellow-500">Note: Test account may need email verification</p>
             </div>
           </div>
         </div>

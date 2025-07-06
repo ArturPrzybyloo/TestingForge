@@ -1,6 +1,8 @@
 const express = require('express');
 const User = require('../models/User');
 const { protect } = require('../middleware/auth');
+const { sendVerificationEmail } = require('../services/emailService');
+const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
 
 // @desc    Register new user
@@ -29,27 +31,48 @@ router.post('/register', async (req, res) => {
       });
     }
 
-    // Create user
+    // Generate verification token
+    const verificationToken = uuidv4();
+    const verificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+
+    // Create user with verification fields
     const user = await User.create({
       username,
       email,
-      password
+      password,
+      isEmailVerified: false,
+      emailVerificationToken: verificationToken,
+      emailVerificationExpires: verificationExpires
     });
 
-    // Generate token
-    const token = user.generateAuthToken();
-
-    res.status(201).json({
-      success: true,
-      token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        progress: user.progress
-      }
-    });
+    // Send verification email
+    try {
+      await sendVerificationEmail(email, username, verificationToken);
+      
+      res.status(201).json({
+        success: true,
+        message: 'Account created successfully. Please check your email for verification link.',
+        user: {
+          id: user._id,
+          username: user.username,
+          email: user.email,
+          isEmailVerified: user.isEmailVerified
+        }
+      });
+    } catch (emailError) {
+      // If email sending fails, still create account but notify user
+      console.error('Email sending failed:', emailError);
+      res.status(201).json({
+        success: true,
+        message: 'Account created successfully, but we couldn\'t send verification email. Please try resending verification email.',
+        user: {
+          id: user._id,
+          username: user.username,
+          email: user.email,
+          isEmailVerified: user.isEmailVerified
+        }
+      });
+    }
 
   } catch (error) {
     console.error('Registration error:', error);
@@ -60,6 +83,117 @@ router.post('/register', async (req, res) => {
     }
     
     res.status(500).json({ message: 'Server error during registration' });
+  }
+});
+
+// @desc    Verify email address
+// @route   GET /api/auth/verify-email/:token
+// @access  Public
+router.get('/verify-email/:token', async (req, res) => {
+  try {
+    const { token } = req.params;
+
+    // Find user with this verification token
+    const user = await User.findOne({
+      emailVerificationToken: token,
+      emailVerificationExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid or expired verification token'
+      });
+    }
+
+    // Mark user as verified
+    user.isEmailVerified = true;
+    user.emailVerificationToken = null;
+    user.emailVerificationExpires = null;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: 'Email verified successfully! You can now log in.',
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        isEmailVerified: user.isEmailVerified
+      }
+    });
+
+  } catch (error) {
+    console.error('Email verification error:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Server error during email verification' 
+    });
+  }
+});
+
+// @desc    Resend verification email
+// @route   POST /api/auth/resend-verification
+// @access  Public
+router.post('/resend-verification', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email is required'
+      });
+    }
+
+    // Find user by email
+    const user = await User.findOne({ email: email.toLowerCase() });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    if (user.isEmailVerified) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email is already verified'
+      });
+    }
+
+    // Generate new verification token
+    const verificationToken = uuidv4();
+    const verificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+
+    // Update user with new token
+    user.emailVerificationToken = verificationToken;
+    user.emailVerificationExpires = verificationExpires;
+    await user.save();
+
+    // Send verification email
+    try {
+      await sendVerificationEmail(email, user.username, verificationToken);
+      
+      res.json({
+        success: true,
+        message: 'Verification email resent successfully. Please check your email.'
+      });
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to send verification email. Please try again later.'
+      });
+    }
+
+  } catch (error) {
+    console.error('Resend verification error:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Server error during resend verification' 
+    });
   }
 });
 
@@ -84,6 +218,16 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
+    // Check if email is verified
+    if (!user.isEmailVerified) {
+      return res.status(401).json({ 
+        success: false,
+        message: 'Please verify your email address before logging in. Check your email for verification link.',
+        requiresVerification: true,
+        email: user.email
+      });
+    }
+
     // Check password
     const isPasswordValid = await user.comparePassword(password);
 
@@ -102,6 +246,7 @@ router.post('/login', async (req, res) => {
         username: user.username,
         email: user.email,
         isAdmin: user.isAdmin,
+        isEmailVerified: user.isEmailVerified,
         progress: user.progress
       }
     });
