@@ -45,22 +45,33 @@ const Register: React.FC = () => {
     }
 
     try {
+      console.log('🔍 API Base URL:', api.defaults.baseURL);
+      console.log('🔍 Registration data:', { username: formData.username, email: formData.email });
+      
       const response = await api.post('/auth/register', {
         username: formData.username,
         email: formData.email,
         password: formData.password
       });
 
+      console.log('✅ Registration response:', response);
+      console.log('✅ Response data:', response.data);
+      console.log('✅ Response status:', response.status);
+
       if (response.data && response.data.success) {
+        console.log('✅ Success! Setting success state...');
         setSuccess(true);
         setRegistrationMessage(response.data.message);
         // Don't navigate immediately - let user see the success message
       } else {
+        console.log('❌ No success in response data:', response.data);
         setError('Registration failed. Please try again.');
       }
     } catch (err: any) {
-      console.error('Registration error:', err);
-      setError(err.response?.data?.message || err.message || 'Registration failed. Please try again.');
+      console.error('❌ Registration error:', err);
+      console.error('❌ Error response:', err.response?.data);
+      console.error('❌ Error status:', err.response?.status);
+      setError(err.response?.data?.message || err.message || `Registration failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
