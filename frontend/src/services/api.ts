@@ -1,7 +1,10 @@
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 // Use Render backend URL for production, fallback to localhost for development
-const API_URL = process.env.REACT_APP_API_URL || 'https://testingforge.onrender.com/api';
+const API_URL = process.env.REACT_APP_API_URL || 
+  (window.location.hostname === 'arturprzybyloo.github.io' ? 
+    'https://testingforge.onrender.com/api' : 
+    'http://localhost:3002/api');
 
 const api = axios.create({
   baseURL: API_URL,
