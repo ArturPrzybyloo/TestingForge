@@ -103,8 +103,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const timeUntilExpiry = (decodedToken.exp * 1000) - Date.now();
         const timeInMinutes = Math.floor(timeUntilExpiry / 60000);
         
+        console.log(`⏱️  Token expires in ${timeInMinutes} minutes`);
+        
         // Show warning if token expires in less than 10 minutes
         if (timeUntilExpiry < 10 * 60 * 1000 && timeUntilExpiry > 0) {
+          console.log('⚠️  Showing session warning');
           setSessionWarning({
             show: true,
             timeRemaining: Math.floor(timeUntilExpiry / 1000)
@@ -113,11 +116,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         
         // Auto refresh if token expires in less than 5 minutes
         if (timeUntilExpiry < 5 * 60 * 1000 && timeUntilExpiry > 0) {
+          console.log('🔄 Auto-refreshing token (< 5 min remaining)');
           refreshAuthToken();
         }
         
         // If token expired, logout
         if (timeUntilExpiry <= 0) {
+          console.log('🚪 Token expired, logging out');
           logout();
         }
       } catch (error) {
@@ -161,6 +166,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         throw new Error('No refresh token available');
       }
 
+      console.log('🔄 Attempting to refresh token...');
       const response = await api.post('/auth/refresh', { refreshToken });
       
       if (response.data.success) {
@@ -172,12 +178,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setRefreshToken(newRefreshToken);
         api.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
         
+        console.log('✅ Token refreshed successfully');
         return true;
       }
       
       throw new Error('Token refresh failed');
     } catch (error) {
-      console.error('Token refresh failed:', error);
+      console.error('❌ Token refresh failed:', error);
       logout();
       return false;
     }

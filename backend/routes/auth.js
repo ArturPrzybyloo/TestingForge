@@ -240,6 +240,14 @@ router.post('/login', async (req, res) => {
     const refreshToken = user.generateRefreshToken(rememberMe);
     await user.save(); // Save refresh token to database
 
+    // Debug log for token generation
+    const jwt = require('jsonwebtoken');
+    const decodedToken = jwt.decode(token);
+    console.log('🔑 Generated token for user:', user.username);
+    console.log('⏰ Token expires at:', new Date(decodedToken.exp * 1000));
+    console.log('🕒 Token expires in:', Math.floor((decodedToken.exp * 1000 - Date.now()) / 60000), 'minutes');
+    console.log('🎫 Remember me:', rememberMe ? 'Yes' : 'No');
+
     res.json({
       success: true,
       token,
@@ -347,6 +355,13 @@ router.post('/refresh', async (req, res) => {
     const newToken = user.generateAuthToken();
     const newRefreshToken = user.generateRefreshToken();
     await user.save();
+
+    // Debug log for token refresh
+    const jwt = require('jsonwebtoken');
+    const decodedToken = jwt.decode(newToken);
+    console.log('🔄 Refreshed token for user:', user.username);
+    console.log('⏰ New token expires at:', new Date(decodedToken.exp * 1000));
+    console.log('🕒 New token expires in:', Math.floor((decodedToken.exp * 1000 - Date.now()) / 60000), 'minutes');
 
     res.json({
       success: true,
