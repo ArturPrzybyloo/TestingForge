@@ -8,6 +8,7 @@ interface FlagSubmissionResult {
   pointsEarned?: number;
   totalPoints?: number;
   newLevel?: string;
+  isRetake?: boolean;
 }
 
 interface UseFlagSubmissionReturn {
@@ -37,41 +38,51 @@ export const useFlagSubmission = (): UseFlagSubmissionReturn => {
         });
 
         if (response.data && response.data.success) {
-          // Update local state
-          setCompletedChallenges(prev => ({ 
-            ...prev, 
-            [challengeId]: true 
-          }));
+          // Update local state only for first completion
+          if (!response.data.isRetake) {
+            setCompletedChallenges(prev => ({ 
+              ...prev, 
+              [challengeId]: true 
+            }));
+          }
           
           return {
             success: true,
             message: response.data.message || 'Flag submitted successfully!',
-            pointsEarned: response.data.pointsEarned,
+            pointsEarned: response.data.pointsEarned || 0,
             totalPoints: response.data.totalPoints,
-            newLevel: response.data.newLevel
+            newLevel: response.data.newLevel,
+            isRetake: response.data.isRetake || false
           };
         } else {
           throw new Error(response.data?.message || 'Unknown error occurred');
         }
       } else {
-        // For non-authenticated users, just store in localStorage
-        setCompletedChallenges(prev => ({ 
-          ...prev, 
-          [challengeId]: true 
-        }));
+        // For non-authenticated users, always allow retakes
+        const wasAlreadyCompleted = completedChallenges[challengeId];
         
-        const done = JSON.parse(localStorage.getItem('forge_completed_challenges') || '{}');
-        localStorage.setItem('forge_completed_challenges', JSON.stringify({ 
-          ...done, 
-          [challengeId]: true 
-        }));
+        if (!wasAlreadyCompleted) {
+          setCompletedChallenges(prev => ({ 
+            ...prev, 
+            [challengeId]: true 
+          }));
+          
+          const done = JSON.parse(localStorage.getItem('forge_completed_challenges') || '{}');
+          localStorage.setItem('forge_completed_challenges', JSON.stringify({ 
+            ...done, 
+            [challengeId]: true 
+          }));
+        }
 
         return {
           success: true,
-          message: 'Flag submitted successfully! (Login to track progress across sessions)',
-          pointsEarned: points,
+          message: wasAlreadyCompleted 
+            ? 'Great! You completed the challenge again! 🎉 (Login to track progress across sessions)'
+            : 'Flag submitted successfully! (Login to track progress across sessions)',
+          pointsEarned: wasAlreadyCompleted ? 0 : points,
           totalPoints: points,
-          newLevel: 'Guest'
+          newLevel: 'Guest',
+          isRetake: wasAlreadyCompleted
         };
       }
     } catch (err: any) {
@@ -85,7 +96,7 @@ export const useFlagSubmission = (): UseFlagSubmissionReturn => {
     } finally {
       setIsSubmitting(false);
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, completedChallenges]);
 
   // Load completed challenges on mount
   useEffect(() => {

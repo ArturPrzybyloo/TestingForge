@@ -139,10 +139,10 @@ const Challenges: React.FC = () => {
           {/* User Progress Display */}
           {isAuthenticated && (
             <div className="bg-gray-800 rounded-lg p-4 max-w-md mx-auto mb-8">
-              <h3 className="text-lg font-semibold text-white mb-2">Your Progress</h3>
+              <h3 className="text-lg font-semibold text-white mb-2">{t('challenges.yourProgress')}</h3>
               <div className="flex justify-between text-gray-300">
-                <span>Completed: {userProgress.completedChallenges.length}/{localChallenges.length}</span>
-                <span>Points: {userProgress.totalPoints}</span>
+                <span>{t('challenges.completed')}: {userProgress.completedChallenges.length}/{localChallenges.length}</span>
+                <span>{t('challenges.points')}: {userProgress.totalPoints}</span>
               </div>
               <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
                 <div 
@@ -165,7 +165,7 @@ const Challenges: React.FC = () => {
             >
               {difficulties.map(diff => (
                 <option key={diff} value={diff}>
-                  {diff === 'All' ? 'All Difficulties' : diff.charAt(0).toUpperCase() + diff.slice(1)}
+                  {diff === 'All' ? t('challenges.difficulty.all') : t(`challenges.difficulty.${diff}`)}
                 </option>
               ))}
             </select>
@@ -180,7 +180,7 @@ const Challenges: React.FC = () => {
             >
               {categories.map(cat => (
                 <option key={cat} value={cat}>
-                  {cat === 'All' ? 'All Categories' : cat.charAt(0).toUpperCase() + cat.slice(1)}
+                  {cat === 'All' ? t('challenges.category.all') : cat.charAt(0).toUpperCase() + cat.slice(1)}
                 </option>
               ))}
             </select>
@@ -227,16 +227,29 @@ const Challenges: React.FC = () => {
                   </span>
                 </div>
 
-                <Link
-                  to={`/challenges/${challenge.id}`}
-                  className={`block w-full text-center py-2 px-4 rounded-lg font-medium transition-colors ${
-                    completed[challenge.id]
-                      ? 'bg-green-600 hover:bg-green-700 text-white'
-                      : 'bg-blue-600 hover:bg-blue-700 text-white'
-                  }`}
-                >
-                  {completed[challenge.id] ? 'Review Challenge' : 'Start Challenge'}
-                </Link>
+                {completed[challenge.id] ? (
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Link
+                      to={`/challenges/${challenge.id}`}
+                      className="flex-1 text-center py-2 px-4 rounded-lg font-medium transition-colors bg-green-600 hover:bg-green-700 text-white"
+                    >
+                      {t('Review Challenge')}
+                    </Link>
+                    <Link
+                      to={`/challenges/${challenge.id}?retake=true`}
+                      className="flex-1 text-center py-2 px-4 rounded-lg font-medium transition-colors bg-blue-600 hover:bg-blue-700 text-white"
+                    >
+                      {t('Try Again')}
+                    </Link>
+                  </div>
+                ) : (
+                  <Link
+                    to={`/challenges/${challenge.id}`}
+                    className="block w-full text-center py-2 px-4 rounded-lg font-medium transition-colors bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    {t('Start Challenge')}
+                  </Link>
+                )}
               </div>
             </div>
           ))}
@@ -244,7 +257,7 @@ const Challenges: React.FC = () => {
 
         {filteredChallenges.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-gray-400">No challenges match your current filters.</p>
+            <p className="text-gray-400">{t('challenges.noMatchingChallenges')}</p>
           </div>
         )}
       </section>

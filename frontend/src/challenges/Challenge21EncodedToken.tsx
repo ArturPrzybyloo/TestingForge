@@ -12,15 +12,35 @@ const CHALLENGE_POINTS = 60;
    This is used for signing tokens in development
 */
 
-const Challenge21EncodedToken: React.FC<{onComplete?: () => void}> = ({ onComplete }) => {
+const Challenge21EncodedToken: React.FC<{onComplete?: () => void, isRetakeMode?: boolean}> = ({ onComplete, isRetakeMode = false }) => {
   const [tokenInput, setTokenInput] = useState('');
-  const [flagInput, setFlagInput] = useState('');
+  const [decodedValue, setDecodedValue] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [flagInput, setFlagInput] = useState('');
+  const [flagFeedback, setFlagFeedback] = useState('');
+  const [step, setStep] = useState(1);
   const [showFlag, setShowFlag] = useState(false);
   const [currentToken, setCurrentToken] = useState('');
 
   const { submitFlag, isSubmitting, isCompleted } = useFlagSubmission();
   const challengeCompleted = isCompleted(CHALLENGE_ID);
+
+  // In retake mode, treat as if not completed
+  const effectiveCompleted = challengeCompleted && !isRetakeMode;
+
+  // Reset state when entering retake mode
+  React.useEffect(() => {
+    if (isRetakeMode) {
+      setTokenInput('');
+      setDecodedValue('');
+      setFeedback('');
+      setFlagInput('');
+      setFlagFeedback('');
+      setStep(1);
+      setShowFlag(false);
+      setCurrentToken('');
+    }
+  }, [isRetakeMode]);
 
   // Generate initial token with basic user role
   useEffect(() => {
@@ -147,11 +167,11 @@ Try decoding the current token to understand its structure, then create your own
 
   return (
     <div className={`bg-gray-800 rounded-xl p-6 border-2 max-w-4xl mx-auto mt-8 ${
-      challengeCompleted ? 'border-green-500' : 'border-gray-700'
+      effectiveCompleted ? 'border-green-500' : 'border-gray-700'
     }`}>
       <h2 className="text-2xl font-bold mb-2 text-blue-400">
         Encoded Token Challenge
-        {challengeCompleted && <span className="text-green-500 ml-2">✓</span>}
+        {effectiveCompleted && <span className="text-green-500 ml-2">✓</span>}
       </h2>
       <p className="text-gray-300 mb-4">
         A JWT token is being used for authentication, but the secret key has been accidentally exposed in the source code. 
@@ -190,27 +210,27 @@ Try decoding the current token to understand its structure, then create your own
           onChange={(e) => setTokenInput(e.target.value)}
           className="w-full h-24 p-3 rounded bg-gray-700 text-white font-mono text-sm"
           placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-          disabled={challengeCompleted}
+          disabled={effectiveCompleted}
         />
         <div className="flex gap-2 mt-2">
           <button 
             onClick={verifyToken}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           >
             Verify Token
           </button>
           <button 
             onClick={showHint}
             className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           >
             Show Hint
           </button>
           <button 
             onClick={() => setFeedback('Try online JWT tools like jwt.io to decode and understand the token structure. You can also use browser console with atob() function to decode Base64 parts.')}
             className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           >
             JWT Tools Tip
           </button>
@@ -224,7 +244,7 @@ Try decoding the current token to understand its structure, then create your own
         </div>
       )}
 
-      {(showFlag || challengeCompleted) && (
+      {(showFlag || effectiveCompleted) && (
         <div className="mb-4">
           <input
             type="text"
@@ -232,14 +252,14 @@ Try decoding the current token to understand its structure, then create your own
             value={flagInput}
             onChange={(e) => setFlagInput(e.target.value)}
             className="w-full p-2 rounded bg-gray-700 text-white mb-2"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           />
           <button 
             onClick={checkFlag}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shadow py-2 transition-colors disabled:opacity-50"
-            disabled={isSubmitting || challengeCompleted}
+            disabled={isSubmitting || effectiveCompleted}
           >
-            {isSubmitting ? 'Submitting...' : challengeCompleted ? 'Completed' : 'Submit Flag'}
+            {isSubmitting ? 'Submitting...' : effectiveCompleted ? 'Completed' : 'Submit Flag'}
           </button>
         </div>
       )}
@@ -248,7 +268,7 @@ Try decoding the current token to understand its structure, then create your own
         <pre className="whitespace-pre-wrap">{feedback}</pre>
       </div>
 
-      {!showFlag && !challengeCompleted && (
+      {!showFlag && !effectiveCompleted && (
         <div className="mt-4 text-sm text-gray-400">
           💡 Hint: The secret key is exposed in the source code comments above. Use browser DevTools or online JWT tools to decode the current token, modify the role, and create a new signature.
         </div>

@@ -5,7 +5,7 @@ const FLAG = 'CAESAR-SHIFT-13';
 const CHALLENGE_ID = 'caesar-cipher';
 const CHALLENGE_POINTS = 30;
 
-const Challenge1Caesar: React.FC<{onComplete?: () => void}> = ({ onComplete }) => {
+const Challenge1Caesar: React.FC<{onComplete?: () => void, isRetakeMode?: boolean}> = ({ onComplete, isRetakeMode = false }) => {
   const [inputText, setInputText] = useState('PNRFNE-FUVSG-13');
   const [outputText, setOutputText] = useState('');
   const [shift, setShift] = useState(0);
@@ -14,6 +14,20 @@ const Challenge1Caesar: React.FC<{onComplete?: () => void}> = ({ onComplete }) =
 
   const { submitFlag, isSubmitting, isCompleted } = useFlagSubmission();
   const challengeCompleted = isCompleted(CHALLENGE_ID);
+
+  // In retake mode, treat as if not completed
+  const effectiveCompleted = challengeCompleted && !isRetakeMode;
+
+  // Reset state when entering retake mode
+  React.useEffect(() => {
+    if (isRetakeMode) {
+      setInputText('PNRFNE-FUVSG-13');
+      setOutputText('');
+      setShift(0);
+      setFlagInput('');
+      setFeedback('');
+    }
+  }, [isRetakeMode]);
 
   const applyCaesarCipher = (text: string, shift: number) => {
     return text.replace(/[A-Z]/g, (char) => {
@@ -44,11 +58,11 @@ const Challenge1Caesar: React.FC<{onComplete?: () => void}> = ({ onComplete }) =
 
   return (
     <div className={`bg-gray-800 rounded-xl p-6 border-2 max-w-2xl mx-auto mt-8 ${
-      challengeCompleted ? 'border-green-500' : 'border-gray-700'
+      effectiveCompleted ? 'border-green-500' : 'border-gray-700'
     }`}>
       <h2 className="text-2xl font-bold mb-2 text-blue-400">
         Caesar Cipher Challenge
-        {challengeCompleted && <span className="text-green-500 ml-2">✓</span>}
+        {effectiveCompleted && <span className="text-green-500 ml-2">✓</span>}
       </h2>
       <p className="text-gray-300 mb-4">
         Decode the Caesar cipher below to reveal the hidden message. Try different shift values.
@@ -63,7 +77,7 @@ const Challenge1Caesar: React.FC<{onComplete?: () => void}> = ({ onComplete }) =
           value={inputText}
           onChange={(e) => setInputText(e.target.value.toUpperCase())}
           className="w-full p-2 rounded bg-gray-700 text-white font-mono"
-          disabled={challengeCompleted}
+          disabled={effectiveCompleted}
         />
       </div>
 
@@ -78,7 +92,7 @@ const Challenge1Caesar: React.FC<{onComplete?: () => void}> = ({ onComplete }) =
           value={shift}
           onChange={(e) => handleShiftChange(parseInt(e.target.value))}
           className="w-full"
-          disabled={challengeCompleted}
+          disabled={effectiveCompleted}
         />
       </div>
 
@@ -98,14 +112,14 @@ const Challenge1Caesar: React.FC<{onComplete?: () => void}> = ({ onComplete }) =
           value={flagInput}
           onChange={(e) => setFlagInput(e.target.value)}
           className="w-full p-2 rounded bg-gray-700 text-white mb-2"
-          disabled={challengeCompleted}
+          disabled={effectiveCompleted}
         />
         <button 
           onClick={checkFlag}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shadow py-2 transition-colors disabled:opacity-50"
-          disabled={isSubmitting || challengeCompleted}
+          disabled={isSubmitting || effectiveCompleted}
         >
-          {isSubmitting ? 'Submitting...' : challengeCompleted ? 'Completed' : 'Submit Flag'}
+          {isSubmitting ? 'Submitting...' : effectiveCompleted ? 'Completed' : 'Submit Flag'}
         </button>
       </div>
 

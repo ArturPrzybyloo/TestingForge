@@ -65,4 +65,32 @@ body {
 :focus {
   outline: none;
   box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.5);
+}
+
+/* Retake mode styles - hide specific completion indicators */
+.retake-mode .challenge-completed-indicator,
+.retake-mode .challenge-completed-border,
+.retake-mode .challenge-completed-text {
+  display: none !important;
+}
+
+/* Re-enable disabled buttons in retake mode */
+.retake-mode button:disabled {
+  opacity: 1 !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  background-color: rgb(59 130 246) !important; /* bg-blue-500 */
+}
+
+.retake-mode button:disabled:hover {
+  background-color: rgb(37 99 235) !important; /* bg-blue-600 */
+}
+
+/* Make completed challenges look active again */
+.retake-mode .bg-green-500 {
+  background-color: rgb(59 130 246) !important; /* bg-blue-500 */
+}
+
+.retake-mode .bg-green-600 {
+  background-color: rgb(37 99 235) !important; /* bg-blue-600 */
 } 

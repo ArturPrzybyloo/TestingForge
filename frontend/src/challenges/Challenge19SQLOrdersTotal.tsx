@@ -5,15 +5,31 @@ const FLAG = 'SQL-ORDERS-TOTAL-440';
 const CHALLENGE_ID = 'sql-orders-total';
 const CHALLENGE_POINTS = 30;
 
-const Challenge19SQLOrdersTotal: React.FC<{onComplete?: () => void}> = ({ onComplete }) => {
+const Challenge19SQLOrdersTotal: React.FC<{onComplete?: () => void, isRetakeMode?: boolean}> = ({ onComplete, isRetakeMode = false }) => {
   const [sqlInput, setSqlInput] = useState('');
   const [queryResult, setQueryResult] = useState<any>(null);
   const [flagInput, setFlagInput] = useState('');
   const [feedback, setFeedback] = useState('');
   const [showFlag, setShowFlag] = useState(false);
+  const [foundValue, setFoundValue] = useState('');
 
   const { submitFlag, isSubmitting, isCompleted } = useFlagSubmission();
   const challengeCompleted = isCompleted(CHALLENGE_ID);
+
+  // In retake mode, treat as if not completed
+  const effectiveCompleted = challengeCompleted && !isRetakeMode;
+
+  // Reset state when entering retake mode
+  React.useEffect(() => {
+    if (isRetakeMode) {
+      setSqlInput('');
+      setQueryResult(null);
+      setFlagInput('');
+      setFeedback('');
+      setShowFlag(false);
+      setFoundValue('');
+    }
+  }, [isRetakeMode]);
 
   // Mock database data
   const ordersData = [
@@ -101,11 +117,11 @@ const Challenge19SQLOrdersTotal: React.FC<{onComplete?: () => void}> = ({ onComp
 
   return (
     <div className={`bg-gray-800 rounded-xl p-6 border-2 max-w-4xl mx-auto mt-8 ${
-      challengeCompleted ? 'border-green-500' : 'border-gray-700'
+      effectiveCompleted ? 'border-green-500' : 'border-gray-700'
     }`}>
       <h2 className="text-2xl font-bold mb-2 text-blue-400">
         SQL Orders Total Challenge
-        {challengeCompleted && <span className="text-green-500 ml-2">✓</span>}
+        {effectiveCompleted && <span className="text-green-500 ml-2">✓</span>}
       </h2>
       <p className="text-gray-300 mb-4">
         Calculate the total amount of all orders placed by "John Doe" using SQL SUM function.
@@ -138,27 +154,27 @@ const Challenge19SQLOrdersTotal: React.FC<{onComplete?: () => void}> = ({ onComp
           onChange={(e) => setSqlInput(e.target.value)}
           className="w-full h-32 p-3 rounded bg-gray-700 text-white font-mono text-sm"
           placeholder="Enter your SQL query here..."
-          disabled={challengeCompleted}
+          disabled={effectiveCompleted}
         />
         <div className="flex gap-2 mt-2">
           <button 
             onClick={executeQuery}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           >
             Execute Query
           </button>
           <button 
             onClick={showHint}
             className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           >
             Show Hint
           </button>
           <button 
             onClick={showTableStructure}
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           >
             Show All Data
           </button>
@@ -188,7 +204,7 @@ const Challenge19SQLOrdersTotal: React.FC<{onComplete?: () => void}> = ({ onComp
         </div>
       )}
 
-      {(showFlag || challengeCompleted) && (
+      {(showFlag || effectiveCompleted) && (
         <div className="mb-4">
           <input
             type="text"
@@ -196,14 +212,14 @@ const Challenge19SQLOrdersTotal: React.FC<{onComplete?: () => void}> = ({ onComp
             value={flagInput}
             onChange={(e) => setFlagInput(e.target.value)}
             className="w-full p-2 rounded bg-gray-700 text-white mb-2"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           />
           <button 
             onClick={checkFlag}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shadow py-2 transition-colors disabled:opacity-50"
-            disabled={isSubmitting || challengeCompleted}
+            disabled={isSubmitting || effectiveCompleted}
           >
-            {isSubmitting ? 'Submitting...' : challengeCompleted ? 'Completed' : 'Submit Flag'}
+            {isSubmitting ? 'Submitting...' : effectiveCompleted ? 'Completed' : 'Submit Flag'}
           </button>
         </div>
       )}
@@ -212,7 +228,7 @@ const Challenge19SQLOrdersTotal: React.FC<{onComplete?: () => void}> = ({ onComp
         {feedback}
       </div>
 
-      {!showFlag && !challengeCompleted && (
+      {!showFlag && !effectiveCompleted && (
         <div className="mt-4 text-sm text-gray-400">
           💡 Hint: Use the SUM() function to calculate the total amount for all orders where customer_name equals 'John Doe'.
         </div>

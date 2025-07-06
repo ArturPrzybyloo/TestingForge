@@ -18,7 +18,7 @@ const INIT = [
   'Check the function works correctly',
 ];
 
-const Challenge2Order: React.FC<{onComplete?: () => void}> = ({ onComplete }) => {
+const Challenge2Order: React.FC<{onComplete?: () => void, isRetakeMode?: boolean}> = ({ onComplete, isRetakeMode = false }) => {
   const [steps, setSteps] = useState(INIT);
   const [dragged, setDragged] = useState<number | null>(null);
   const [flagInput, setFlagInput] = useState('');
@@ -27,6 +27,9 @@ const Challenge2Order: React.FC<{onComplete?: () => void}> = ({ onComplete }) =>
 
   const { submitFlag, isSubmitting, isCompleted } = useFlagSubmission();
   const challengeCompleted = isCompleted(CHALLENGE_ID);
+
+  // In retake mode, treat as if not completed
+  const effectiveCompleted = challengeCompleted && !isRetakeMode;
 
   const onDragStart = (idx: number) => setDragged(idx);
   const onDragOver = (idx: number) => {
@@ -62,22 +65,22 @@ const Challenge2Order: React.FC<{onComplete?: () => void}> = ({ onComplete }) =>
 
   return (
     <div className={`bg-gray-800 rounded-xl p-6 border-2 max-w-xl mx-auto mt-8 ${
-      challengeCompleted ? 'border-green-500' : 'border-gray-700'
+      effectiveCompleted ? 'border-green-500' : 'border-gray-700'
     }`}>
       <h2 className="text-2xl font-bold mb-2 text-blue-400">
         Order Matters! (Drag & Drop Test Cases)
-        {challengeCompleted && <span className="text-green-500 ml-2">✓</span>}
+        {effectiveCompleted && <span className="text-green-500 ml-2">✓</span>}
       </h2>
       <p className="text-gray-300 mb-4">Arrange the test cases in the correct order (from 1 to 4).</p>
       <div className="space-y-2 mb-2">
         {steps.map((step, idx) => (
           <div
             key={step}
-            draggable={!challengeCompleted}
+            draggable={!effectiveCompleted}
             onDragStart={() => onDragStart(idx)}
             onDragOver={() => onDragOver(idx)}
             className={`p-2 rounded bg-gray-700 text-white mb-1 border ${
-              challengeCompleted ? 'cursor-default border-green-500/50' : 
+              effectiveCompleted ? 'cursor-default border-green-500/50' : 
               dragged === idx ? 'cursor-move border-blue-400' : 'cursor-move border-gray-700'
             }`}
           >
@@ -88,12 +91,12 @@ const Challenge2Order: React.FC<{onComplete?: () => void}> = ({ onComplete }) =>
       <button 
         className="w-full mb-2 bg-green-500 hover:bg-green-600 text-white rounded font-medium shadow py-2 transition-colors disabled:opacity-50" 
         onClick={checkOrder}
-        disabled={challengeCompleted}
+        disabled={effectiveCompleted}
       >
-        {challengeCompleted ? 'Completed' : 'Check order'}
+        {effectiveCompleted ? 'Completed' : 'Check order'}
       </button>
       <div className="min-h-[24px] text-sm mb-2">{feedback}</div>
-      {(feedback.includes('flag') || challengeCompleted) && (
+      {(feedback.includes('flag') || effectiveCompleted) && (
         <div className="mt-4">
           <div className="mb-2">Flag: <span className="bg-blue-700 px-2 py-1 rounded text-white font-mono">{FLAG}</span></div>
           <input
@@ -102,14 +105,14 @@ const Challenge2Order: React.FC<{onComplete?: () => void}> = ({ onComplete }) =>
             placeholder="Enter the flag..."
             value={flagInput}
             onChange={e => setFlagInput(e.target.value)}
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           />
           <button 
             className="w-full mb-2 bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shadow py-2 transition-colors disabled:opacity-50" 
             onClick={checkFlag}
-            disabled={isSubmitting || challengeCompleted}
+            disabled={isSubmitting || effectiveCompleted}
           >
-            {isSubmitting ? 'Submitting...' : challengeCompleted ? 'Completed' : 'Check Flag'}
+            {isSubmitting ? 'Submitting...' : effectiveCompleted ? 'Completed' : 'Check Flag'}
           </button>
           <div className={`min-h-[24px] text-sm ${flagFeedback.includes('passed') ? 'text-green-400' : 'text-red-400'}`}>
             {flagFeedback}

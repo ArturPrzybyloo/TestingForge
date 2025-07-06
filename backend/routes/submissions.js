@@ -4,14 +4,13 @@ const User = require('../models/User');
 const { protect } = require('../middleware/auth');
 const router = express.Router();
 
-// @desc    Submit flag for challenge (frontend-validated)
+// @desc    Submit flag for challenge
 // @route   POST /api/submissions
 // @access  Private
 router.post('/', protect, async (req, res) => {
   try {
     const { challengeId, flag, points } = req.body;
 
-    // Validation
     if (!challengeId || !flag) {
       return res.status(400).json({ 
         message: 'Please provide challengeId and flag' 
@@ -30,8 +29,14 @@ router.post('/', protect, async (req, res) => {
     );
 
     if (alreadyCompleted) {
-      return res.status(400).json({ 
-        message: 'Challenge already completed' 
+      // Allow retake but don't add points again
+      return res.json({
+        success: true,
+        message: 'Great! You completed the challenge again! 🎉 (No additional points awarded)',
+        pointsEarned: 0,
+        totalPoints: user.progress.totalPoints,
+        newLevel: user.progress.level,
+        isRetake: true
       });
     }
 
@@ -66,7 +71,8 @@ router.post('/', protect, async (req, res) => {
       message: 'Congratulations! Flag submitted successfully!',
       pointsEarned: challengePoints,
       totalPoints: user.progress.totalPoints,
-      newLevel: user.progress.level
+      newLevel: user.progress.level,
+      isRetake: false
     });
 
   } catch (error) {
@@ -96,6 +102,19 @@ router.get('/my-progress', protect, async (req, res) => {
     console.error('Get progress error:', error);
     res.status(500).json({ message: 'Server error' });
   }
+});
+
+// @desc    Reset challenge completion (REMOVED for security - use retake instead)
+// @route   DELETE /api/submissions/:challengeId  
+// @access  Private
+router.delete('/:challengeId', protect, async (req, res) => {
+  // This endpoint is disabled for security reasons when using shared test accounts
+  // Users can retake challenges without losing progress instead
+  res.status(405).json({
+    success: false,
+    message: 'Challenge reset is disabled. You can retake challenges without losing progress by clicking "Try Again".',
+    hint: 'This prevents accidental progress loss when using shared accounts.'
+  });
 });
 
 // @desc    Get leaderboard

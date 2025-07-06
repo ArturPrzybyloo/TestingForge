@@ -6,7 +6,7 @@ const BROKEN_ID = 'btn-broken';
 const CHALLENGE_ID = 'accessibility-audit';
 const CHALLENGE_POINTS = 40;
 
-const Challenge18AccessibilityAudit: React.FC<{onComplete?: () => void}> = ({ onComplete }) => {
+const Challenge18AccessibilityAudit: React.FC<{onComplete?: () => void, isRetakeMode?: boolean}> = ({ onComplete, isRetakeMode = false }) => {
   const [brokenIdInput, setBrokenIdInput] = useState('');
   const [flagInput, setFlagInput] = useState('');
   const [feedback, setFeedback] = useState('');
@@ -16,7 +16,23 @@ const Challenge18AccessibilityAudit: React.FC<{onComplete?: () => void}> = ({ on
   const { submitFlag, isSubmitting, isCompleted } = useFlagSubmission();
   const challengeCompleted = isCompleted(CHALLENGE_ID);
 
+  // In retake mode, treat as if not completed
+  const effectiveCompleted = challengeCompleted && !isRetakeMode;
+
+  // Reset state when entering retake mode
+  React.useEffect(() => {
+    if (isRetakeMode) {
+      setBrokenIdInput('');
+      setFlagInput('');
+      setFeedback('');
+      setUnlocked(false);
+      setIdFeedback('');
+    }
+  }, [isRetakeMode]);
+
   const checkId = () => {
+    if (effectiveCompleted) return;
+    
     if (brokenIdInput.trim() === BROKEN_ID) {
       setUnlocked(true);
       setIdFeedback('Correct! Now enter the flag.');
@@ -41,11 +57,11 @@ const Challenge18AccessibilityAudit: React.FC<{onComplete?: () => void}> = ({ on
 
   return (
     <div className={`bg-gray-800 rounded-xl p-6 border-2 max-w-xl mx-auto mt-8 ${
-      challengeCompleted ? 'border-green-500' : 'border-gray-700'
+      effectiveCompleted ? 'border-green-500' : 'border-gray-700'
     }`}>
       <h2 className="text-2xl font-bold mb-2 text-blue-400">
         Accessibility Audit
-        {challengeCompleted && <span className="text-green-500 ml-2">✓</span>}
+        {effectiveCompleted && <span className="text-green-500 ml-2">✓</span>}
       </h2>
       <p className="text-gray-300 mb-4">
         Use <b>TAB</b> to navigate through the interactive elements below. One of them cannot be focused using TAB (it is broken for keyboard users).<br />
@@ -66,12 +82,12 @@ const Challenge18AccessibilityAudit: React.FC<{onComplete?: () => void}> = ({ on
           placeholder="Enter the id of the broken element..."
           value={brokenIdInput}
           onChange={e => setBrokenIdInput(e.target.value)}
-          disabled={unlocked || challengeCompleted}
+          disabled={unlocked || effectiveCompleted}
         />
         <button 
           className="w-full mb-2 bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shadow py-2 transition-colors disabled:opacity-50" 
           onClick={checkId} 
-          disabled={unlocked || challengeCompleted}
+          disabled={unlocked || effectiveCompleted}
         >
           Check id
         </button>
@@ -79,7 +95,7 @@ const Challenge18AccessibilityAudit: React.FC<{onComplete?: () => void}> = ({ on
           {idFeedback}
         </div>
       </div>
-      {(unlocked || challengeCompleted) && (
+      {(unlocked || effectiveCompleted) && (
         <div className="mb-4">
           <div className="mb-2 text-green-300 font-mono text-lg select-all">{FLAG}</div>
           <input
@@ -88,14 +104,14 @@ const Challenge18AccessibilityAudit: React.FC<{onComplete?: () => void}> = ({ on
             placeholder="Enter the flag..."
             value={flagInput}
             onChange={e => setFlagInput(e.target.value)}
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           />
           <button 
             className="w-full mb-2 bg-green-500 hover:bg-green-600 text-white rounded font-medium shadow py-2 transition-colors disabled:opacity-50" 
             onClick={checkFlag}
-            disabled={isSubmitting || challengeCompleted}
+            disabled={isSubmitting || effectiveCompleted}
           >
-            {isSubmitting ? 'Submitting...' : challengeCompleted ? 'Completed' : 'Check Flag'}
+            {isSubmitting ? 'Submitting...' : effectiveCompleted ? 'Completed' : 'Check Flag'}
           </button>
           <div className={`min-h-[24px] text-sm ${feedback.includes('passed') ? 'text-green-400' : 'text-red-400'}`}>
             {feedback}

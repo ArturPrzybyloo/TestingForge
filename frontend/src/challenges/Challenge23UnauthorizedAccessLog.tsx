@@ -6,15 +6,31 @@ const CHALLENGE_ID = 'unauthorized-access-log';
 const CHALLENGE_POINTS = 40;
 const TARGET_IP = '192.168.1.45';
 
-const Challenge23UnauthorizedAccessLog: React.FC<{onComplete?: () => void}> = ({ onComplete }) => {
+const Challenge23UnauthorizedAccessLog: React.FC<{onComplete?: () => void, isRetakeMode?: boolean}> = ({ onComplete, isRetakeMode = false }) => {
   const [ipInput, setIpInput] = useState('');
   const [flagInput, setFlagInput] = useState('');
   const [feedback, setFeedback] = useState('');
   const [showFlag, setShowFlag] = useState(false);
   const [showLogs, setShowLogs] = useState(false);
+  const [foundAnswer, setFoundAnswer] = useState('');
 
   const { submitFlag, isSubmitting, isCompleted } = useFlagSubmission();
   const challengeCompleted = isCompleted(CHALLENGE_ID);
+
+  // In retake mode, treat as if not completed
+  const effectiveCompleted = challengeCompleted && !isRetakeMode;
+
+  // Reset state when entering retake mode
+  React.useEffect(() => {
+    if (isRetakeMode) {
+      setIpInput('');
+      setFlagInput('');
+      setFeedback('');
+      setShowFlag(false);
+      setShowLogs(false);
+      setFoundAnswer('');
+    }
+  }, [isRetakeMode]);
 
   // Mock server logs data
   const serverLogs = [
@@ -85,11 +101,11 @@ Try filtering the logs by status code 401 and grouping by IP address.`);
 
   return (
     <div className={`bg-gray-800 rounded-xl p-4 md:p-6 border-2 max-w-6xl mx-auto mt-8 ${
-      challengeCompleted ? 'border-green-500' : 'border-gray-700'
+      effectiveCompleted ? 'border-green-500' : 'border-gray-700'
     }`}>
       <h2 className="text-2xl font-bold mb-2 text-blue-400">
         Unauthorized Access Log Challenge
-        {challengeCompleted && <span className="text-green-500 ml-2">✓</span>}
+        {effectiveCompleted && <span className="text-green-500 ml-2">✓</span>}
       </h2>
       <p className="text-gray-300 mb-4">
         Analyze server logs to find the IP address with the most failed login attempts (status code 401). 
@@ -139,20 +155,20 @@ Try filtering the logs by status code 401 and grouping by IP address.`);
           onChange={(e) => setIpInput(e.target.value)}
           className="w-full p-3 rounded bg-gray-700 text-white font-mono"
           placeholder="192.168.x.x"
-          disabled={challengeCompleted || showFlag}
+          disabled={effectiveCompleted || showFlag}
         />
         <div className="flex gap-2 mt-2">
           <button 
             onClick={checkIP}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
-            disabled={challengeCompleted || showFlag}
+            disabled={effectiveCompleted || showFlag}
           >
             Check IP Address
           </button>
           <button 
             onClick={showHint}
             className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           >
             Show Hint
           </button>
@@ -169,7 +185,7 @@ Try filtering the logs by status code 401 and grouping by IP address.`);
         </div>
       )}
 
-      {(showFlag || challengeCompleted) && (
+      {(showFlag || effectiveCompleted) && (
         <div className="mb-4">
           <input
             type="text"
@@ -177,14 +193,14 @@ Try filtering the logs by status code 401 and grouping by IP address.`);
             value={flagInput}
             onChange={(e) => setFlagInput(e.target.value)}
             className="w-full p-2 rounded bg-gray-700 text-white mb-2"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           />
           <button 
             onClick={checkFlag}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shadow py-2 transition-colors disabled:opacity-50"
-            disabled={isSubmitting || challengeCompleted}
+            disabled={isSubmitting || effectiveCompleted}
           >
-            {isSubmitting ? 'Submitting...' : challengeCompleted ? 'Completed' : 'Submit Flag'}
+            {isSubmitting ? 'Submitting...' : effectiveCompleted ? 'Completed' : 'Submit Flag'}
           </button>
         </div>
       )}
@@ -193,7 +209,7 @@ Try filtering the logs by status code 401 and grouping by IP address.`);
         <pre className="whitespace-pre-wrap">{feedback}</pre>
       </div>
 
-      {!showFlag && !challengeCompleted && (
+      {!showFlag && !effectiveCompleted && (
         <div className="mt-4 text-sm text-gray-400">
                      💡 Tip: Focus on POST requests to /api/login with status 401. You can use browser console to filter and count: 
            <code className="bg-gray-700 px-1 rounded">logs.filter(log =&gt; log.status === 401)</code>

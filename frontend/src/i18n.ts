@@ -305,37 +305,86 @@ const resources = {
       'learn.course.aiqa.duration': '3 weeks',
       'learn.course.aiqa.cta': 'See details',
       'learn.minicourse.devtools.title': 'DevTools Mini Course',
-      'learn.minicourse.devtools.description': 'Master browser DevTools for web testing and debugging.',
-      'learn.minicourse.devtools.duration': '1 hour',
+      'learn.minicourse.devtools.description': 'Quick, practical DevTools lessons for QA testing. Learn essential browser debugging skills.',
+      'learn.minicourse.devtools.duration': '1 hour total',
       'learn.minicourse.devtools.cta': 'Start now',
       'learn.comingSoon': 'Coming soon',
       'learn.moduleNotFound': 'Module not found',
       'learn.backToCourses': '← Back to courses',
       
       // DevTools Course modules
-      'learn.course.introduction.title': 'Introduction to DevTools',
-      'learn.course.introduction.description': 'Learn the basics of browser developer tools and their importance in web development and testing.',
-      'learn.course.introduction.content': 'Welcome to the DevTools Mini Course!\n\nBrowser Developer Tools (DevTools) are essential for web developers and testers. They provide powerful features for:\n\n• Inspecting HTML and CSS\n• Debugging JavaScript\n• Monitoring network requests\n• Analyzing performance\n• Testing responsive design\n\nIn this course, you\'ll learn how to effectively use these tools to improve your testing and debugging skills.\n\nLet\'s get started!',
+      'learn.course.introduction.title': 'Podstawy DevTools',
+      'learn.course.introduction.description': 'Szybkie wprowadzenie do DevTools przeglądarki - Twojego podstawowego zestawu narzędzi testerskich.',
+      'learn.course.introduction.content': '🔧 Podstawy DevTools - Twój Zestaw Narzędzi\n\nDevTools przeglądarki to Twoje najważniejsze narzędzia testerskie. Każdy QA powinien je opanować.\n\n📋 Czym są DevTools?\n• Wbudowane w każdą nowoczesną przeglądarkę\n• Niezbędne do debugowania i testowania\n• Darmowe i zawsze dostępne\n• Bez konieczności instalacji\n\n🚀 Jak otworzyć DevTools:\n• Naciśnij F12 (Windows/Linux)\n• Cmd+Option+I (Mac)\n• Kliknij prawym → Zbadaj\n• Ctrl+Shift+I (Windows/Linux)\n\n🎯 Główne panele których będziesz używać:\n• Elements - inspekcja HTML/CSS\n• Console - debugowanie JavaScript\n• Network - wywołania API i żądania\n• Sources - debugowanie z breakpointami\n• Application - przechowywanie i PWA\n• Performance - analiza wydajności\n• Lighthouse - audyty jakości\n\n✨ Szybki sukces:\nSpróbuj teraz - kliknij prawym na dowolny element tej strony i wybierz "Zbadaj". Zobaczysz HTML i CSS tego elementu!\n\n💡 Pro tip:\nTrzymaj DevTools otwarte podczas testowania - szybciej wykryjesz błędy i zrozumiesz jak działają strony internetowe.',
       
-      'learn.course.elements.title': 'Elements Panel',
-      'learn.course.elements.description': 'Master the Elements panel to inspect and modify HTML/CSS in real-time.',
-      'learn.course.elements.content': 'The Elements Panel\n\nThe Elements panel is your gateway to understanding the structure of web pages. Here you can:\n\n• Inspect HTML elements\n• Modify CSS styles in real-time\n• View computed styles\n• Edit HTML directly\n• Debug layout issues\n\nKey Features:\n1. Element selector tool (Ctrl+Shift+C)\n2. Style editing and debugging\n3. Box model visualization\n4. Event listeners inspection\n\nTry This:\n1. Right-click any element on a webpage\n2. Select "Inspect Element"\n3. Modify CSS properties in the Styles panel\n4. Watch changes happen live!',
+      'learn.course.elements.title': 'Panel Elements',
+      'learn.course.elements.description': 'Opanuj inspekcję HTML/CSS i edycję na żywo w kilka minut.',
+      'learn.course.elements.content': '🎨 Panel Elements - Inspektor HTML/CSS\n\nPanel Elements pozwala na inspekcję i edycję HTML i CSS dowolnej strony w czasie rzeczywistym.\n\n🔍 Co możesz robić:\n• Przeglądać strukturę HTML strony\n• Edytować style CSS na żywo\n• Testować responsywne projekty\n• Debugować problemy z układem\n• Znajdować uszkodzone elementy\n\n🛠️ Podstawowe umiejętności:\n\n1. **Wybieranie elementów**\n   • Kliknij ikonę selektora (góra-lewo)\n   • Najedź na elementy strony\n   • Kliknij aby zbadać konkretny element\n   • Użyj skrótu Ctrl+Shift+C\n\n2. **Edycja CSS na żywo**\n   • Kliknij dowolną właściwość CSS aby edytować\n   • Dodawaj nowe style klikając puste miejsce\n   • Przełączaj style checkboxami\n   • Zobacz zmiany natychmiast na stronie\n\n3. **Typowe zadania testowe**\n   • Zmieniaj kolory przycisków aby testować widoczność\n   • Ukrywaj elementy aby testować mobile layout\n   • Edytuj tekst aby testować różne długości\n   • Testuj stany hover przyciskiem :hov\n\n⚡ Szybkie ćwiczenie:\n1. Otwórz dowolną stronę\n2. Naciśnij F12 aby otworzyć DevTools\n3. Kliknij narzędzie selektora\n4. Kliknij przycisk lub link\n5. W panelu Styles zmień background-color\n6. Zobacz jak zmiana następuje natychmiast!\n\n💡 Pro tip dla testerów:\nUżywaj panelu Elements do testowania edge case\'ów UI - długi tekst, brakujące obrazy, różne rozmiary ekranu. To szybsze niż zmienianie prawdziwego kodu!',
       
-      'learn.course.console.title': 'Console Panel',
-      'learn.course.console.description': 'Learn to use the Console for JavaScript debugging and testing.',
-      'learn.course.console.content': 'The Console Panel\n\nThe Console is your JavaScript playground and debugging companion:\n\n• Execute JavaScript commands\n• View error messages and logs\n• Test code snippets\n• Interact with page elements\n• Debug JavaScript issues\n\nCommon Console Methods:\n• console.log() - Output messages\n• console.error() - Display errors\n• console.warn() - Show warnings\n• console.table() - Display data in tables\n• console.time() - Measure execution time\n\nTesting Tips:\n1. Use console.log() to debug variables\n2. Test JavaScript functions directly\n3. Inspect object properties\n4. Monitor API responses',
+      'learn.course.console.title': 'Panel Console',
+      'learn.course.console.description': 'Debuguj JavaScript i testuj fragmenty kodu jak profesjonalista.',
+      'learn.course.console.content': '💻 Panel Console - Centrum Testowania JavaScript\n\nConsole to Twój plac zabaw JavaScript i centrum debugowania.\n\n🎯 Co możesz robić:\n• Wykonywać kod JavaScript natychmiast\n• Debugować błędy i problemy\n• Testować wywołania API\n• Sprawdzać zmienne\n• Monitorować zachowanie aplikacji\n\n🔧 Podstawowe komendy Console:\n\n1. **Podstawowe testowanie**\n   • console.log("Cześć") - Wypisuj wiadomości\n   • console.error("Problem") - Pokazuj błędy\n   • console.warn("Ostrzeżenie") - Pokazuj ostrzeżenia\n   • console.table(dane) - Wyświetlaj dane jako tabelę\n\n2. **Szybkie testowanie DOM**\n   • document.querySelector("button") - Znajdź elementy\n   • $0 - Aktualnie wybrany element\n   • $$("div") - Znajdź wszystkie elementy div\n   • inspect(element) - Przejdź do panelu Elements\n\n3. **Testowanie formularzy**\n   • document.forms[0] - Pobierz pierwszy formularz\n   • form.checkValidity() - Sprawdź walidację formularza\n   • input.value = "test" - Ustaw wartości inputów\n   • form.submit() - Wyślij formularze\n\n⚡ Praktyczne ćwiczenie:\n1. Otwórz stronę z formularzem\n2. Naciśnij F12 → zakładka Console\n3. Wpisz: document.querySelector("input")\n4. Spróbuj: $0.value = "dane testowe"\n5. Testuj: document.forms[0].checkValidity()\n\n🐛 Typowe wzorce błędów:\n• "Cannot read property" - Sprawdź czy element istnieje\n• "Not defined" - Zmienna/funkcja nie istnieje\n• "Permission denied" - CORS lub ograniczenie bezpieczeństwa\n\n💡 Pro tip dla testerów:\nUżywaj Console do testowania funkcji JavaScript przed pisaniem skryptów automatyzacji. Idealne do eksperymentowania z selektorami i interakcjami formularzy!',
       
-      'learn.course.network.title': 'Network Panel',
-      'learn.course.network.description': 'Monitor and analyze network requests, responses, and performance.',
-      'learn.course.network.content': 'The Network Panel\n\nThe Network panel shows all network activity for your page:\n\n• HTTP requests and responses\n• Request/response headers\n• Timing information\n• File sizes and load times\n• API call monitoring\n\nKey Information:\n• Status codes (200, 404, 500, etc.)\n• Request methods (GET, POST, PUT, DELETE)\n• Response times and sizes\n• Headers and cookies\n• Request/response bodies\n\nTesting Applications:\n1. Monitor API calls\n2. Check for failed requests\n3. Analyze loading performance\n4. Verify request headers\n5. Debug CORS issues',
+      'learn.course.network.title': 'Panel Network',
+      'learn.course.network.description': 'Monitoruj wywołania API i debuguj problemy sieciowe efektywnie.',
+      'learn.course.network.content': '🌐 Panel Network - Centrum Testowania API\n\nPanel Network pokazuje wszystkie żądania HTTP - idealny do testowania API i debugowania.\n\n🎯 Co możesz monitorować:\n• Wywołania API i odpowiedzi\n• Czasy ładowania i wydajność\n• Nieudane żądania i błędy\n• Przesyłanie formularzy\n• Upload/download plików\n\n🔍 Kluczowe funkcje:\n\n1. **Analiza żądań**\n   • Kody statusu (200, 404, 500)\n   • Nagłówki żądań/odpowiedzi\n   • Dane payload żądania\n   • Zawartość odpowiedzi\n   • Informacje o czasie\n\n2. **Typowe zadania testowe**\n   • Weryfikuj czy API endpointy są wywoływane\n   • Sprawdzaj parametry żądań\n   • Waliduj dane odpowiedzi\n   • Debuguj problemy z uwierzytelnianiem\n   • Testuj scenariusze błędów\n\n3. **Szybkie debugowanie**\n   • Czerwone żądania = nieudane wywołania\n   • Szukaj kodów statusu 4xx/5xx\n   • Sprawdzaj zakładkę "Response" dla komunikatów błędów\n   • Weryfikuj nagłówki żądań dla tokenów auth\n\n⚡ Praktyczne ćwiczenie:\n1. Otwórz stronę z formularzami/przyciskami\n2. Naciśnij F12 → zakładka Network\n3. Kliknij "Clear" aby zresetować\n4. Wyślij formularz lub kliknij przyciski\n5. Obserwuj żądania pojawiające się w czasie rzeczywistym\n6. Kliknij żądanie aby zobaczyć szczegóły\n\n🚨 Typowe problemy do sprawdzenia:\n• Błędy CORS (zablokowane przez przeglądarkę)\n• Błędy 401/403 (uwierzytelnianie)\n• Błędy 404 (nieprawidłowy URL)\n• Błędy 500 (problemy serwera)\n• Błędy timeout (wolna sieć)\n\n💡 Pro tip dla testerów:\nUżywaj "Copy as cURL" aby odtwarzać wywołania API w Postman lub narzędziach automatyzacji. Kliknij prawym na żądanie → Copy → Copy as cURL!',
       
-      'learn.course.performance.title': 'Performance Analysis',
-      'learn.course.performance.description': 'Analyze page performance and identify bottlenecks.',
-      'learn.course.performance.content': 'Performance Analysis\n\nThe Performance panel helps you identify and fix performance issues:\n\n• Page load analysis\n• JavaScript execution profiling\n• Memory usage monitoring\n• Rendering performance\n• User interaction metrics\n\nKey Metrics:\n• First Contentful Paint (FCP)\n• Largest Contentful Paint (LCP)\n• Time to Interactive (TTI)\n• Cumulative Layout Shift (CLS)\n\nOptimization Tips:\n1. Minimize JavaScript execution time\n2. Optimize images and resources\n3. Reduce layout shifts\n4. Eliminate render-blocking resources\n5. Use efficient CSS selectors\n\nStart by recording a performance profile and analyzing the results!',
+      'learn.course.sources.title': 'Panel Sources',
+      'learn.course.sources.description': 'Debuguj JavaScript z breakpointami i debugowaniem krok po kroku.',
+      'learn.course.sources.content': '🔍 Panel Sources - Debugger JavaScript\n\nPanel Sources pozwala na debugowanie kodu JavaScript z breakpointami i wykonywaniem krok po kroku.\n\n🎯 Podstawowe funkcje debugowania:\n• Ustawianie breakpointów w kodzie\n• Przechodzenie przez kod krok po kroku\n• Sprawdzanie wartości zmiennych\n• Obserwowanie wyrażeń\n• Debugowanie kodu asynchronicznego\n\n🛠️ Podstawowe umiejętności debugowania:\n\n1. **Ustawianie breakpointów**\n   • Klikaj numery linii aby ustawić breakpointy\n   • Czerwona kropka = aktywny breakpoint\n   • Kod zatrzyma się na breakpointach\n   • Sprawdzaj zmienne podczas pauzy\n\n2. **Kontrola krok po kroku**\n   • F8 - Wznów wykonywanie\n   • F10 - Krok dalej (następna linia)\n   • F11 - Wejdź do (wejście do funkcji)\n   • Shift+F11 - Wyjdź z (wyjście z funkcji)\n\n3. **Sprawdzanie zmiennych**\n   • Najedź na zmienne aby zobaczyć wartości\n   • Użyj panelu "Scope" dla wszystkich zmiennych\n   • Dodawaj wyrażenia "Watch" do monitorowania\n   • Sprawdzaj "Call Stack" dla historii funkcji\n\n⚡ Szybkie ćwiczenie debugowania:\n1. Otwórz stronę z JavaScript\n2. Naciśnij F12 → zakładka Sources\n3. Znajdź plik .js w drzewie plików\n4. Kliknij numer linii aby ustawić breakpoint\n5. Wchodź w interakcję ze stroną aby uruchomić kod\n6. Użyj F10 aby przechodzić przez kod\n\n🐛 Kiedy używać panelu Sources:\n• Błędy JavaScript których nie rozumiesz\n• Funkcje nie działają zgodnie z oczekiwaniami\n• Potrzebujesz zobaczyć wartości zmiennych podczas wykonywania\n• Złożona logika wymagająca przeglądu krok po kroku\n\n💡 Pro tip dla testerów:\nUżywaj "Pause on exceptions" aby automatycznie zatrzymywać się gdy występują błędy. Świetne do wyłapywania bugów o których nie wiedziałeś!',
+      
+      'learn.course.application.title': 'Panel Application',
+      'learn.course.application.description': 'Zarządzaj cookies, storage i funkcjami PWA do kompleksowego testowania.',
+      'learn.course.application.content': '🗄️ Panel Application - Menedżer Storage & Danych\n\nPanel Application zarządza storage przeglądarki, cookies i funkcjami PWA.\n\n🎯 Co możesz zarządzać:\n• Cookies i dane sesji\n• Local/Session Storage\n• Bazy danych IndexedDB\n• Service Workers\n• Cache Storage\n\n🔧 Podstawowe testowanie storage:\n\n1. **Cookies**\n   • Przeglądaj wszystkie cookies dla domeny\n   • Edytuj wartości cookies\n   • Usuwaj konkretne cookies\n   • Testuj przepływy login/logout\n\n2. **Local Storage**\n   • Zobacz wszystkie pary klucz-wartość\n   • Dodawaj/edytuj/usuwaj wpisy\n   • Testuj trwałość danych\n   • Czyść całe storage\n\n3. **Session Storage**\n   • Podobnie do Local Storage\n   • Dane tylko na czas sesji\n   • Idealne do testowania danych tymczasowych\n\n⚡ Typowe scenariusze testowe:\n\n**Testuj preferencje użytkownika:**\n1. Zmień ustawienia języka/motywu\n2. Sprawdź czy zapisane w Local Storage\n3. Odśwież stronę aby sprawdzić trwałość\n\n**Testuj sesje logowania:**\n1. Zaloguj się na stronę\n2. Sprawdź Cookies dla tokenów auth\n3. Usuń cookies auth\n4. Odśwież aby przetestować zachowanie logout\n\n**Testuj trwałość danych:**\n1. Wypełnij formularz\n2. Sprawdź czy dane zapisane w storage\n3. Wyczyść storage i przetestuj utratę danych\n\n🛠️ Szybkie ćwiczenie:\n1. Otwórz dowolną stronę\n2. Naciśnij F12 → zakładka Application\n3. Kliknij "Local Storage" → nazwa domeny\n4. Dodaj wpis testowy: klucz="test", wartość="cześć"\n5. Odśwież stronę - dane powinny zostać\n6. Spróbuj to samo z "Session Storage"\n\n💡 Pro tip dla testerów:\nUżywaj "Clear storage" aby zresetować wszystkie dane na raz. Idealne do testowania doświadczeń nowych użytkowników!',
+      
+      'learn.course.performance.title': 'Panel Performance',
+      'learn.course.performance.description': 'Analizuj szybkość strony i identyfikuj wąskie gardła wydajności.',
+      'learn.course.performance.content': '⚡ Panel Performance - Narzędzie Analizy Szybkości\n\nPanel Performance pomaga znajdować i naprawiać problemy z wydajnością strony.\n\n🎯 Co możesz analizować:\n• Szybkość ładowania strony\n• Czas wykonywania JavaScript\n• Wydajność renderowania\n• Użycie pamięci\n• Opóźnienia interakcji użytkownika\n\n🔍 Kluczowe metryki wydajności:\n\n1. **Wydajność ładowania**\n   • Czas do pierwszej treści\n   • Czas do interaktywności\n   • Czasy ładowania zasobów\n   • Wąskie gardła sieciowe\n\n2. **Wydajność wykonywania**\n   • Czas wykonywania JavaScript\n   • Czasy layout i paint\n   • Wzorce użycia pamięci\n   • Analiza frame rate\n\n🛠️ Jak używać panelu Performance:\n\n1. **Nagrywanie wydajności**\n   • Kliknij przycisk "Record"\n   • Wchodź w interakcję ze stroną\n   • Kliknij "Stop" aby analizować\n   • Przeglądaj timeline\n\n2. **Analiza wyników**\n   • Szukaj czerwonych pasków (wolne operacje)\n   • Sprawdzaj wątek "Main" dla wąskich gardeł\n   • Przeglądaj "Network" dla wolnych żądań\n   • Monitoruj "Memory" dla wycieków\n\n⚡ Szybki test wydajności:\n1. Otwórz wolną stronę\n2. Naciśnij F12 → zakładka Performance\n3. Kliknij przycisk "Record"\n4. Odśwież stronę\n5. Kliknij "Stop" po załadowaniu\n6. Szukaj czerwonych pasków w timeline\n\n🚨 Typowe problemy z wydajnością:\n• Duże pliki JavaScript\n• Nieoptymalizowane obrazy\n• Za dużo żądań HTTP\n• Wycieki pamięci\n• Wolne zapytania do bazy danych\n\n💡 Pro tip dla testerów:\nUżywaj opcji "Screenshots" aby zobaczyć wizualny postęp podczas ładowania. Świetne do identyfikacji kiedy treść staje się widoczna dla użytkowników!',
+      
+      'learn.course.lighthouse.title': 'Audyty Lighthouse',
+      'learn.course.lighthouse.description': 'Uruchamiaj automatyczne audyty jakości dla wydajności, dostępności i SEO.',
+      'learn.course.lighthouse.content': '🔍 Lighthouse - Automatyczne Audyty Jakości\n\nLighthouse automatycznie testuje Twoją stronę pod kątem wydajności, dostępności, SEO i najlepszych praktyk.\n\n🎯 Co sprawdza Lighthouse:\n• Wydajność (szybkość ładowania)\n• Dostępność (czytniki ekranu, kontrast)\n• SEO (optymalizacja dla wyszukiwarek)\n• Najlepsze praktyki (bezpieczeństwo, nowoczesne standardy)\n• PWA (funkcje Progressive Web App)\n\n🛠️ Jak uruchomić Lighthouse:\n\n1. **Otwórz Lighthouse**\n   • Naciśnij F12 → zakładka Lighthouse\n   • Wybierz kategorie audytu\n   • Wybierz urządzenie (mobile/desktop)\n   • Kliknij "Generate report"\n\n2. **Czytaj raport**\n   • Wyniki od 0-100 (wyżej = lepiej)\n   • Wskaźniki czerwony/żółty/zielony\n   • Konkretne sugestie poprawy\n   • Porównania przed/po\n\n⚡ Szybki audyt Lighthouse:\n1. Otwórz dowolną stronę\n2. Naciśnij F12 → zakładka Lighthouse\n3. Wybierz wszystkie kategorie\n4. Kliknij "Generate report"\n5. Poczekaj na zakończenie analizy\n6. Przejrzyj wyniki i rekomendacje\n\n🎯 Typowe problemy znalezione:\n• Nieoptymalizowane obrazy\n• Brakujący tekst alt\n• Wolne czasy ładowania\n• Słabe doświadczenie mobile\n• Brakujące meta opisy\n• Luki bezpieczeństwa\n\n📊 Rozumienie wyników:\n• 90-100: Doskonałe\n• 50-89: Wymaga poprawy\n• 0-49: Słabe\n\n💡 Pro tip dla testerów:\nUruchamiaj Lighthouse przed i po wprowadzeniu zmian aby zmierzyć poprawę. Idealne do udowadniania że Twoje optymalizacje rzeczywiście działają!\n\n🔧 Szybkie wygrane:\n• Skompresuj obrazy\n• Dodaj tekst alt do obrazów\n• Popraw kontrast kolorów\n• Dodaj meta opisy\n• Włącz HTTPS\n• Zminifikuj CSS/JavaScript',
       
       // Difficulty levels
       'difficulty.beginner': 'Beginner',
       'difficulty.medium': 'Medium',
+      
+      // Cookie Banner
+      'cookie.title': '🍪 We use cookies',
+      'cookie.description': 'We use cookies to remember your challenge progress, language preferences, and login sessions. This helps us provide a better user experience.',
+      'cookie.acceptAll': 'Accept all',
+      'cookie.onlyNecessary': 'Only necessary',
+      
+      // Challenge Wrapper
+      'challenge.completed.title': 'Challenge Completed!',
+      'challenge.completed.description': 'Great job! You can try again or move on to the next challenge.',
+      'challenge.completed.tryAgain': 'Try Again',
+      'challenge.completed.resetting': 'Resetting...',
+      'challenge.retake.title': 'Retake Mode',
+      'challenge.retake.description': 'You can attempt this challenge again. Your progress and points remain unchanged.',
+      'challenge.retake.hide': 'Hide',
+      'challenge.reset.confirm': 'Are you sure you want to reset this challenge? You will lose progress for this task.',
+      'challenge.reset.error': 'Error resetting challenge. Please try again.',
+      'QA Interactive Challenges': 'QA Interactive Challenges',
+      'Test your QA skills with real-world scenarios. Find bugs, identify security issues, and improve application quality.': 'Test your QA skills with real-world scenarios. Find bugs, identify security issues, and improve application quality.',
+      'Start Challenge': 'Start Challenge',
+      'Review Challenge': 'Review Challenge',
+      'Try Again': 'Try Again',
+      'challenges': {
+        'yourProgress': 'Your Progress',
+        'completed': 'Completed',
+        'points': 'Points',
+        'noMatchingChallenges': 'No challenges match your current filters.',
+        'difficulty': {
+          'all': 'All Difficulties',
+          'easy': 'Easy',
+          'medium': 'Medium',
+          'hard': 'Hard'
+        },
+        'category': {
+          'all': 'All Categories'
+        }
+      }
     }
   },
   pl: {
@@ -431,7 +480,7 @@ const resources = {
       
       // Playground
       'playground.title': 'Playground Automatyzacji',
-      'playground.description': 'Witaj w Playground Automatyzacji! To jest Twoje dedykowane miejsce do ćwiczenia automatyzacji web. Każdy moduł zapewnia kontrolowane środowisko do praktyki różnych scenariuszy automatyzacji z narzędziami takimi jak Selenium, Playwright czy Cypress. Bez flag czy wyzwań - tylko czysta praktyka automatyzacji!',
+      'playground.description': 'Witaj w Playground Automatyzacji! To jest Twoje dedykowane miejsce do ćwiczenia automatyzacji web. Każdy moduł zapewnia kontrolowane środowisko do praktyki różnych scenariuszy automatyzacji z narzędziami takimi jak Selenium, Playwright, czy Cypress. Bez flag czy wyzwań - tylko czysta praktyka automatyzacji!',
       'playground.tips': 'Wskazówki',
       
       // Playground modules
@@ -647,37 +696,90 @@ const resources = {
       'learn.course.aiqa.duration': '3 tygodnie',
       'learn.course.aiqa.cta': 'Zobacz szczegóły',
       'learn.minicourse.devtools.title': 'Mini kurs DevTools',
-      'learn.minicourse.devtools.description': 'Opanuj narzędzia deweloperskie przeglądarki do testowania i debugowania.',
-      'learn.minicourse.devtools.duration': '1 godzina',
+      'learn.minicourse.devtools.description': 'Szybkie, praktyczne lekcje DevTools dla testerów QA. Naucz się podstawowych umiejętności debugowania przeglądarki.',
+      'learn.minicourse.devtools.duration': '1 godzina całość',
       'learn.minicourse.devtools.cta': 'Zacznij teraz',
       'learn.comingSoon': 'Wkrótce dostępny',
       'learn.moduleNotFound': 'Moduł nie znaleziony',
       'learn.backToCourses': '← Powrót do kursów',
       
-      // DevTools Course modules PL
-      'learn.course.introduction.title': 'Wprowadzenie do DevTools',
-      'learn.course.introduction.description': 'Poznaj podstawy narzędzi deweloperskich przeglądarki i ich znaczenie w tworzeniu i testowaniu stron.',
-      'learn.course.introduction.content': 'Witaj w Mini Kursie DevTools!\n\nNarzędzia Deweloperskie Przeglądarki (DevTools) są niezbędne dla programistów i testerów. Zapewniają potężne funkcje do:\n\n• Inspekcji HTML i CSS\n• Debugowania JavaScript\n• Monitorowania żądań sieciowych\n• Analizy wydajności\n• Testowania responsywnego designu\n\nW tym kursie nauczysz się skutecznie używać tych narzędzi, aby poprawić swoje umiejętności testowania i debugowania.\n\nZaczynajmy!',
+      // DevTools Course modules PL - nowe krótkie wersje
+      'learn.course.introduction.title': 'Podstawy DevTools',
+      'learn.course.introduction.description': 'Szybkie wprowadzenie do DevTools przeglądarki - Twojego podstawowego zestawu narzędzi testerskich.',
+      'learn.course.introduction.content': '🔧 Podstawy DevTools - Twój Zestaw Narzędzi\n\nDevTools przeglądarki to Twoje najważniejsze narzędzia testerskie. Każdy QA powinien je opanować.\n\n📋 Czym są DevTools?\n• Wbudowane w każdą nowoczesną przeglądarkę\n• Niezbędne do debugowania i testowania\n• Darmowe i zawsze dostępne\n• Bez konieczności instalacji\n\n🚀 Jak otworzyć DevTools:\n• Naciśnij F12 (Windows/Linux)\n• Cmd+Option+I (Mac)\n• Kliknij prawym → Zbadaj\n• Ctrl+Shift+I (Windows/Linux)\n\n🎯 Główne panele których będziesz używać:\n• Elements - inspekcja HTML/CSS\n• Console - debugowanie JavaScript\n• Network - wywołania API i żądania\n• Sources - debugowanie z breakpointami\n• Application - przechowywanie i PWA\n• Performance - analiza wydajności\n• Lighthouse - audyty jakości\n\n✨ Szybki sukces:\nSpróbuj teraz - kliknij prawym na dowolny element tej strony i wybierz "Zbadaj". Zobaczysz HTML i CSS tego elementu!\n\n💡 Pro tip:\nTrzymaj DevTools otwarte podczas testowania - szybciej wykryjesz błędy i zrozumiesz jak działają strony internetowe.',
       
-      'learn.course.elements.title': 'Panel Elementów',
-      'learn.course.elements.description': 'Opanuj panel Elementów do inspekcji i modyfikacji HTML/CSS w czasie rzeczywistym.',
-      'learn.course.elements.content': 'Panel Elementów\n\nPanel Elementów to Twoja brama do zrozumienia struktury stron internetowych. Tutaj możesz:\n\n• Inspektować elementy HTML\n• Modyfikować style CSS w czasie rzeczywistym\n• Przeglądać obliczone style\n• Edytować HTML bezpośrednio\n• Debugować problemy z układem\n\nKluczowe Funkcje:\n1. Narzędzie wyboru elementów (Ctrl+Shift+C)\n2. Edycja i debugowanie stylów\n3. Wizualizacja modelu pudełkowego\n4. Inspekcja nasłuchiwaczy zdarzeń\n\nSpróbuj tego:\n1. Kliknij prawym przyciskiem na dowolny element strony\n2. Wybierz "Zbadaj element"\n3. Modyfikuj właściwości CSS w panelu Stylów\n4. Obserwuj zmiany na żywo!',
+      'learn.course.elements.title': 'Panel Elements',
+      'learn.course.elements.description': 'Opanuj inspekcję HTML/CSS i edycję na żywo w kilka minut.',
+      'learn.course.elements.content': '🎨 Panel Elements - Inspektor HTML/CSS\n\nPanel Elements pozwala na inspekcję i edycję HTML i CSS dowolnej strony w czasie rzeczywistym.\n\n🔍 Co możesz robić:\n• Przeglądać strukturę HTML strony\n• Edytować style CSS na żywo\n• Testować responsywne projekty\n• Debugować problemy z układem\n• Znajdować uszkodzone elementy\n\n🛠️ Podstawowe umiejętności:\n\n1. **Wybieranie elementów**\n   • Kliknij ikonę selektora (góra-lewo)\n   • Najedź na elementy strony\n   • Kliknij aby zbadać konkretny element\n   • Użyj skrótu Ctrl+Shift+C\n\n2. **Edycja CSS na żywo**\n   • Kliknij dowolną właściwość CSS aby edytować\n   • Dodawaj nowe style klikając puste miejsce\n   • Przełączaj style checkboxami\n   • Zobacz zmiany natychmiast na stronie\n\n3. **Typowe zadania testowe**\n   • Zmieniaj kolory przycisków aby testować widoczność\n   • Ukrywaj elementy aby testować mobile layout\n   • Edytuj tekst aby testować różne długości\n   • Testuj stany hover przyciskiem :hov\n\n⚡ Szybkie ćwiczenie:\n1. Otwórz dowolną stronę\n2. Naciśnij F12 aby otworzyć DevTools\n3. Kliknij narzędzie selektora\n4. Kliknij przycisk lub link\n5. W panelu Styles zmień background-color\n6. Zobacz jak zmiana następuje natychmiast!\n\n💡 Pro tip dla testerów:\nUżywaj panelu Elements do testowania edge case\'ów UI - długi tekst, brakujące obrazy, różne rozmiary ekranu. To szybsze niż zmienianie prawdziwego kodu!',
       
-      'learn.course.console.title': 'Panel Konsoli',
-      'learn.course.console.description': 'Naucz się używać Konsoli do debugowania i testowania JavaScript.',
-      'learn.course.console.content': 'Panel Konsoli\n\nKonsola to Twój plac zabaw JavaScript i pomocnik w debugowaniu:\n\n• Wykonywanie poleceń JavaScript\n• Przeglądanie komunikatów błędów i logów\n• Testowanie fragmentów kodu\n• Interakcja z elementami strony\n• Debugowanie problemów JavaScript\n\nPodstawowe Metody Konsoli:\n• console.log() - Wyświetlanie wiadomości\n• console.error() - Pokazywanie błędów\n• console.warn() - Ostrzeżenia\n• console.table() - Wyświetlanie danych w tabelach\n• console.time() - Pomiar czasu wykonania\n\nWskazówki Testowe:\n1. Używaj console.log() do debugowania zmiennych\n2. Testuj funkcje JavaScript bezpośrednio\n3. Sprawdzaj właściwości obiektów\n4. Monitoruj odpowiedzi API',
+      'learn.course.console.title': 'Panel Console',
+      'learn.course.console.description': 'Debuguj JavaScript i testuj fragmenty kodu jak profesjonalista.',
+      'learn.course.console.content': '💻 Panel Console - Centrum Testowania JavaScript\n\nConsole to Twój plac zabaw JavaScript i centrum debugowania.\n\n🎯 Co możesz robić:\n• Wykonywać kod JavaScript natychmiast\n• Debugować błędy i problemy\n• Testować wywołania API\n• Sprawdzać zmienne\n• Monitorować zachowanie aplikacji\n\n🔧 Podstawowe komendy Console:\n\n1. **Podstawowe testowanie**\n   • console.log("Cześć") - Wypisuj wiadomości\n   • console.error("Problem") - Pokazuj błędy\n   • console.warn("Ostrzeżenie") - Pokazuj ostrzeżenia\n   • console.table(dane) - Wyświetlaj dane jako tabelę\n\n2. **Szybkie testowanie DOM**\n   • document.querySelector("button") - Znajdź elementy\n   • $0 - Aktualnie wybrany element\n   • $$("div") - Znajdź wszystkie elementy div\n   • inspect(element) - Przejdź do panelu Elements\n\n3. **Testowanie formularzy**\n   • document.forms[0] - Pobierz pierwszy formularz\n   • form.checkValidity() - Sprawdź walidację formularza\n   • input.value = "test" - Ustaw wartości inputów\n   • form.submit() - Wyślij formularze\n\n⚡ Praktyczne ćwiczenie:\n1. Otwórz stronę z formularzem\n2. Naciśnij F12 → zakładka Console\n3. Wpisz: document.querySelector("input")\n4. Spróbuj: $0.value = "dane testowe"\n5. Testuj: document.forms[0].checkValidity()\n\n🐛 Typowe wzorce błędów:\n• "Cannot read property" - Sprawdź czy element istnieje\n• "Not defined" - Zmienna/funkcja nie istnieje\n• "Permission denied" - CORS lub ograniczenie bezpieczeństwa\n\n💡 Pro tip dla testerów:\nUżywaj Console do testowania funkcji JavaScript przed pisaniem skryptów automatyzacji. Idealne do eksperymentowania z selektorami i interakcjami formularzy!',
       
-      'learn.course.network.title': 'Panel Sieci',
-      'learn.course.network.description': 'Monitoruj i analizuj żądania sieciowe, odpowiedzi i wydajność.',
-      'learn.course.network.content': 'Panel Sieci\n\nPanel Sieci pokazuje całą aktywność sieciową Twojej strony:\n\n• Żądania i odpowiedzi HTTP\n• Nagłówki żądań/odpowiedzi\n• Informacje o czasie\n• Rozmiary plików i czasy ładowania\n• Monitorowanie wywołań API\n\nKluczowe Informacje:\n• Kody statusu (200, 404, 500, itp.)\n• Metody żądań (GET, POST, PUT, DELETE)\n• Czasy odpowiedzi i rozmiary\n• Nagłówki i ciasteczka\n• Treści żądań/odpowiedzi\n\nZastosowania Testowe:\n1. Monitorowanie wywołań API\n2. Sprawdzanie nieudanych żądań\n3. Analiza wydajności ładowania\n4. Weryfikacja nagłówków żądań\n5. Debugowanie problemów CORS',
+      'learn.course.network.title': 'Panel Sieci - Analiza HTTP',
+      'learn.course.network.description': 'Opanuj debugowanie sieci, testowanie API i optymalizację wydajności z zaawansowanymi technikami monitorowania.',
+      'learn.course.network.content': '🌐 Panel Sieci - Twoje Narzędzie Detektywistyczne HTTP\n\nPanel Sieci jest kluczowy dla zrozumienia komunikacji aplikacji webowych, debugowania problemów API i optymalizacji wydajności.\n\n🎯 Podstawowa analiza sieci:\n• Monitorowanie żądań/odpowiedzi HTTP\n• Debugowanie i testowanie API\n• Identyfikacja wąskich gardeł wydajności\n• Analiza nagłówków bezpieczeństwa\n• Rozwiązywanie problemów CORS\n• Monitorowanie WebSocket\n• Debugowanie Service Worker\n\n🛠️ Zaawansowane funkcje sieci:\n\n1. **Analiza żądań**\n   • Kody statusu (200, 404, 500, itp.)\n   • Metody HTTP (GET, POST, PUT, DELETE)\n   • Nagłówki (Żądanie/Odpowiedź)\n   • Ciasteczka i uwierzytelnianie\n   • Parametry zapytań\n   • Treści żądań/odpowiedzi\n\n2. **Monitorowanie wydajności**\n   • Wykresy wodospadowe\n   • Analiza czasów\n   • Optymalizacja ładowania zasobów\n   • Analiza ścieżki krytycznej\n   • Analiza wielkości pakietów\n   • Wydajność CDN\n\n3. **Narzędzia debugowania**\n   • Analiza nieudanych żądań\n   • Debugowanie błędów CORS\n   • Problemy uwierzytelniania\n   • Wykrywanie ograniczeń szybkości\n   • Rozwiązywanie problemów timeout\n   • Problemy certyfikatów SSL/TLS\n\n4. **Możliwości testowe**\n   • Kopiowanie jako komenda cURL\n   • Kopiowanie jako kod fetch()\n   • Edycja i ponowne wysyłanie żądań\n   • Blokowanie żądań\n   • Symulacja throttling\n   • Testowanie trybu offline\n\nOpanuj debugowanie sieci i rozwiążesz każdy problem aplikacji webowej!',
       
-      'learn.course.performance.title': 'Analiza Wydajności',
-      'learn.course.performance.description': 'Analizuj wydajność strony i identyfikuj wąskie gardła.',
-      'learn.course.performance.content': 'Analiza Wydajności\n\nPanel Wydajności pomaga identyfikować i naprawiać problemy z wydajnością:\n\n• Analiza ładowania strony\n• Profilowanie wykonania JavaScript\n• Monitorowanie użycia pamięci\n• Wydajność renderowania\n• Metryki interakcji użytkownika\n\nKluczowe Metryki:\n• First Contentful Paint (FCP)\n• Largest Contentful Paint (LCP)\n• Time to Interactive (TTI)\n• Cumulative Layout Shift (CLS)\n\nWskazówki Optymalizacji:\n1. Minimalizuj czas wykonania JavaScript\n2. Optymalizuj obrazy i zasoby\n3. Redukuj przesunięcia układu\n4. Eliminuj zasoby blokujące renderowanie\n5. Używaj wydajnych selektorów CSS\n\nZacznij od nagrania profilu wydajności i analizy wyników!',
+      'learn.course.sources.title': 'Panel Sources - Debugowanie Kodu',
+      'learn.course.sources.description': 'Opanuj debugowanie JavaScript z breakpointami, step-through debugging i analizą kodu źródłowego.',
+      'learn.course.sources.content': '🔍 Panel Sources - Zaawansowane Debugowanie JavaScript\n\nPanel Sources to Twoje najpotężniejsze narzędzie do debugowania kodu JavaScript, ustawiania breakpointów i zrozumienia przepływu wykonania kodu.\n\n🎯 Podstawowe funkcje debugowania:\n• Zarządzanie breakpointami\n• Step-through debugging\n• Inspekcja zmiennych\n• Analiza stosu wywołań\n• Edycja kodu źródłowego\n• Wyrażenia watch\n• Breakpointy warunkowe\n\nOpanuj Panel Sources i będziesz debugować każdy problem JavaScript z pewnością!',
+      
+      'learn.course.application.title': 'Panel Application - Storage i PWA',
+      'learn.course.application.description': 'Opanuj zarządzanie storage przeglądarki, service workers i techniki debugowania Progressive Web App.',
+      'learn.course.application.content': '🗄️ Panel Application - Zarządzanie Storage i PWA\n\nPanel Application to Twoje centrum kontroli do zarządzania storage przeglądarki, service workers i funkcjami Progressive Web App.\n\n🎯 Podstawowe funkcje aplikacji:\n• Zarządzanie Local i Session Storage\n• Inspekcja i edycja ciasteczek\n• Eksploracja bazy danych IndexedDB\n• Debugowanie Service Worker\n• Analiza manifestu PWA\n• Zarządzanie cache storage\n• Monitorowanie background sync\n\nOpanuj Panel Application i będziesz zarządzać storage każdej aplikacji webowej jak profesjonalista!',
+      
+      'learn.course.performance.title': 'Analiza Wydajności - Optymalizacja',
+      'learn.course.performance.description': 'Opanuj zaawansowane profilowanie wydajności, analizę pamięci i techniki optymalizacji dla błyskawicznych aplikacji webowych.',
+      'learn.course.performance.content': '⚡ Panel Wydajności - Mistrz Optymalizacji Prędkości\n\nPanel Wydajności to Twoje centrum dowodzenia optymalizacji wydajności, pomagające tworzyć błyskawiczne aplikacje webowe.\n\n🎯 Podstawowa analiza wydajności:\n• Profilowanie wydajności runtime\n• Wykrywanie wycieków pamięci\n• Optymalizacja wykonania JavaScript\n• Analiza wydajności renderowania\n• Metryki wydajności ładowania\n• Responsywność interakcji użytkownika\n• Monitorowanie Core Web Vitals\n\nOpanuj analizę wydajności i będziesz budować najszybsze aplikacje internetowe!',
+      
+      'learn.course.lighthouse.title': 'Lighthouse - Audyty Jakości',
+      'learn.course.lighthouse.description': 'Opanuj automatyczne audyty z Lighthouse dla wydajności, dostępności, SEO i najlepszych praktyk.',
+      'learn.course.lighthouse.content': '🔍 Lighthouse - Strażnik Jakości Twoich Stron\n\nLighthouse to automatyczne narzędzie audytowe, które pomaga poprawić jakość Twoich stron internetowych dzięki kompleksowej analizie i praktycznym rekomendacjom.\n\n🎯 Podstawowe kategorie Lighthouse:\n• Optymalizacja wydajności\n• Zgodność z dostępnością\n• Najlepsze praktyki SEO\n• Funkcje Progressive Web App\n• Jakość kodu i najlepsze praktyki\n\nOpanuj Lighthouse i będziesz budować strony, które wyróżniają się w każdej metryce jakości!',
+      
+      'learn.course.debugging.title': 'Zaawansowane Techniki Debugowania',
+      'learn.course.debugging.description': 'Opanuj profesjonalne workflow debugowania, metodologie rozwiązywania problemów i zaawansowane techniki problem-solving.',
+      'learn.course.debugging.content': '🔧 Zaawansowane Debugowanie - Profesjonalne Rozwiązywanie Problemów\n\nOpanuj sztukę systematycznego debugowania z profesjonalnymi technikami używanymi przez seniorów deweloperów i inżynierów QA.\n\n🎯 Profesjonalne podejście do debugowania:\n• Systematyczne podejście do rozwiązywania problemów\n• Metodologia analizy głównych przyczyn\n• Debugowanie oparte na hipotezach\n• Dokumentacja i dzielenie się wiedzą\n• Strategie zapobiegawcze debugowania\n\nOpanuj te zaawansowane techniki debugowania i rozwiążesz każde wyzwanie techniczne z pewnością i efektywnością!',
       
       // Difficulty levels
       'difficulty.beginner': 'Początkujący',
       'difficulty.medium': 'Średni',
+      
+      // Cookie Banner
+      'cookie.title': '🍪 Używamy ciasteczek',
+      'cookie.description': 'Używamy ciasteczek do zapamiętywania Twojego postępu w challengach, preferencji językowych i sesji logowania. Pomaga nam to zapewnić lepsze doświadczenie użytkownika.',
+      'cookie.acceptAll': 'Akceptuj wszystkie',
+      'cookie.onlyNecessary': 'Tylko niezbędne',
+      
+      // Challenge Wrapper
+      'challenge.completed.title': 'Challenge Ukończony!',
+      'challenge.completed.description': 'Świetna robota! Możesz spróbować ponownie lub przejść do następnego wyzwania.',
+      'challenge.completed.tryAgain': 'Spróbuj Ponownie',
+      'challenge.completed.resetting': 'Resetowanie...',
+      'challenge.retake.title': 'Tryb Powtórki',
+      'challenge.retake.description': 'Możesz spróbować tego wyzwania ponownie. Twój postęp i punkty pozostają niezmienione.',
+      'challenge.retake.hide': 'Ukryj',
+      'challenge.reset.confirm': 'Czy na pewno chcesz zresetować ten challenge? Stracisz postęp dla tego zadania.',
+      'challenge.reset.error': 'Błąd podczas resetowania challenge. Spróbuj ponownie.',
+      'QA Interactive Challenges': 'Interaktywne Wyzwania QA',
+      'Test your QA skills with real-world scenarios. Find bugs, identify security issues, and improve application quality.': 'Sprawdź swoje umiejętności QA w rzeczywistych scenariuszach. Znajdź błędy, zidentyfikuj problemy bezpieczeństwa i popraw jakość aplikacji.',
+      'Start Challenge': 'Rozpocznij Wyzwanie',
+      'Review Challenge': 'Przejrzyj Wyzwanie',
+      'Try Again': 'Spróbuj Ponownie',
+      'challenges': {
+        'yourProgress': 'Twój Postęp',
+        'completed': 'Ukończone',
+        'points': 'Punkty',
+        'noMatchingChallenges': 'Brak wyzwań pasujących do wybranych filtrów.',
+        'difficulty': {
+          'all': 'Wszystkie Poziomy',
+          'easy': 'Łatwy',
+          'medium': 'Średni',
+          'hard': 'Trudny'
+        },
+        'category': {
+          'all': 'Wszystkie Kategorie'
+        }
+      }
     }
   }
 };

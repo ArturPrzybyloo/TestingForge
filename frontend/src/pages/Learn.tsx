@@ -3,12 +3,13 @@ import { Link, useParams } from 'react-router-dom';
 import {
   AcademicCapIcon,
   BookOpenIcon,
+  LightBulbIcon,
   CodeBracketIcon,
   ServerIcon,
   RocketLaunchIcon,
   ChartBarIcon,
-  ClockIcon,
-  UserGroupIcon,
+  BugAntIcon,
+  CpuChipIcon,
 } from '@heroicons/react/24/outline';
 import { useTranslation } from 'react-i18next';
 
@@ -26,7 +27,7 @@ const devToolsCourse: CourseModule[] = [
     id: 'introduction',
     title: 'learn.course.introduction.title',
     description: 'learn.course.introduction.description',
-    duration: '15 minutes',
+    duration: '5 min',
     content: `learn.course.introduction.content`,
     icon: <BookOpenIcon className="h-8 w-8 text-green-500" />
   },
@@ -34,7 +35,7 @@ const devToolsCourse: CourseModule[] = [
     id: 'elements',
     title: 'learn.course.elements.title',
     description: 'learn.course.elements.description',
-    duration: '20 minutes',
+    duration: '8 min',
     content: `learn.course.elements.content`,
     icon: <CodeBracketIcon className="h-8 w-8 text-blue-500" />
   },
@@ -42,7 +43,7 @@ const devToolsCourse: CourseModule[] = [
     id: 'console',
     title: 'learn.course.console.title',
     description: 'learn.course.console.description',
-    duration: '25 minutes',
+    duration: '10 min',
     content: `learn.course.console.content`,
     icon: <ServerIcon className="h-8 w-8 text-green-500" />
   },
@@ -50,17 +51,41 @@ const devToolsCourse: CourseModule[] = [
     id: 'network',
     title: 'learn.course.network.title',
     description: 'learn.course.network.description',
-    duration: '30 minutes',
+    duration: '7 min',
     content: `learn.course.network.content`,
     icon: <RocketLaunchIcon className="h-8 w-8 text-blue-500" />
+  },
+  {
+    id: 'sources',
+    title: 'learn.course.sources.title',
+    description: 'learn.course.sources.description',
+    duration: '10 min',
+    content: `learn.course.sources.content`,
+    icon: <BugAntIcon className="h-8 w-8 text-purple-500" />
+  },
+  {
+    id: 'application',
+    title: 'learn.course.application.title',
+    description: 'learn.course.application.description',
+    duration: '6 min',
+    content: `learn.course.application.content`,
+    icon: <CpuChipIcon className="h-8 w-8 text-orange-500" />
   },
   {
     id: 'performance',
     title: 'learn.course.performance.title',
     description: 'learn.course.performance.description',
-    duration: '35 minutes',
+    duration: '8 min',
     content: `learn.course.performance.content`,
     icon: <ChartBarIcon className="h-8 w-8 text-green-500" />
+  },
+  {
+    id: 'lighthouse',
+    title: 'learn.course.lighthouse.title',
+    description: 'learn.course.lighthouse.description',
+    duration: '5 min',
+    content: `learn.course.lighthouse.content`,
+    icon: <LightBulbIcon className="h-8 w-8 text-yellow-500" />
   }
 ];
 

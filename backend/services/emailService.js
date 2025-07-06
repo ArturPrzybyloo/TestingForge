@@ -25,32 +25,32 @@ const sendVerificationEmail = async (email, username, verificationToken) => {
     const mailOptions = {
       from: process.env.FROM_EMAIL || 'noreply@aitestforge.com',
       to: email,
-      subject: 'AI Test Forge - Weryfikacja adresu email',
+      subject: 'AI Test Forge - Email Verification',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333; text-align: center;">AI Test Forge</h2>
           <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #495057;">Cześć ${username}!</h3>
+            <h3 style="color: #495057;">Hello ${username}!</h3>
             <p style="color: #6c757d; line-height: 1.6;">
-              Dziękujemy za rejestrację w AI Test Forge. Aby dokończyć proces rejestracji, 
-              kliknij poniższy link, aby zweryfikować swój adres email:
+              Thank you for registering with AI Test Forge. To complete your registration process, 
+              please click the link below to verify your email address:
             </p>
             <div style="text-align: center; margin: 30px 0;">
               <a href="${verificationUrl}" 
                  style="background-color: #007bff; color: white; padding: 12px 30px; 
                         text-decoration: none; border-radius: 5px; font-weight: bold;">
-                Weryfikuj Email
+                Verify Email
               </a>
             </div>
             <p style="color: #6c757d; font-size: 14px;">
-              Jeśli nie możesz kliknąć przycisku, skopiuj i wklej poniższy link do przeglądarki:
+              If you can't click the button, copy and paste the following link into your browser:
             </p>
             <p style="color: #007bff; word-break: break-all; font-size: 14px;">
               ${verificationUrl}
             </p>
             <p style="color: #6c757d; font-size: 14px; margin-top: 30px;">
-              Ten link wygaśnie za 24 godziny.<br>
-              Jeśli to nie Ty rejestrowałeś się w naszym serwisie, zignoruj ten email.
+              This link will expire in 24 hours.<br>
+              If you didn't create an account with us, please ignore this email.
             </p>
           </div>
         </div>
@@ -77,32 +77,32 @@ const sendPasswordResetEmail = async (email, username, resetToken) => {
     const mailOptions = {
       from: process.env.FROM_EMAIL || 'noreply@aitestforge.com',
       to: email,
-      subject: 'AI Test Forge - Reset hasła',
+      subject: 'AI Test Forge - Password Reset',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333; text-align: center;">AI Test Forge</h2>
           <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #495057;">Cześć ${username}!</h3>
+            <h3 style="color: #495057;">Hello ${username}!</h3>
             <p style="color: #6c757d; line-height: 1.6;">
-              Otrzymaliśmy prośbę o reset hasła dla Twojego konta. 
-              Kliknij poniższy link, aby utworzyć nowe hasło:
+              We received a request to reset your password for your account. 
+              Click the link below to create a new password:
             </p>
             <div style="text-align: center; margin: 30px 0;">
               <a href="${resetUrl}" 
                  style="background-color: #dc3545; color: white; padding: 12px 30px; 
                         text-decoration: none; border-radius: 5px; font-weight: bold;">
-                Resetuj Hasło
+                Reset Password
               </a>
             </div>
             <p style="color: #6c757d; font-size: 14px;">
-              Jeśli nie możesz kliknąć przycisku, skopiuj i wklej poniższy link do przeglądarki:
+              If you can't click the button, copy and paste the following link into your browser:
             </p>
             <p style="color: #dc3545; word-break: break-all; font-size: 14px;">
               ${resetUrl}
             </p>
             <p style="color: #6c757d; font-size: 14px; margin-top: 30px;">
-              Ten link wygaśnie za 1 godzinę.<br>
-              Jeśli to nie Ty prosiłeś o reset hasła, zignoruj ten email.
+              This link will expire in 1 hour.<br>
+              If you didn't request a password reset, please ignore this email.
             </p>
           </div>
         </div>

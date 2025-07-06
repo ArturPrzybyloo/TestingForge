@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import SessionManager from './components/SessionManager';
+import CookieBanner from './components/CookieBanner';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import Challenges from './pages/Challenges';
@@ -21,6 +22,7 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <SessionManager />
+      <CookieBanner />
       <Router>
         <Routes>
           <Route path="/" element={<MainLayout><Outlet /></MainLayout>}>

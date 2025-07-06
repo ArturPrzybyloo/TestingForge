@@ -5,7 +5,7 @@ const FLAG = 'SQL-LOGIN-FREQ-USER-1001';
 const CHALLENGE_ID = 'sql-login-frequency';
 const CHALLENGE_POINTS = 40;
 
-const Challenge20SQLLoginFrequency: React.FC<{onComplete?: () => void}> = ({ onComplete }) => {
+const Challenge20SQLLoginFrequency: React.FC<{onComplete?: () => void, isRetakeMode?: boolean}> = ({ onComplete, isRetakeMode = false }) => {
   const [sqlInput, setSqlInput] = useState('');
   const [queryResult, setQueryResult] = useState<any>(null);
   const [flagInput, setFlagInput] = useState('');
@@ -14,6 +14,20 @@ const Challenge20SQLLoginFrequency: React.FC<{onComplete?: () => void}> = ({ onC
 
   const { submitFlag, isSubmitting, isCompleted } = useFlagSubmission();
   const challengeCompleted = isCompleted(CHALLENGE_ID);
+
+  // In retake mode, treat as if not completed
+  const effectiveCompleted = challengeCompleted && !isRetakeMode;
+
+  // Reset state when entering retake mode
+  React.useEffect(() => {
+    if (isRetakeMode) {
+      setSqlInput('');
+      setQueryResult(null);
+      setFlagInput('');
+      setFeedback('');
+      setShowFlag(false);
+    }
+  }, [isRetakeMode]);
 
   // Mock database data - 30 days ago to today
   const getDateDaysAgo = (days: number) => {
@@ -154,11 +168,11 @@ LIMIT ?;`);
 
   return (
     <div className={`bg-gray-800 rounded-xl p-6 border-2 max-w-4xl mx-auto mt-8 ${
-      challengeCompleted ? 'border-green-500' : 'border-gray-700'
+      effectiveCompleted ? 'border-green-500' : 'border-gray-700'
     }`}>
       <h2 className="text-2xl font-bold mb-2 text-blue-400">
         SQL Login Frequency Challenge
-        {challengeCompleted && <span className="text-green-500 ml-2">✓</span>}
+        {effectiveCompleted && <span className="text-green-500 ml-2">✓</span>}
       </h2>
       <p className="text-gray-300 mb-4">
         Find the user_id of the user who logged in most frequently in the last 30 days using GROUP BY, COUNT, and ORDER BY.
@@ -192,27 +206,27 @@ LIMIT ?;`);
           onChange={(e) => setSqlInput(e.target.value)}
           className="w-full h-40 p-3 rounded bg-gray-700 text-white font-mono text-sm"
           placeholder="Enter your SQL query here..."
-          disabled={challengeCompleted}
+          disabled={effectiveCompleted}
         />
         <div className="flex gap-2 mt-2">
           <button 
             onClick={executeQuery}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           >
             Execute Query
           </button>
           <button 
             onClick={showHint}
             className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           >
             Show Hint
           </button>
           <button 
             onClick={showTableStructure}
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           >
             Show All Data
           </button>
@@ -242,7 +256,7 @@ LIMIT ?;`);
         </div>
       )}
 
-      {(showFlag || challengeCompleted) && (
+      {(showFlag || effectiveCompleted) && (
         <div className="mb-4">
           <input
             type="text"
@@ -250,14 +264,14 @@ LIMIT ?;`);
             value={flagInput}
             onChange={(e) => setFlagInput(e.target.value)}
             className="w-full p-2 rounded bg-gray-700 text-white mb-2"
-            disabled={challengeCompleted}
+            disabled={effectiveCompleted}
           />
           <button 
             onClick={checkFlag}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shadow py-2 transition-colors disabled:opacity-50"
-            disabled={isSubmitting || challengeCompleted}
+            disabled={isSubmitting || effectiveCompleted}
           >
-            {isSubmitting ? 'Submitting...' : challengeCompleted ? 'Completed' : 'Submit Flag'}
+            {isSubmitting ? 'Submitting...' : effectiveCompleted ? 'Completed' : 'Submit Flag'}
           </button>
         </div>
       )}
@@ -266,7 +280,7 @@ LIMIT ?;`);
         {feedback}
       </div>
 
-      {!showFlag && !challengeCompleted && (
+      {!showFlag && !effectiveCompleted && (
         <div className="mt-4 text-sm text-gray-400">
           💡 Hint: Use GROUP BY user_id, COUNT(*) to count logins, ORDER BY COUNT(*) DESC to sort by frequency, and LIMIT 1 to get the top user.
         </div>
