@@ -25,7 +25,15 @@ const EmailVerification: React.FC = () => {
   const verifyEmail = async () => {
     try {
       setLoading(true);
+      
+      // Debug: log the API URL and token
+      console.log('🔍 API Base URL:', api.defaults.baseURL);
+      console.log('🔍 Verification token:', token);
+      console.log('🔍 Full API URL:', `${api.defaults.baseURL}/auth/verify-email/${token}`);
+      
       const response = await api.get(`/auth/verify-email/${token}`);
+      
+      console.log('✅ API Response:', response.data);
       
       if (response.data && response.data.success) {
         setSuccess(true);
@@ -38,8 +46,10 @@ const EmailVerification: React.FC = () => {
         setError('Email verification failed');
       }
     } catch (err: any) {
-      console.error('Email verification error:', err);
-      setError(err.response?.data?.message || 'Email verification failed');
+      console.error('❌ Email verification error:', err);
+      console.error('❌ Error response:', err.response?.data);
+      console.error('❌ Error status:', err.response?.status);
+      setError(err.response?.data?.message || `Email verification failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
