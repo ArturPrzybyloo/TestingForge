@@ -205,8 +205,8 @@ const Login: React.FC = () => {
           <div className="mt-8 p-4 bg-gray-800 rounded-lg">
             <h3 className="text-sm font-medium text-gray-300 mb-2">Test Account:</h3>
             <div className="space-y-2 text-sm text-gray-400">
-              <p>Email: admin@qa-platform.com</p>
-              <p>Password: admin123</p>
+              <p>Email: test@testing-forge.com</p>
+              <p>Password: test1234</p>
               <p className="text-xs text-yellow-500">Note: Test account may need email verification</p>
             </div>
           </div>

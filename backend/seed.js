@@ -17,8 +17,8 @@ const seedDatabase = async () => {
     // Create admin user
     const adminUser = await User.create({
       username: 'admin',
-      email: 'admin@qa-platform.com',
-      password: 'admin123',
+      email: 'test@testing-forge.com',
+      password: 'test1234',
       isAdmin: true,
       role: 'admin'
     });
@@ -142,7 +142,7 @@ const seedDatabase = async () => {
     console.log('Created sample challenges');
 
     console.log('\n=== Database Seeded Successfully ===');
-    console.log(`Admin User: admin@qa-platform.com / admin123`);
+    console.log(`Admin User: test@testing-forge.com / test1234`);
     console.log(`Created ${challenges.length} challenges`);
 
   } catch (error) {

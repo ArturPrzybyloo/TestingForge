@@ -13,8 +13,8 @@ const mockUsers = [
   {
     _id: '1',
     username: 'admin',
-    email: 'admin@qa-platform.com',
-    password: 'admin123', // In real app, this would be hashed
+    email: 'test@testing-forge.com',
+    password: 'test1234', // In real app, this would be hashed
     isAdmin: true,
     completedChallenges: [1, 2],
     createdAt: new Date().toISOString()
