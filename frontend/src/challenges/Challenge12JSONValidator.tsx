@@ -3,14 +3,33 @@ import { useFlagSubmission } from '../hooks/useFlagSubmission';
 
 const FLAG = 'FLAG-JSON-VALID';
 const CHALLENGE_ID = 'json-validator';
-const CHALLENGE_POINTS = 45;
+const CHALLENGE_POINTS = 30;
 
 const initialJson = [
-  { key: 'id', value: '42', error: true, type: 'number', display: 'string' }, // should be number
-  { key: 'email', value: 'user@forge', error: true, type: 'email', display: 'invalid' }, // invalid email
-  { key: 'createdAt', value: '2023-13-99', error: true, type: 'date', display: 'invalid' }, // invalid date
-  { key: 'isActive', value: 'yes', error: true, type: 'boolean', display: 'string' }, // should be boolean
-  { key: 'role', value: 'user', error: false, type: 'string', display: 'string' },
+  { key: 'id', value: '42', error: false, type: 'number', display: 'string' }, // valid as string
+  { key: 'userId', value: 'abc123', error: true, type: 'number', display: 'string' }, // should be number
+  { key: 'email', value: 'user@forge.com', error: false, type: 'email', display: 'valid' }, // valid email
+  { key: 'secondaryEmail', value: 'admin@forge', error: true, type: 'email', display: 'invalid' }, // missing .com
+  { key: 'firstName', value: 'John', error: false, type: 'string', display: 'string' },
+  { key: 'lastName', value: 'Doe', error: false, type: 'string', display: 'string' },
+  { key: 'age', value: '25', error: false, type: 'number', display: 'string' }, // valid as string
+  { key: 'birthDate', value: '1998-02-30', error: true, type: 'date', display: 'invalid' }, // Feb 30 doesn't exist
+  { key: 'createdAt', value: '2023-12-15T10:30:00Z', error: false, type: 'date', display: 'valid' }, // valid ISO date
+  { key: 'lastLogin', value: '2024-13-01', error: true, type: 'date', display: 'invalid' }, // month 13 doesn't exist
+  { key: 'isActive', value: 'true', error: false, type: 'boolean', display: 'string' }, // valid as string
+  { key: 'isVerified', value: 'yes', error: true, type: 'boolean', display: 'string' }, // should be true/false
+  { key: 'isPremium', value: 'false', error: false, type: 'boolean', display: 'string' }, // valid as string
+  { key: 'role', value: 'admin', error: false, type: 'string', display: 'string' },
+  { key: 'department', value: 'Engineering', error: false, type: 'string', display: 'string' },
+  { key: 'salary', value: '75000.50', error: false, type: 'number', display: 'string' }, // valid as string
+  { key: 'bonus', value: '5000.abc', error: true, type: 'number', display: 'invalid' }, // invalid number format
+  { key: 'startDate', value: '2023-02-29', error: true, type: 'date', display: 'invalid' }, // 2023 not leap year
+  { key: 'endDate', value: '2024-12-31', error: false, type: 'date', display: 'valid' }, // valid date
+  { key: 'phone', value: '+1-555-123-4567', error: false, type: 'phone', display: 'valid' },
+  { key: 'zipCode', value: '90210', error: false, type: 'string', display: 'string' },
+  { key: 'score', value: '95.5', error: false, type: 'number', display: 'string' }, // valid as string
+  { key: 'rating', value: '4.8.2', error: true, type: 'number', display: 'invalid' }, // too many decimal points
+  { key: 'status', value: 'active', error: false, type: 'string', display: 'string' }
 ];
 
 const Challenge12JSONValidator: React.FC<{onComplete?: () => void, isRetakeMode?: boolean}> = ({ onComplete, isRetakeMode = false }) => {
@@ -53,7 +72,11 @@ const Challenge12JSONValidator: React.FC<{onComplete?: () => void, isRetakeMode?
     if (flagInput.trim() === FLAG) {
       const result = await submitFlag(CHALLENGE_ID, FLAG, CHALLENGE_POINTS);
       if (result.success) {
-        setFlagFeedback(`Challenge passed! 🎉 (+${result.pointsEarned} pts)`);
+        if (result.isRetake || isRetakeMode) {
+          setFlagFeedback(`Retake completed! 🎉 Practice makes perfect!`);
+        } else {
+          setFlagFeedback(`Challenge passed! 🎉 (+${result.pointsEarned} pts)`);
+        }
         if (onComplete) onComplete();
       } else {
         setFlagFeedback(`Error: ${result.message}`);
@@ -72,7 +95,7 @@ const Challenge12JSONValidator: React.FC<{onComplete?: () => void, isRetakeMode?
         {effectiveCompleted && <span className="text-green-500 ml-2">✓</span>}
       </h2>
       <p className="text-gray-300 mb-6">
-        Below is a simulated JSON response with several logic/type errors. Click all incorrect fields to unlock the flag.
+        Below is a complex JSON response from a user management API. Several fields contain subtle validation errors that need to be identified. Carefully analyze each field for data type inconsistencies, format violations, and logical errors. Click on all problematic fields to unlock the flag.
       </p>
       <pre className="bg-gray-900 text-blue-200 rounded p-4 text-sm overflow-x-auto min-h-[64px] border border-gray-700 transition-all duration-300">
         <code>
@@ -84,10 +107,11 @@ const Challenge12JSONValidator: React.FC<{onComplete?: () => void, isRetakeMode?
                 className={
                   field.error
                     ? found.includes(field.key)
-                      ? 'text-green-400 font-bold underline' : !effectiveCompleted ? 'hover:text-red-400 underline' : '' : ''
+                      ? 'text-green-400 font-bold' : !effectiveCompleted ? 'hover:text-red-300 transition-colors' : ''
+                    : ''
                 }
               >
-                &nbsp;  "{field.key}": "{field.value}"{idx < json.length - 1 ? ',' : ''}
+                &nbsp;&nbsp;"{field.key}": "{field.value}"{idx < json.length - 1 ? ',' : ''}
               </span>
               {field.error && found.includes(field.key) && <span className="ml-2 text-green-400">✔</span>}
             </div>

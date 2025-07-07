@@ -178,6 +178,18 @@ Try decoding the current token to understand its structure, then create your own
         Create a valid JWT token with "premium_user" role to access the hidden flag.
       </p>
       
+      <div className="mb-4 p-4 bg-blue-900 border border-blue-500 rounded-lg">
+        <h3 className="text-blue-400 font-semibold mb-2">📋 Step-by-Step Challenge</h3>
+        <ol className="text-blue-200 text-sm space-y-2">
+          <li><strong>1.</strong> Click "Decode Current Token" to analyze the token structure</li>
+          <li><strong>2.</strong> Understand what needs to change: role from "basic_user" to "premium_user"</li>
+          <li><strong>3.</strong> Use the exposed secret key: <code className="bg-gray-800 px-1 rounded">super_secret_key_2024_do_not_share</code></li>
+          <li><strong>4.</strong> Research JWT structure and create your own token generation method</li>
+          <li><strong>5.</strong> Generate a new JWT token with the premium_user role</li>
+          <li><strong>6.</strong> Enter your token in the field and verify it to get the flag!</li>
+        </ol>
+      </div>
+      
       <div className="mb-4 p-4 bg-gray-700 rounded-lg">
         <h3 className="text-yellow-400 font-semibold mb-2">🔍 Current Token Analysis</h3>
         <div className="font-mono text-sm text-gray-300 break-all mb-2">
@@ -198,6 +210,40 @@ Try decoding the current token to understand its structure, then create your own
         </p>
         <div className="bg-gray-800 p-2 rounded font-mono text-xs text-green-400">
           {`/* JWT_SECRET = "super_secret_key_2024_do_not_share" */`}
+        </div>
+      </div>
+
+      <div className="mb-4 p-4 bg-purple-900 border border-purple-500 rounded-lg">
+        <h3 className="text-purple-400 font-semibold mb-2">🧠 JWT Creation Guide</h3>
+        <div className="text-purple-200 text-sm space-y-3">
+          <div>
+            <p><strong>📝 What you need to understand:</strong></p>
+            <ul className="list-disc list-inside ml-2 space-y-1">
+              <li>JWT has 3 parts: <code>header.payload.signature</code></li>
+              <li>Each part must be Base64 encoded</li>
+              <li>Change role from "basic_user" to "premium_user"</li>
+              <li>Recalculate signature using the exposed secret</li>
+            </ul>
+          </div>
+          
+          <div>
+            <p><strong>🔧 Tools you can use:</strong></p>
+            <ul className="list-disc list-inside ml-2 space-y-1">
+              <li><strong>Browser Console:</strong> Use <code>btoa()</code>, <code>atob()</code>, <code>JSON.stringify()</code></li>
+              <li><strong>Online Tools:</strong> jwt.io, jwt-decode websites</li>
+              <li><strong>JavaScript:</strong> Write your own encoding/signing functions</li>
+            </ul>
+          </div>
+          
+          <div>
+            <p><strong>💡 Key functions to research:</strong></p>
+            <ul className="list-disc list-inside ml-2 space-y-1">
+              <li><code>btoa(string)</code> - converts string to Base64</li>
+              <li><code>atob(base64)</code> - converts Base64 to string</li>
+              <li><code>JSON.stringify(object)</code> - converts object to JSON string</li>
+              <li>Hash algorithm for signature (check challenge source code)</li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -234,6 +280,13 @@ Try decoding the current token to understand its structure, then create your own
           >
             JWT Tools Tip
           </button>
+          <button 
+            onClick={() => setFeedback(`Signature Algorithm Hint:\n\nLook at the createSignature function in this challenge's source code. You need to implement the same algorithm:\n\n1. Combine header.payload string with the secret key\n2. Create a simple hash using character codes\n3. Convert to Base64 and clean up the result\n4. Take first 16 characters\n\nStudy the code in DevTools → Sources tab to understand the exact implementation.`)}
+            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
+            disabled={effectiveCompleted}
+          >
+            Signature Algorithm
+          </button>
         </div>
       </div>
 
@@ -268,11 +321,21 @@ Try decoding the current token to understand its structure, then create your own
         <pre className="whitespace-pre-wrap">{feedback}</pre>
       </div>
 
-      {!showFlag && !effectiveCompleted && (
-        <div className="mt-4 text-sm text-gray-400">
-          💡 Hint: The secret key is exposed in the source code comments above. Use browser DevTools or online JWT tools to decode the current token, modify the role, and create a new signature.
-        </div>
-      )}
+              {!showFlag && !effectiveCompleted && (
+          <div className="mt-4 p-3 bg-gray-700 rounded-lg">
+            <h4 className="text-yellow-400 font-semibold mb-2">🎯 Learning Objectives:</h4>
+            <div className="text-gray-300 text-sm space-y-1">
+              <p>• Understand JWT token structure (header.payload.signature)</p>
+              <p>• Learn how to decode and encode Base64 data</p>
+              <p>• Practice creating digital signatures with a secret key</p>
+              <p>• Recognize security risks of exposed secrets in source code</p>
+              <p>• Experience manual JWT token manipulation</p>
+            </div>
+            <p className="text-yellow-300 text-xs mt-2">
+              💡 This is a hands-on learning challenge - no copy-paste shortcuts!
+            </p>
+          </div>
+        )}
     </div>
   );
 };

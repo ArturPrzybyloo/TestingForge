@@ -4,7 +4,7 @@ import { useFlagSubmission } from '../hooks/useFlagSubmission';
 const FLAG = 'FLAG_A11Y_TAB_321';
 const BROKEN_ID = 'btn-broken';
 const CHALLENGE_ID = 'accessibility-audit';
-const CHALLENGE_POINTS = 40;
+const CHALLENGE_POINTS = 25;
 
 const Challenge18AccessibilityAudit: React.FC<{onComplete?: () => void, isRetakeMode?: boolean}> = ({ onComplete, isRetakeMode = false }) => {
   const [brokenIdInput, setBrokenIdInput] = useState('');

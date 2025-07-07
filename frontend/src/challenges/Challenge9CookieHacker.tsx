@@ -5,7 +5,7 @@ const FLAG = 'FLAG-COOKIE-ADMIN';
 const COOKIE_NAME = 'forge_admin';
 const COOKIE_VALUE = 'letmein';
 const CHALLENGE_ID = 'cookie-hacker';
-const CHALLENGE_POINTS = 50;
+const CHALLENGE_POINTS = 35;
 
 const Challenge9CookieHacker: React.FC<{onComplete?: () => void, isRetakeMode?: boolean}> = ({ onComplete, isRetakeMode = false }) => {
   const [showFlag, setShowFlag] = useState(false);

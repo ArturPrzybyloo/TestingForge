@@ -30,12 +30,15 @@ const Challenge7XHRDetective: React.FC<{onComplete?: () => void, isRetakeMode?: 
   const handleFetch = () => {
     setLoading(true);
     // Simulate XHR with fetch and custom header
-    fetch('/api/fake-user', {
+    // Use a non-existent endpoint on the same domain to avoid CORS issues
+    // The 404 error is expected - the goal is to inspect the Authorization header
+    fetch('./api/fake-user', {
       headers: {
         'Authorization': FLAG,
       },
     })
-      .then(() => setTimeout(() => setLoading(false), 1200));
+      .then(() => setTimeout(() => setLoading(false), 1200))
+      .catch(() => setTimeout(() => setLoading(false), 1200)); // Handle 404 gracefully
   };
 
   const handleFlagCheck = async () => {

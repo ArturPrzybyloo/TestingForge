@@ -29,12 +29,12 @@ const Challenge4UrlParam: React.FC<{onComplete?: () => void, isRetakeMode?: bool
   useEffect(() => {
     setCurrentUrl(window.location.href);
     
-    // Check URL parameters for secret parameter
+    // Check URL parameters for debug parameter
     // Handle both hash-based routing and regular query parameters
     const checkUrlParams = () => {
       // First try regular query parameters
       const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('secret') === 'admin123') {
+      if (urlParams.get('debug') === 'true') {
         setShowFlag(true);
         return;
       }
@@ -43,7 +43,7 @@ const Challenge4UrlParam: React.FC<{onComplete?: () => void, isRetakeMode?: bool
       const hash = window.location.hash;
       if (hash.includes('?')) {
         const hashParams = new URLSearchParams(hash.split('?')[1]);
-        if (hashParams.get('secret') === 'admin123') {
+        if (hashParams.get('debug') === 'true') {
           setShowFlag(true);
           return;
         }
@@ -90,7 +90,8 @@ const Challenge4UrlParam: React.FC<{onComplete?: () => void, isRetakeMode?: bool
         {effectiveCompleted && <span className="text-green-500 ml-2">✓</span>}
       </h2>
       <p className="text-gray-300 mb-4">
-        Manipulate the URL parameters to reveal hidden content. Add the correct parameter to unlock the flag.
+        This application might have hidden debug features accessible via URL parameters. Find the right parameter to unlock hidden content.
+        <span className="text-blue-400 font-bold"> ({CHALLENGE_POINTS} points)</span>
       </p>
       
       <div className="mb-4 p-4 bg-gray-700 rounded-lg">
@@ -101,18 +102,23 @@ const Challenge4UrlParam: React.FC<{onComplete?: () => void, isRetakeMode?: bool
       </div>
 
       <div className="mb-4 p-4 bg-gray-700 rounded-lg">
-        <h3 className="text-lg font-semibold text-white mb-2">Instructions:</h3>
+        <h3 className="text-lg font-semibold text-white mb-2">Testing Scenario:</h3>
+        <p className="text-gray-300 text-sm mb-3">
+          You're testing a web application and suspect it has debug or admin features accessible through URL parameters.
+        </p>
         <ul className="text-gray-300 text-sm space-y-1">
-          <li>• Add a URL parameter called "secret" with the value "admin123"</li>
-          <li>• Example: Add <code className="bg-gray-600 px-1 rounded">?secret=admin123</code> to the end of the URL</li>
-          <li>• Full example: <code className="bg-gray-600 px-1 rounded text-xs">...#/challenges/url-param?secret=admin123</code></li>
-          <li>• The page will reveal the flag when the correct parameter is detected</li>
+          <li>• Many applications use URL parameters for feature flags or debugging</li>
+          <li>• Common parameter names include: admin, debug, test, dev, hidden, etc.</li>
+          <li>• Values are often: true, 1, on, enabled, yes, etc.</li>
+          <li>• Try adding parameters after ? in the URL (or after # for single-page apps)</li>
+          <li>• Example format: <code className="bg-gray-600 px-1 rounded">?parameter=value</code></li>
         </ul>
       </div>
 
       {showFlag && (
         <div className="mb-4 p-4 bg-green-900 border border-green-500 rounded-lg">
-          <h3 className="text-green-400 font-semibold mb-2">🎉 Secret Content Unlocked!</h3>
+          <h3 className="text-green-400 font-semibold mb-2">🎉 Debug Mode Activated!</h3>
+          <p className="text-white mb-2">Great job! You found the hidden debug parameter.</p>
           <p className="text-white font-mono">Flag: {FLAG}</p>
         </div>
       )}
@@ -143,7 +149,7 @@ const Challenge4UrlParam: React.FC<{onComplete?: () => void, isRetakeMode?: bool
 
       {!showFlag && !effectiveCompleted && (
         <div className="mt-4 text-sm text-gray-400">
-          💡 Hint: Modify the URL in your browser's address bar and refresh the page
+          💡 Pro tip: Think like a tester - what parameters might developers use for debugging or admin access?
         </div>
       )}
     </div>
